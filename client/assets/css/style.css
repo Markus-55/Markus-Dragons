@@ -15,7 +15,7 @@ body {
 #dragon {
   position: absolute;
   top: 20%;
-  left: 13%;
+  left: 26%;
 }
 
 #head {
@@ -487,7 +487,6 @@ body {
 
 #rightWing {
   transform: rotateZ(-357deg);
-  border-left: ;
 }
 
 .rightWingPart1 {

@@ -10,7 +10,6 @@
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="assets/css/mystyle.css">
-  <link rel="stylesheet" href="assets/css/dragons.css">
   <link rel="stylesheet" href="assets/css/colors.css">
   <link rel="stylesheet" href="assets/css/factory.css">
   <link rel="stylesheet" href="assets/css/frontend.css">
@@ -26,22 +25,27 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-4 catBox m-2 light-b-shadow">
+      <div class="col-lg-4 dragonBox m-2 light-b-shadow">
+
+        <!-- The dragon -->
         <div id="dragon">
 
-          <!-- The right wing -->
-          <div id="rightWing">
-            <div class="rightWingPart1"></div>
-            <div class="rightWingPart2"></div>
-            <div class="rightWingPart3"></div>
-            <div class="rightWingPart4"></div>
-          </div>
-          <!-- The left wing -->
-          <div id="leftWing">
-            <div class="leftWingPart1"></div>
-            <div class="leftWingPart2"></div>
-            <div class="leftWingPart3"></div>
-            <div class="leftWingPart4"></div>
+          <!-- The wings -->
+          <div id="wings">
+            <!-- The right wing -->
+            <div id="rightWing">
+              <div class="rightWingPart1"></div>
+              <div class="rightWingPart2"></div>
+              <div class="rightWingPart3"></div>
+              <div class="rightWingPart4"></div>
+            </div>
+            <!-- The left wing -->
+            <div id="leftWing">
+              <div class="leftWingPart1"></div>
+              <div class="leftWingPart2"></div>
+              <div class="leftWingPart3"></div>
+              <div class="leftWingPart4"></div>
+            </div>
           </div>
 
           <!-- The tail with scales -->
@@ -184,6 +188,25 @@
           </div>
 
         </div>
+        <br>
+        <div class="dnaDiv" id="catDNA">
+          <b>
+            DNA:
+            <!-- Colors -->
+            <span id="dnabody"></span>
+            <span id="wingsTailDna"></span>
+            <span id="dnaeyes"></span>
+            <span id="dnaears"></span>
+
+            <!-- Dragontributes -->
+            <span id="dnashape"></span>
+            <span id="dnadecoration"></span>
+            <span id="dnadecorationMid"></span>
+            <span id="dnadecorationSides"></span>
+            <span id="dnadanimation"></span>
+            <span id="dnaspecial"></span>
+          </b>
+        </div>
 
       </div>
       <!-- Make a class column with dragonTributes margin 2 and light blue shadow -->
@@ -197,14 +220,21 @@
             <!-- Make an input slider with a minimum number 10 and max 98 -->
             <input type="range" min="10" max="98" class="form-control-range" id="bodycolor">
           </div>
+
+          <div class="form-group">
+            <!-- label with wings and tail -->
+            <label for="formControlRange"><b>Wings and tail</b><span class="badge badge-dark ml-2" id="wingsTailCode"></span></label>
+            <!-- Make an input slider with a minimum number 10 and max 98 -->
+            <input type="range" min="13" max="98" class="form-control-range" id="wingsTailColor">
+          </div>
+        </div>
+
         </div>
 
       </div>
+      <br>
 
     </div>
-    <br>
-
-  </div>
   <footer align="left">
     <p>Ivan on Tech Academy Bootcamp</p>
   </footer>

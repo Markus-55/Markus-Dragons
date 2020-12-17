@@ -2,8 +2,8 @@
 var colors = Object.values(allColors())
 
 var defaultDNA = {
-    "headcolor" : 10,
-    "mouthColor" : 13,
+    "headBodyColor" : 10,
+    "wingsTailColor" : 13,
     "eyesColor" : 96,
     "earsColor" : 10,
     //Cattributes
@@ -17,8 +17,8 @@ var defaultDNA = {
 
 // when page load
 $( document ).ready(function() {
-  $('#dnabody').html(defaultDNA.headColor);
-  $('#dnamouth').html(defaultDNA.mouthColor);
+  $('#dnabody').html(defaultDNA.headBodyColor);
+  $('#wingsTailDna').html(defaultDNA.wingsTailColor);
   $('#dnaeyes').html(defaultDNA.eyesColor);
   $('#dnaears').html(defaultDNA.earsColor);
 
@@ -29,13 +29,14 @@ $( document ).ready(function() {
 //   $('#dnaanimation').html(defaultDNA.animation)
 //   $('#dnaspecial').html(defaultDNA.lastNum)
 
-  renderCat(defaultDNA)
+  renderHeadBody(defaultDNA)
+  renderWingsTail(defaultDNA)
 });
 
 function getDna(){
     var dna = ''
     dna += $('#dnabody').html()
-    dna += $('#dnamouth').html()
+    dna += $('#wingsTailDna').html()
     dna += $('#dnaeyes').html()
     dna += $('#dnaears').html()
     dna += $('#dnashape').html()
@@ -48,9 +49,14 @@ function getDna(){
     return parseInt(dna)
 }
 
-function renderCat(dna){
-    headColor(colors[dna.headcolor],dna.headcolor)
-    $('#bodycolor').val(dna.headcolor)
+function renderHeadBody(dna){
+    headBodyColor(colors[dna.headBodyColor],dna.headBodyColor)
+    $('#bodycolor').val(dna.headBodyColor)
+}
+
+function renderWingsTail(dna){
+    wingsTailColor(colors[dna.wingsTailColor],dna.wingsTailColor)
+    $('#wingsTailColor').val(dna.wingsTailColor)
 }
 
 // Listening for change
@@ -58,5 +64,13 @@ $('#bodycolor').change(()=>{
     // Make a color value = to the id body color with the value
     var colorVal = $('#bodycolor').val()
     // Call function headColor with the color value in the colors object and color value as arguments
-    headColor(colors[colorVal],colorVal)
+    headBodyColor(colors[colorVal],colorVal)
+})
+
+// Listening for change
+$('#wingsTailColor').change(()=>{
+    // Make a color value = to the id body color with the value
+    var colorVal = $('#wingsTailColor').val()
+    // Call function wingsTailColor with the color value in the colors object and color value as arguments
+    wingsTailColor(colors[colorVal],colorVal)
 })

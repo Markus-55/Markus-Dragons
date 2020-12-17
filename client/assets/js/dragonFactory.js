@@ -15,13 +15,23 @@ function genColors(){
 }
 
 // Make a function headcolor with color and code as argument
-function headColor(color,code) {
+function headBodyColor(color, code) {
     // Change the head and body background color of the dragon
     $('#head, #body').css('background', '#' + color)
     // modifies the headcode id with html with the code in the slider
     $('#headcode').html('code: ' + code)
     // modifies the dnabody id with html with the code
     $('#dnabody').html(code)
+}
+
+// Make a function headcolor with color and code as argument
+function wingsTailColor(color, code) {
+    // Change the head and body background color of the dragon
+    $('#wings, .tail').css('background', '#' + color)
+    // modifies the headcode id with html with the code in the slider
+    $('#wingsTailCode').html('code: ' + code)
+    // modifies the dnabody id with html with the code
+    $('#wingsTailDna').html(code)
 }
 
 
