@@ -1,9 +1,20 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+html {
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+body {
+    background: #607d8b;
 
-
+}
 
 .frontend {
     height: 90vh;
-    padding-top: 105px;    
+    padding-top: 105px;
     background: url('../images/banner.png') no-repeat;
     background-size: cover;
     background-position:bottom;
@@ -16,7 +27,7 @@
 
 .nav-link {
     padding: 17px 55px;
-    margin-right: 25px;    
+    margin-right: 25px;
 }
 
 .nav-link b {
@@ -28,9 +39,9 @@
     color: #ed5b0d;
 }
 
-.catGroup { 
+.catGroup {
     margin-top: 120px;
-    width: 50%;    
+    width: 50%;
 }
 
 #canvas {
@@ -42,10 +53,10 @@
     margin-top: -30px;
     padding-top: 50px;
     padding-bottom: 50px;
-    border-radius: 10px;    
+    border-radius: 10px;
     width: 82%;
     text-align: center;
-    position: relative;    
+    position: relative;
 }
 
 .middleBox {
@@ -76,7 +87,7 @@ footer {
 
 .featureBox h4 {
     font-weight: 600;
-} 
+}
 
 .featureBox:hover {
     border: 1px solid #ffffff;
@@ -105,14 +116,14 @@ footer {
     background-color: #cc3737;
     color: #ffffff;
   }
-  
+
  .white-btn {
-    background: #ffffff;    
+    background: #ffffff;
     border-radius: 30px;
     padding: 17px 3vw;
     font-weight: 600;
     letter-spacing: 1px;
- } 
+ }
 
 
  .animation-wrapper {
