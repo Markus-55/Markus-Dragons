@@ -272,7 +272,7 @@
   top: 6px;
   left: 8px;
   border-radius: 50%;
-  box-shadow: 2px 4px 4px -1px black;
+  box-shadow: 2px 4px 3px -1px black;
   transform: rotate(160deg);
 }
 

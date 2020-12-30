@@ -27,12 +27,12 @@ $(document).ready(function() {
   // Legs and arms color is set
   $("#legsArmsDna").html(defaultDNA.legsArmsColor);
 
-  // $('#dnashape').html(defaultDNA.eyesShape);
-  // $('#dnadecoration').html(defaultDNA.decorationPattern);
-  // $('#dnadecorationMid').html(defaultDNA.decorationMidcolor);
-  // $('#dnadecorationSides').html(defaultDNA.decorationSidescolor);
-  // $('#dnaanimation').html(defaultDNA.animation);
-  // $('#dnaspecial').html(defaultDNA.lastNum);
+  $("#dnashape").html(defaultDNA.eyesShape);
+  $("#dnadecoration").html(defaultDNA.decorationPattern);
+  $("#dnadecorationMid").html(defaultDNA.decorationMidcolor);
+  $("#dnadecorationSides").html(defaultDNA.decorationSidescolor);
+  $("#dnaanimation").html(defaultDNA.animation);
+  $("#dnaspecial").html(defaultDNA.lastNum);
 
   // Call function renderHeadBody with the default dna as an argument
   renderHeadBody(defaultDNA);
@@ -57,7 +57,7 @@ function getDna() {
   // dna += legs and arms dna
   dna += $("#legsArmsDna").html();
 
-  // will be used later
+
   dna += $("#dnashape").html();
   dna += $("#dnadecoration").html();
   dna += $("#dnadecorationMid").html();
@@ -134,4 +134,9 @@ $("#legsArmsColor").change(() => {
   var colorVal = $("#legsArmsColor").val();
   // Call function legsArmsColor with the colors color value and color value as arguments
   legsArmsColor(colors[colorVal], colorVal);
+})
+
+$("#eyesShape").change(() => {
+  var shape = parseInt($("#eyesShape").val());
+  eyeVariation(shape);
 })
