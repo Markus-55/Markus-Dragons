@@ -43,7 +43,7 @@
   left: 135px;
 }
 
-.horns {
+.horns1 {
   background-color: #000d2f;
   border-radius: 0px 90px 0px 90px;
   width: 63px;
@@ -63,7 +63,7 @@
   transform: rotate(44deg);
 }
 
-.outerScales {
+.horns2 {
   background-color: #252525;
   border-radius: 0px 90px 0px 90px;
   width: 14px;
@@ -71,25 +71,25 @@
   position: absolute;
 }
 
-.rightOuterScale1 {
+.rightHorn1 {
   top: 18px;
   left: 163px;
   transform: scale(1,-1) rotate(135deg);
 }
 
-.rightOuterScale2 {
+.rightHorn2 {
   top: 29px;
   left: 164px;
   transform: scale(1,-1) rotate(96deg);
 }
 
-.leftOuterScale1 {
+.leftHorn1 {
   top: 12px;
   left: 1px;
   transform: rotate(163deg);
 }
 
-.leftOuterScale2 {
+.leftHorn2 {
   top: 25px;
   left: 1px;
   transform: rotate(93deg);

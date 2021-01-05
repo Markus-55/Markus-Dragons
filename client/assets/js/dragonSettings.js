@@ -1,47 +1,48 @@
 // Create a variable that stores the result of the object call
-var colors = Object.values(allColors())
+var colors = Object.values(allColors());
 
 // Make a variable for the default dna object
-var defaultDNA = {
+var defaultDnaCode = {
   // Dragon colors
   "headBodyColor": 1,
   "wingsTailColor": 11,
   "eyesColor": 21,
   "legsArmsColor": 31,
   // Dragon atributes
-  "eyesShape": 1,
-  "decorationPattern": 1,
-  "decorationMidcolor": 13,
-  "decorationSidescolor": 13,
+  "eyeShape": 1,
+  "hornShape": 1,
+  "midColorDecoration": 13,
+  "sideColorDecoration": 13,
   "animation": 1,
   "lastNum": 1
 }
+
 // Prepare the document
 $(document).ready(function() {
-  // Head and body color id is set
-  $("#headBodyDna").html(defaultDNA.headBodyColor);
-  // Wings and tail color id is set
-  $("#wingsTailDna").html(defaultDNA.wingsTailColor);
-  // Eyes color id is set
-  $("#eyesDna").html(defaultDNA.eyesColor);
-  // Legs and arms color is set
-  $("#legsArmsDna").html(defaultDNA.legsArmsColor);
+  // The head and body color is set with the default dna code
+  $("#headBodyDna").html(defaultDnaCode.headBodyColor);
+  // The wings and tail color is set with the default dna code
+  $("#wingsTailDna").html(defaultDnaCode.wingsTailColor);
+  // The eyes color is set with the default dna code
+  $("#eyesDna").html(defaultDnaCode.eyesColor);
+  // The legs and arms color is set with the default dna code
+  $("#legsArmsDna").html(defaultDnaCode.legsArmsColor);
 
-  $("#dnashape").html(defaultDNA.eyesShape);
-  $("#dnadecoration").html(defaultDNA.decorationPattern);
-  $("#dnadecorationMid").html(defaultDNA.decorationMidcolor);
-  $("#dnadecorationSides").html(defaultDNA.decorationSidescolor);
-  $("#dnaanimation").html(defaultDNA.animation);
-  $("#dnaspecial").html(defaultDNA.lastNum);
+  // The eyes shape is set with the default dna code
+  $("#eyeShapeDna").html(defaultDnaCode.eyeShape);
+  // The decoration patern is set with the default dna code
+  $("#hornShapeDna").html(defaultDnaCode.hornShape);
+  // The mid color decoration is set with the default dna code
+  $("#midDecorationDna").html(defaultDnaCode.midColorDecoration);
+  // The side color decoration is set with the default dna code
+  $("#sideDecorationDna").html(defaultDnaCode.sideColorDecoration);
+  // The animation is set with the default dna code
+  $("#animationDna").html(defaultDnaCode.animation);
+  $("#specialDna").html(defaultDnaCode.lastNum);
 
-  // Call function renderHeadBody with the default dna as an argument
-  renderHeadBody(defaultDNA);
-  // Call function renderWingsTail with the default dna as an argument
-  renderWingsTail(defaultDNA);
-  // Call function renderEyes with the default dna as an argument
-  renderEyes(defaultDNA);
-  // Call function renderLegsArms with the default dna as an argument
-  renderLegsArms(defaultDNA);
+  // Render the dragon with the default dna code
+  renderDragon(defaultDnaCode);
+  renderHorns(defaultDnaCode);
 });
 
 // Make a function to get the dna
@@ -57,72 +58,82 @@ function getDna() {
   // dna += legs and arms dna
   dna += $("#legsArmsDna").html();
 
-
-  dna += $("#dnashape").html();
-  dna += $("#dnadecoration").html();
-  dna += $("#dnadecorationMid").html();
-  dna += $("#dnadecorationSides").html();
-  dna += $("#dnaanimation").html();
-  dna += $("#dnaspecial").html();
+  // dna += the shape dna
+  dna += $("#eyeShapeDna").html();
+  // dna += the decoration dna
+  dna += $("#hornShapeDna").html();
+  // dna += the mid decoration dna
+  dna += $("#midDecorationDna").html();
+  // dna += sides decoration dna
+  dna += $("#sideDecorationDna").html();
+  // dna += the animation dna
+  dna += $("#animationDna").html();
+  dna += $("#specialDna").html();
   // returns the parseInt dna
   return parseInt(dna);
 }
 
-// Create a function to render the head and body with the dna as an argument
-function renderHeadBody(dna) {
-  // Call function headBodyColor with the color of the head and body color dna
-  // and the head and body color dna as arguments
-  headBodyColor(colors[dna.headBodyColor], dna.headBodyColor);
-  // Sets the head and body color dna in the headBodyColor id
-  $("#headBodyColor").val(dna.headBodyColor);
+// Create a function to render the head and body with the dna code as an argument
+function renderDragon(dnaCode) {
+  // Call function headBodyColor with the head and body color dna code of the colors object call as the first argument
+  // and the head and body color dna code as the second argument
+  headBodyColor(colors[dnaCode.headBodyColor], dnaCode.headBodyColor);
+  // Sets the head and body color with the dna code
+  $("#headBodyColor").val(dnaCode.headBodyColor);
+
+  // Call function wingsTailColor with the wings and tail color dna code of the colors object call as the first argument
+  // and the wings and tail color dna code as the second argument
+  wingsTailColor(colors[dnaCode.wingsTailColor], dnaCode.wingsTailColor);
+  // Sets the wings and tail color with the dna code
+  $("#wingsTailColor").val(dnaCode.wingsTailColor);
+
+  // Call function eyesColor with the eyes color dna code of the colors object call as the first argument
+  // and the eyes color dna code as the second arguments
+  eyesColor(colors[dnaCode.eyesColor], dnaCode.eyesColor);
+  // Sets the eyes color with the dna code
+  $("#eyesColor").val(dnaCode.eyesColor);
+
+  // Call function legsArmsColor with the legs and arms color dna code of the colors object call as the first argument
+  // and the legs and arms color dna code as the second arguments
+  legsArmsColor(colors[dnaCode.legsArmsColor], dnaCode.legsArmsColor);
+  // Sets the legs and arms color with the dna code
+  $("#legsArmsColor").val(dnaCode.legsArmsColor);
+
+  // Call function eyeVariation with the eyes shape dna code as an argument
+  eyeVariation(dnaCode.eyeShape);
+  // Sets the the eyes shape with the dna code
+  $("#eyeShape").val(dnaCode.eyeShape);
+
+
 }
 
-// create a function to render the wings and the tail with the dna as the argument
-function renderWingsTail(dna) {
-  // Call function wingsTailColor with the color of the wings and tail color dna
-  // and the wings and tail color dna as arguments
-  wingsTailColor(colors[dna.wingsTailColor], dna.wingsTailColor);
-  // Sets the wings and tail color in the wingsTailColor id
-  $("#wingsTailColor").val(dna.wingsTailColor);
+function renderHorns(dnaCode) {
+  hornVariation(dnaCode.hornShape);
+  $("hornShape").val(dnaCode.hornShape);
 }
 
-// Create a function to render the eyes with the dna as argument
-function renderEyes(dna) {
-  // Call function eyesColor with the color of the eyes color dna
-  // and the eyes color dna as arguments
-  eyesColor(colors[dna.eyesColor], dna.eyesColor);
-  // Sets the eyes color in the eyesColor id
-  $("#eyesColor").val(dna.eyesColor);
-}
+console.log(hornVariation());
 
-// create a function to render the legs and arms with the dna as argument
-function renderLegsArms(dna) {
-  // Call function legsArmsColor with the color of the legs and arms color dna
-  // and the legs and arms color dna as arguments
-  legsArmsColor(colors[dna.legsArmsColor], dna.legsArmsColor);
-  // Sets the legs and arms dna in the legsArmscolor id
-  $("#legsArmsColor").val(dna.legsArmsColor);
-}
 
 // Listening for change in headBodyColor id
 $("#headBodyColor").change(() => {
-  // Make a color value = to the headBodyColor id with the value
+  // Make a color value = to the headBodyColor id that returns the value attribute
   var colorVal = $("#headBodyColor").val();
-  // Call function headBodyColor with the colors color value and color value as arguments
+  // Call function headBodyColor with the color value of the colors object call and color value as arguments
   headBodyColor(colors[colorVal], colorVal);
 })
 
 // Listening for change in wingsTailColor id
 $("#wingsTailColor").change(() => {
-  // Make a color value = to the wingsTailColor id with the value
+  // Make a color value = to the wingsTailColor id that returns the value attribute
   var colorVal = $("#wingsTailColor").val();
-  // Call function wingsTailColor with the colors color value and color value as arguments
+  // Call function wingsTailColor with the color value of the colors object call and color value as arguments
   wingsTailColor(colors[colorVal], colorVal);
 })
 
 // Listening for change in eyesColor id
 $("#eyesColor").change(() => {
-  // Make a color value = to the eyesColor id with the value
+  // Make a color value = to the eyesColor id that returns the value attribute
   var colorVal = $("#eyesColor").val();
   // Call function eyesColor with the colors color value and color value as arguments
   eyesColor(colors[colorVal], colorVal);
@@ -130,13 +141,21 @@ $("#eyesColor").change(() => {
 
 // Listening for change in legsArmsColor id
 $("#legsArmsColor").change(() => {
-  // Make a color value = to the legsArmsColor id with the value
+  // Make a color value = to the legsArmsColor id that returns the value attribute
   var colorVal = $("#legsArmsColor").val();
-  // Call function legsArmsColor with the colors color value and color value as arguments
+  // Call function legsArmsColor with the color value of the colors object call and color value as arguments
   legsArmsColor(colors[colorVal], colorVal);
 })
 
-$("#eyesShape").change(() => {
-  var shape = parseInt($("#eyesShape").val());
+// Listening for change in eyesShape id
+$("#eyeShape").change(() => {
+  // Make a variable shape = to the parseInt eyesShape id that returns the value attribute
+  var shape = parseInt($("#eyeShape").val());
+  // Call function eyeVariation with the shape as an argument
   eyeVariation(shape);
+})
+
+$("hornShape").change(() => {
+  var shape = parseInt($("hornShape").val());
+  hornVariation(shape);
 })

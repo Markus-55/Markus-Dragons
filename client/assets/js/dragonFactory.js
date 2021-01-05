@@ -57,92 +57,135 @@ function legsArmsColor(color, code) {
   $("#legsArmsDna").html(code);
 }
 
-function eyeVariation(shapeNum) {
+function eyeVariation(eyeShapeNum) {
 
-  $("#dnashape").html(shapeNum);
-  // if the shape number
-  switch (shapeNum) {
-    // is case 1
+  $("#eyeShapeDna").html(eyeShapeNum);
+  // If the shape number
+  switch (eyeShapeNum) {
+    // Is case 1
     case 1:
-      // Resets the eyes
+      // Resets to original eyes
       originalEyes();
-      // Sets the badge to basic
+      // Sets the badge to original
       $("#eyesName").html("Original");
       break
-    // if it is case 2
+    // If it's case 2
     case 2:
       // Resets the eyes
       originalEyes();
-      // Sets the badge to looking up
+      // Set the badge to happy
       $("#eyesName").html("Happy");
-      // Sets border to change the shape of the eyes
+      // Set eyes type to happy
       eyesTypeHappy();
       break
+      // If it's case 3
     case 3:
+      // Reset to original eyes
       originalEyes();
+      // Set the badge to round
       $("#eyesName").html("Round");
+      // Set eyes type to round
       eyesTypeRound();
       break
+    // If it's case 4
     case 4:
+      // Reset to original eyes
       originalEyes();
-      $("#eyesName").html("Pointy");
-      eyesTypePointy();
-      break
-    case 5:
-      originalEyes();
-      $("#eyesName").html("Horizontal");
-      eyesTypeHorizontal();
-      break
-    case 6:
-      originalEyes();
-      $("#eyesName").html("Moon-shape");
-      eyesTypeMoon();
-      break
-    case 7:
-      originalEyes();
+      // Set the badge to relaxed
       $("#eyesName").html("Relaxed");
+      // Set eyes type to relaxed
       eyesTypeRelaxed();
       break
-
-  }
-}
-
-function decorationVariation(num) {
-  $("#dnadecoration").html(num);
-  switch (num) {
-    case 1:
-      $("#decorationName").html("Basic");
-      normaldecoration();
+    // If it's case 5
+    case 5:
+      // Reset to original eyes
+      originalEyes();
+      // Set the badge to pointy
+      $("#eyesName").html("Pointy");
+      // Set eyes type to pointy
+      eyesTypePointy();
+      break
+    // If it's case 6
+    case 6:
+      // Reset to original eyes
+      originalEyes();
+      // Set the badge to Horizontal
+      $("#eyesName").html("Horizontal");
+      // Set eyes type to Horizontal
+      eyesTypeHorizontal();
+      break
+    // If it's case 7
+    case 7:
+      // Reset to original eyes
+      originalEyes();
+      // Set the badge to Moon-shape
+      $("#eyesName").html("Moon-shape");
+      // Set eyes type to Moon shape
+      eyesTypeMoon();
       break
   }
 }
 
+function hornVariation(hornShapeNum) {
+
+  $("#hornShapeDna").html(hornShapeNum);
+
+  switch (hornShapeNum) {
+    case 1:
+      originalHorns();
+      $("#hornsName").html("Basic");
+      break
+    case 2:
+      originalHorns();
+      $("#hornsName").html("test");
+      hornsType1();
+      break
+  }
+}
+console.log(hornVariation());
+
+
+// Create a function to set the original eyes
 function originalEyes() {
+  // Set the border of the eyes to none
   $(".eyes").css("border", "none");
+  // Set the border of the pupils to none
   $(".pupils").css("border", "none");
+  // Set the box-shadow of the inner pupils
   $(".innerPupils").css("box-shadow", "2px 4px 3px -1px black");
+  // Set top of the inner pupils to 6 px
   $(".innerPupils").css("top", "6px");
+  // Set left of the inner pupils to 8 px
   $(".innerPupils").css("left", "8px");
+  // Set the width of the inner pupils to 15 px
   $(".innerPupils").css("width", "15px");
+  // Set the height of the inner pupils to 15 px
   $(".innerPupils").css("height", "15px");
+  // Set transform of the inner pupils to rotate 160 deg
   $(".innerPupils").css("transform", "rotate(160deg)");
+  // Set transform of the pupils to rotate 57 deg
   $(".pupils").css("transform", "rotate(57deg)");
+  // Set top of the pupils to 8 px
   $(".pupils").css("top", "8px");
+  // Set left of the pupils to 1 px
   $(".pupils").css("left", "1px");
 }
 
+// Create a function to set eyes type happy
 function eyesTypeHappy() {
   $(".pupils").css("transform", "rotate(244deg)");
   $(".pupils").css("top", "8px");
   $(".pupils").css("left", "1px");
 }
 
+// Create a function to set eyes type round
 function eyesTypeRound() {
   $(".innerPupils").css("box-shadow", "inset 20px 20px black");
   $(".innerPupils").css("top", "4px");
   $(".innerPupils").css("left", "7px");
 }
 
+// Create a function to set eyes type pointy
 function eyesTypePointy() {
   $(".innerPupils").css("box-shadow", "inset 20px 20px black");
   $(".innerPupils").css("top", "1px");
@@ -152,6 +195,7 @@ function eyesTypePointy() {
   $(".innerPupils").css("transform", "rotate(129deg)");
 }
 
+// Create a function to set eyes type horizontal
 function eyesTypeHorizontal() {
   $(".innerPupils").css("box-shadow", "inset 20px 20px black");
   $(".innerPupils").css("top", "1px");
@@ -161,6 +205,7 @@ function eyesTypeHorizontal() {
   $(".innerPupils").css("transform", "rotate(44deg)");
 }
 
+// Create a function to set eyes type moon-shape
 function eyesTypeMoon() {
   $(".innerPupils").css("box-shadow", "2px 4px 3px -1px black");
   $(".innerPupils").css("top", "10px");
@@ -170,6 +215,7 @@ function eyesTypeMoon() {
   $(".innerPupils").css("transform", "rotate(225deg)");
 }
 
+// Create a function to set eyes type relaxed
 function eyesTypeRelaxed() {
   $(".pupils").css("border-bottom", "10px solid");
   $(".eyes").css("border-bottom", "20px solid");
@@ -179,28 +225,12 @@ function eyesTypeRelaxed() {
   $(".innerPupils").css("box-shadow", "inset black -2px -6px 0px -3px");
 }
 
-function normaldecoration() {
-  //Remove all style from other decorations
-  //In this way we can also use normalDecoration() to reset the decoration style
-  $('.cat__head-dots').css({
-    "transform": "rotate(0deg)",
-    "height": "48px",
-    "width": "14px",
-    "top": "1px",
-    "border-radius": "0 0 50% 50%"
-  });
-  $('.cat__head-dots_first').css({
-    "transform": "rotate(0deg)",
-    "height": "35px",
-    "width": "14px",
-    "top": "1px",
-    "border-radius": "50% 0 50% 50%"
-  });
-  $('.cat__head-dots_second').css({
-    "transform": "rotate(0deg)",
-    "height": "35px",
-    "width": "14px",
-    "top": "1px",
-    "border-radius": "0 50% 50% 50%"
-  });
+function originalHorns() {
+  $(".rightHorn").css("transform", "rotate(44deg)");
+  $(".leftHorn").css("transform", "rotate(44deg)");
+}
+
+function hornsType1() {
+  $(".rightHorn").css("transform", "rotate(26deg)");
+  $(".leftHorn").css("transform", "rotate(60deg)");
 }
