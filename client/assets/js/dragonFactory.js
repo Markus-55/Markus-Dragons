@@ -37,32 +37,53 @@ function wingsTailColor(color, code) {
   $("#wingsTailDna").html(code);
 }
 
+// Make a function legsArmsColor with a color and code as arguments
+function legsArmsColor(color, code) {
+  // Change the legs and arms background color
+  $(".legs, .feet, .arms").css("background", "#" + color);
+  // Modifies the legsArmsCode id with the code in the slider
+  $("#legsArmsCode").html("code: " + code);
+  // Modifies the legsArmsDna id with the code
+  $("#legsArmsDna").html(code);
+}
+
+// Make a function topHornsColor with a color and code as arguments
+function topHornsColor(color, code) {
+  // Change the top horns background color
+  $(".topHorns").css("background", "#" + color);
+  // Modifies the topHornsCode id with the code in the slider
+  $("#topHornsCode").html("code: " + code);
+  // Modifies the topHornsDna id with the code
+  $("#topHornsDna").html(code);
+}
+
+// Make a function sideHornsColor with a color and code as arguments
+function sideHornsColor(color, code) {
+  // Change the side horns background color
+  $(".sideHorns").css("background", "#" + color);
+  // Modifies the sideHornsCode id with the code in the slider
+  $("#sideHornsCode").html("code: " + code);
+  // Modifies the sideHornsDna id with the code
+  $("#sideHornsDna").html(code);
+}
+
 // Make a function eyesColor with a color and code as arguments
 function eyesColor(color, code) {
   // Change the pupils background color
   $(".pupils").css("background", "#" + color);
-  // Modifies eyesCode with the code in the slider
+  // Modifies eyesCode id with the code in the slider
   $("#eyesCode").html("code: " + code);
   // Modifies the eyesDna id with the code
   $("#eyesDna").html(code);
 }
 
-// Make a function legsArmsColor with a color and code as arguments
-function legsArmsColor(color, code) {
-  // Change the legs and arms background color
-  $(".legs, .feet, .arms").css("background", "#" + color)
-  // Modifies the legsArmsCode with the code in the slider
-  $("#legsArmsCode").html("code: " + code);
-  // Modifies the legsArmsDna with the code
-  $("#legsArmsDna").html(code);
-}
-
+// Make a function eyeVariation with the eye shape number as an argument
 function eyeVariation(eyeShapeNum) {
-
+  // Modifies the eyeShapeDna id with the eye shape number
   $("#eyeShapeDna").html(eyeShapeNum);
-  // If the shape number
+  // Switch the eye shape number
   switch (eyeShapeNum) {
-    // Is case 1
+    // If it's case 1
     case 1:
       // Resets to original eyes
       originalEyes();
@@ -71,7 +92,7 @@ function eyeVariation(eyeShapeNum) {
       break
     // If it's case 2
     case 2:
-      // Resets the eyes
+      // Resets to original eyes
       originalEyes();
       // Set the badge to happy
       $("#eyesName").html("Happy");
@@ -109,16 +130,16 @@ function eyeVariation(eyeShapeNum) {
     case 6:
       // Reset to original eyes
       originalEyes();
-      // Set the badge to Horizontal
+      // Set the badge to horizontal
       $("#eyesName").html("Horizontal");
-      // Set eyes type to Horizontal
+      // Set eyes type to horizontal
       eyesTypeHorizontal();
       break
     // If it's case 7
     case 7:
       // Reset to original eyes
       originalEyes();
-      // Set the badge to Moon-shape
+      // Set the badge to moon-shape
       $("#eyesName").html("Moon-shape");
       // Set eyes type to Moon shape
       eyesTypeMoon();
@@ -126,23 +147,57 @@ function eyeVariation(eyeShapeNum) {
   }
 }
 
+// Make a function hornVariation with the horn shape number as an argument
 function hornVariation(hornShapeNum) {
-
+  // Modifies the hornShapeDna id with the horn shape number
   $("#hornShapeDna").html(hornShapeNum);
-
+  // Switch the horn shape number
   switch (hornShapeNum) {
+    // If it's case 1
     case 1:
+      // Reset to original horns
       originalHorns();
-      $("#hornsName").html("Basic");
+      // Set the badge to original
+      $("#hornsName").html("Original");
       break
+    // If it's case 2
     case 2:
+      // Reset to original horns
       originalHorns();
-      $("#hornsName").html("test");
-      hornsType1();
+      // Set the badge to centered
+      $("#hornsName").html("Centered");
+      // Set horn type to centered
+      hornsTypeCentered();
+      break
+    // If it's case 3
+    case 3:
+      // Reset to original horns
+      originalHorns();
+      // Set the badge to small
+      $("#hornsName").html("Small");
+      // Set horn type to small
+      hornsTypeSmall();
+      break
+    // If it's case 4
+    case 4:
+      // Reset to original horns
+      originalHorns();
+      // Set the badge to rounded
+      $("#hornsName").html("Rounded");
+      // Set horn type to rounded
+      hornsTypeRounded();
+      break
+    // If it's case 5
+    case 5:
+      // Reset to original horns
+      originalHorns();
+      // Set the badge to blades
+      $("#hornsName").html("Blades");
+      // Set horn type to blades
+      hornsTypeBlades();
       break
   }
 }
-console.log(hornVariation());
 
 
 // Create a function to set the original eyes
@@ -225,12 +280,54 @@ function eyesTypeRelaxed() {
   $(".innerPupils").css("box-shadow", "inset black -2px -6px 0px -3px");
 }
 
+// Create a function to set the original horns
 function originalHorns() {
-  $(".rightHorn").css("transform", "rotate(44deg)");
-  $(".leftHorn").css("transform", "rotate(44deg)");
+  $(".topHorns").css("top", "-20px");
+  $(".topHorns").css("border-radius", "0px 90px 0px 90px");
+  $(".topHorns").css("width", "63px");
+  $(".topHorns").css("height", "65px");
+  $(".topRightHorn").css("left", "92px");
+  $(".topLeftHorn").css("left", "29px");
+  $(".topHorns").css("transform", "rotate(44deg)");
 }
 
-function hornsType1() {
-  $(".rightHorn").css("transform", "rotate(26deg)");
-  $(".leftHorn").css("transform", "rotate(60deg)");
+// Create a function to set horns type centered
+function hornsTypeCentered() {
+  $(".topRightHorn").css("transform", "rotate(23deg)");
+  $(".topLeftHorn").css("transform", "rotate(65deg)");
+  $(".topRightHorn").css("left", "87px");
+  $(".topLeftHorn").css("left", "21px");
+  $(".topHorns").css("width", "76px");
+  $(".topHorns").css("height", "79px");
+
+}
+
+// Create a function to set horns type small
+function hornsTypeSmall() {
+  $(".topHorns").css("top", "-9px");
+  $(".topRightHorn").css("left", "89px");
+  $(".topLeftHorn").css("left", "32px");
+  $(".topRightHorn").css("transform", "rotate(47deg)");
+  $(".topLeftHorn").css("transform", "rotate(38deg)");
+}
+
+// Create a function to set horns type rounded
+function hornsTypeRounded() {
+  $(".topHorns").css("border-radius", "0px 43px 9px 41px");
+  $(".topHorns").css("width", "57px");
+  $(".topHorns").css("height", "59px");
+  $(".topRightHorn").css("left", "92px");
+  $(".topLeftHorn").css("left", "36px");
+}
+
+// Create a function to set horns type blades
+function hornsTypeBlades() {
+  $(".topHorns").css("border-radius", "0px 90px");
+  $(".topHorns").css("width", "31px");
+  $(".topHorns").css("height", "76px");
+  $(".topHorns").css("top", "-30px");
+  $(".topRightHorn").css("transform", "rotate(30deg)");
+  $(".topLeftHorn").css("transform", "scale(1, -1) rotate(30deg)");
+  $(".topRightHorn").css("left", "107px");
+  $(".topLeftHorn").css("left", "47px");
 }
