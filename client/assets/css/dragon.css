@@ -96,28 +96,25 @@
   position: absolute;
 }
 
-.headScales {
+.scales {
+  position: absolute;
   background-color: #212235;
   border-radius: 105px 54px 160px 37px;
+}
+
+.headScales {
   width: 24px;
   height: 21px;
-  position: absolute;
 }
 
 .armScales {
-  background-color: #212235;
-  border-radius: 105px 54px 160px 37px;
   width: 10px;
   height: 9px;
-  position: absolute;
 }
 
 .bodyScales {
-  background-color: #212235;
-  border-radius: 105px 54px 160px 37px;
   width: 21px;
   height: 18px;
-  position: absolute;
 }
 
 .scale1 {
@@ -326,49 +323,44 @@
   transform: rotate(-20deg);
 }
 
-.tooth1 {
+.teeth {
   position: absolute;
-  top: 123px;
-  left: 53px;
   border-top: 4px solid transparent;
   border-left: 10px solid #404040;
   border-bottom: 4px solid transparent;
+}
+
+.tooth1 {
+  top: 123px;
+  left: 53px;
   transform: rotate(109deg);
 }
 
 .tooth2 {
-  position: absolute;
   top: 125px;
   left: 117px;
-  border-top: 4px solid transparent;
-  border-left: 10px solid #404040;
-  border-bottom: 4px solid transparent;
   transform: rotate(72deg);
 }
 
-.nostril1 {
+.nose {
   background-color: black;
   border-radius: 50%;
   position: absolute;
   top: 77%;
-  left: 53%;
   height: 5px;
   width: 5px;
-  transform: rotate(92deg);
+}
+
+.nostril1 {
+  left: 53%;
 }
 
 .nostril2 {
-  background-color: black;
-  border-radius: 50%;
-  position: absolute;
-  top: 77%;
   left: 45%;
-  height: 5px;
-  width: 5px;
-  transform: rotate(92deg);
 }
 
 .arms {
+  position: absolute;
   background-color: #04044c;
   border-radius: 31% 27% 38% 28%;
   height: 24px;
@@ -378,57 +370,37 @@
 }
 
 .rightArm {
-  position: absolute;
   left: 54px;
 }
 
 .leftArm {
-  position: absolute;
   left: 1px;
 }
 
-.handPart1 {
+.hand {
   background-color: black;
   border-radius: 50px;
   position: absolute;
   top: 100%;
-  left: 36%;
   height: 2px;
   width: 5px;
   transform: rotate(89deg);
+}
+
+.handPart1 {
+  left: 36%;
 }
 
 .handPart2 {
-  background-color: black;
-  border-radius: 50px;
-  position: absolute;
-  top: 100%;
   left: 42%;
-  height: 2px;
-  width: 5px;
-  transform: rotate(89deg);
 }
 
 .handPart3 {
-  background-color: black;
-  border-radius: 50px;
-  position: absolute;
-  top: 100%;
   left: 84%;
-  height: 2px;
-  width: 5px;
-  transform: rotate(89deg);
 }
 
 .handPart4 {
-  background-color: black;
-  border-radius: 50px;
-  position: absolute;
-  top: 100%;
   left: 90%;
-  height: 2px;
-  width: 5px;
-  transform: rotate(89deg);
 }
 
 .legs {
@@ -455,20 +427,19 @@
   border-radius: 30% 66%;
   position: absolute;
   transform: rotate(103deg);
+  width: 12px;
 }
 
 .rightFoot {
   top: 134px;
   left: 104px;
   height: 29px;
-  width: 12px;
 }
 
 .leftFoot {
   top: 130px;
   left: 10px;
   height: 34px;
-  width: 12px;
 }
 
 #rightWing {
@@ -824,22 +795,21 @@
   transform: rotate(8deg);
 }
 
-.tailEnd1 {
+.tailEnd {
   position: absolute;
-  top: 177px;
-  left: 27px;
   border-top: 10px solid transparent;
   border-left: 35px solid #00084a;
   border-bottom: 10px solid transparent;
+}
+
+.tailEnd1 {
+  top: 177px;
+  left: 27px;
   transform: rotate(437deg);
 }
 
 .tailEnd2 {
-  position: absolute;
   top: 163px;
   left: 33px;
-  border-top: 10px solid transparent;
-  border-left: 35px solid #00084a;
-  border-bottom: 10px solid transparent;
   transform: rotate(-33deg);
 }

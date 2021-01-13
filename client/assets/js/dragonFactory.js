@@ -30,7 +30,7 @@ function wingsTailColor(color, code) {
   // Change the tail background color of the dragon
   $(".tail").css("background", "#" + color);
   // Change the tail end border left color of the dragon
-  $(".tailEnd1, .tailEnd2").css("border-left-color", "#" + color);
+  $(".tailEnd").css("border-left-color", "#" + color);
   // Modifies the wingsTailCode id with the code in the slider
   $("#wingsTailCode").html("code: " + code);
   // Modifies the wingsTailDna id with the code
@@ -45,6 +45,16 @@ function legsArmsColor(color, code) {
   $("#legsArmsCode").html("code: " + code);
   // Modifies the legsArmsDna id with the code
   $("#legsArmsDna").html(code);
+}
+
+// Make a function eyesColor with a color and code as arguments
+function eyesColor(color, code) {
+  // Change the pupils background color
+  $(".pupils").css("background", "#" + color);
+  // Modifies eyesCode id with the code in the slider
+  $("#eyesCode").html("code: " + code);
+  // Modifies the eyesDna id with the code
+  $("#eyesDna").html(code);
 }
 
 // Make a function topHornsColor with a color and code as arguments
@@ -65,16 +75,6 @@ function sideHornsColor(color, code) {
   $("#sideHornsCode").html("code: " + code);
   // Modifies the sideHornsDna id with the code
   $("#sideHornsDna").html(code);
-}
-
-// Make a function eyesColor with a color and code as arguments
-function eyesColor(color, code) {
-  // Change the pupils background color
-  $(".pupils").css("background", "#" + color);
-  // Modifies eyesCode id with the code in the slider
-  $("#eyesCode").html("code: " + code);
-  // Modifies the eyesDna id with the code
-  $("#eyesDna").html(code);
 }
 
 // Make a function eyeVariation with the eye shape number as an argument
@@ -198,7 +198,6 @@ function hornVariation(hornShapeNum) {
       break
   }
 }
-
 
 // Create a function to set the original eyes
 function originalEyes() {
