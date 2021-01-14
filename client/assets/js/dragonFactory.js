@@ -25,12 +25,10 @@ function headBodyColor(color, code) {
 
 // Make a function wingsTailColor with a color and code as arguments
 function wingsTailColor(color, code) {
-  // Change the wings border left color of the dragon
-  $(".wings").css("border-left-color", "#" + color);
+  // Change the wings and tail end border left color of the dragon
+  $(".wings, .tailEnd").css("border-left-color", "#" + color);
   // Change the tail background color of the dragon
   $(".tail").css("background", "#" + color);
-  // Change the tail end border left color of the dragon
-  $(".tailEnd").css("border-left-color", "#" + color);
   // Modifies the wingsTailCode id with the code in the slider
   $("#wingsTailCode").html("code: " + code);
   // Modifies the wingsTailDna id with the code
@@ -201,132 +199,153 @@ function hornVariation(hornShapeNum) {
 
 // Create a function to set the original eyes
 function originalEyes() {
-  // Set the border of the eyes to none
+  // Reset the border of the eyes to none
   $(".eyes").css("border", "none");
-  // Set the border of the pupils to none
-  $(".pupils").css("border", "none");
-  // Set the box-shadow of the inner pupils
-  $(".innerPupils").css("box-shadow", "2px 4px 3px -1px black");
-  // Set top of the inner pupils to 6 px
-  $(".innerPupils").css("top", "6px");
-  // Set left of the inner pupils to 8 px
-  $(".innerPupils").css("left", "8px");
-  // Set the width of the inner pupils to 15 px
-  $(".innerPupils").css("width", "15px");
-  // Set the height of the inner pupils to 15 px
-  $(".innerPupils").css("height", "15px");
-  // Set transform of the inner pupils to rotate 160 deg
-  $(".innerPupils").css("transform", "rotate(160deg)");
-  // Set transform of the pupils to rotate 57 deg
-  $(".pupils").css("transform", "rotate(57deg)");
-  // Set top of the pupils to 8 px
-  $(".pupils").css("top", "8px");
-  // Set left of the pupils to 1 px
-  $(".pupils").css("left", "1px");
+  // Reset pupils with original css property
+  $(".pupils").css({
+    "border": "none",
+    "transform": "rotate(57deg)",
+    "left": "1px"
+  });
+  // Reset inner pupils with original css property
+  $(".innerPupils").css({
+    "box-shadow": "2px 4px 3px -1px black",
+    "transform": "rotate(160deg)",
+    "height": "15px",
+    "width": "15px",
+    "left": "8px",
+    "top": "6px"
+  });
 }
 
 // Create a function to set eyes type happy
 function eyesTypeHappy() {
   $(".pupils").css("transform", "rotate(244deg)");
-  $(".pupils").css("top", "8px");
-  $(".pupils").css("left", "1px");
 }
 
 // Create a function to set eyes type round
 function eyesTypeRound() {
-  $(".innerPupils").css("box-shadow", "inset 20px 20px black");
-  $(".innerPupils").css("top", "4px");
-  $(".innerPupils").css("left", "7px");
-}
-
-// Create a function to set eyes type pointy
-function eyesTypePointy() {
-  $(".innerPupils").css("box-shadow", "inset 20px 20px black");
-  $(".innerPupils").css("top", "1px");
-  $(".innerPupils").css("left", "12px");
-  $(".innerPupils").css("width", "6px");
-  $(".innerPupils").css("height", "21px");
-  $(".innerPupils").css("transform", "rotate(129deg)");
-}
-
-// Create a function to set eyes type horizontal
-function eyesTypeHorizontal() {
-  $(".innerPupils").css("box-shadow", "inset 20px 20px black");
-  $(".innerPupils").css("top", "1px");
-  $(".innerPupils").css("left", "11px");
-  $(".innerPupils").css("width", "6px");
-  $(".innerPupils").css("height", "21px");
-  $(".innerPupils").css("transform", "rotate(44deg)");
-}
-
-// Create a function to set eyes type moon-shape
-function eyesTypeMoon() {
-  $(".innerPupils").css("box-shadow", "2px 4px 3px -1px black");
-  $(".innerPupils").css("top", "10px");
-  $(".innerPupils").css("left", "2px");
-  $(".innerPupils").css("width", "20px");
-  $(".innerPupils").css("height", "11px");
-  $(".innerPupils").css("transform", "rotate(225deg)");
+  $(".innerPupils").css({
+    "box-shadow": "inset 20px 20px black",
+    "left": "7px",
+    "top": "4px"
+  });
 }
 
 // Create a function to set eyes type relaxed
 function eyesTypeRelaxed() {
-  $(".pupils").css("border-bottom", "10px solid");
   $(".eyes").css("border-bottom", "20px solid");
-  $(".pupils").css("transform", "rotate(22deg)");
-  $(".pupils").css("left", "2px");
-  $(".innerPupils").css("transform", "rotate(192deg)");
-  $(".innerPupils").css("box-shadow", "inset black -2px -6px 0px -3px");
+  $(".innerPupils").css({
+    "box-shadow": "inset black -2px -6px 0px -3px",
+    "transform": "rotate(192deg)"
+  });
+  $(".pupils").css({
+    "border-bottom": "10px solid",
+    "transform": "rotate(22deg)",
+    "left": "2px"
+  });
+}
+
+// Create a function to set eyes type pointy
+function eyesTypePointy() {
+  $(".innerPupils").css({
+    "box-shadow": "inset 20px 20px black",
+    "transform": "rotate(129deg)",
+    "height": "21px",
+    "left": "12px",
+    "width": "6px",
+    "top": "1px"
+  });
+}
+
+// Create a function to set eyes type horizontal
+function eyesTypeHorizontal() {
+  $(".innerPupils").css({
+    "box-shadow": "inset 20px 20px black",
+    "transform": "rotate(44deg)",
+    "height": "21px",
+    "left": "11px",
+    "width": "6px",
+    "top": "1px"
+  });
+}
+
+// Create a function to set eyes type moon-shape
+function eyesTypeMoon() {
+  $(".innerPupils").css({
+    "transform": "rotate(225deg)",
+    "height": "11px",
+    "width": "20px",
+    "left": "2px",
+    "top": "10px"
+  });
 }
 
 // Create a function to set the original horns
 function originalHorns() {
-  $(".topHorns").css("top", "-20px");
-  $(".topHorns").css("border-radius", "0px 90px 0px 90px");
-  $(".topHorns").css("width", "63px");
-  $(".topHorns").css("height", "65px");
   $(".topRightHorn").css("left", "92px");
   $(".topLeftHorn").css("left", "29px");
-  $(".topHorns").css("transform", "rotate(44deg)");
+  $(".topHorns").css({
+    "border-radius": "0px 90px",
+    "transform": "rotate(44deg)",
+    "height": "65px",
+    "width": "63px",
+    "top": "-20px"
+  });
 }
 
 // Create a function to set horns type centered
 function hornsTypeCentered() {
-  $(".topRightHorn").css("transform", "rotate(23deg)");
-  $(".topLeftHorn").css("transform", "rotate(65deg)");
-  $(".topRightHorn").css("left", "87px");
-  $(".topLeftHorn").css("left", "21px");
-  $(".topHorns").css("width", "76px");
-  $(".topHorns").css("height", "79px");
-
+  $(".topRightHorn").css({
+    "transform": "scale(1,-1) rotate(65deg)",
+    "left": "87px"
+  });
+  $(".topLeftHorn").css({
+    "transform": "rotate(66deg)",
+    "left": "21px"
+  });
+  $(".topHorns").css({
+    "height": "79px",
+    "width": "76px"
+  });
 }
 
 // Create a function to set horns type small
 function hornsTypeSmall() {
   $(".topHorns").css("top", "-9px");
-  $(".topRightHorn").css("left", "89px");
-  $(".topLeftHorn").css("left", "32px");
-  $(".topRightHorn").css("transform", "rotate(47deg)");
-  $(".topLeftHorn").css("transform", "rotate(38deg)");
+  $(".topRightHorn").css({
+    "transform": "rotate(47deg)",
+    "left": "89px"
+  });
+  $(".topLeftHorn").css({
+    "transform": "rotate(38deg)",
+    "left": "32px"
+  });
 }
 
 // Create a function to set horns type rounded
 function hornsTypeRounded() {
-  $(".topHorns").css("border-radius", "0px 43px 9px 41px");
-  $(".topHorns").css("width", "57px");
-  $(".topHorns").css("height", "59px");
-  $(".topRightHorn").css("left", "92px");
   $(".topLeftHorn").css("left", "36px");
+  $(".topHorns").css({
+    "border-radius": "0px 43px 9px 41px",
+    "height": "59px",
+    "width": "57px"
+  });
 }
 
 // Create a function to set horns type blades
 function hornsTypeBlades() {
-  $(".topHorns").css("border-radius", "0px 90px");
-  $(".topHorns").css("width", "31px");
-  $(".topHorns").css("height", "76px");
-  $(".topHorns").css("top", "-30px");
-  $(".topRightHorn").css("transform", "rotate(30deg)");
-  $(".topLeftHorn").css("transform", "scale(1, -1) rotate(30deg)");
-  $(".topRightHorn").css("left", "107px");
-  $(".topLeftHorn").css("left", "47px");
+  $(".topHorns").css({
+    "height": "76px",
+    "width": "31px",
+    "top": "-30px"
+  });
+  $(".topRightHorn").css({
+    "transform": "rotate(30deg)",
+    "left": "107px"
+  });
+  $(".topLeftHorn").css({
+    "transform": "scale(1, -1) rotate(30deg)",
+    "left": "47px"
+  });
 }

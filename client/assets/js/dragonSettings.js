@@ -7,7 +7,7 @@ var defaultDnaCode = {
   "headBodyColor": 13,
   "wingsTailColor": 21,
   "legsArmsColor": 37,
-  "eyesColor": 42,
+  "eyesColor": 45,
   // Dragon atributes
   "eyeShape": 5,
   "hornShape": 3,
