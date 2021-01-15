@@ -1,0 +1,157 @@
+.tiltingHead {
+  animation: headTilt 3s infinite;
+}
+
+.tiltingRightEar {
+  animation: rightEarTilt 3s infinite;
+}
+
+.tiltingLeftEar {
+  animation: leftEarTilt 3s infinite;
+}
+
+.tiltingTopRightHorn {
+  animation: topRightHornTilt 3s infinite;
+}
+
+.tiltingTopLeftHorn {
+  animation: topLeftHornTilt 3s infinite;
+}
+
+/* class for right blade horn animation */
+.tiltingRightBladeHorn {
+  animation: rightBladeHornTilt 3s infinite;
+}
+
+/* class for left blade horn animation */
+.tiltingLeftBladeHorn {
+  animation: leftBladeHornTilt 3s infinite;
+}
+
+/* animation for right blade horn */
+@keyframes rightBladeHornTilt {
+  0% {
+    transform: rotate(30deg);
+  }
+
+  30% {
+    transform: rotate(36deg);
+  }
+
+  60% {
+    transform: rotate(26deg);
+  }
+
+  100% {
+    transform: rotate(30deg);
+  }
+}
+
+/* animation for left blade horn */
+@keyframes leftBladeHornTilt {
+  0% {
+    transform: scale(1,-1) rotate(30deg);
+  }
+
+  30% {
+    transform: scale(1,-1) rotate(24deg);
+  }
+
+  60% {
+    transform: scale(1,-1) rotate(34deg);
+  }
+
+  100% {
+    transform: scale(1,-1) rotate(30deg);
+  }
+}
+
+@keyframes topRightHornTilt {
+  0% {
+    transform: rotate(47deg);
+  }
+
+  30% {
+    transform: rotate(53deg);
+  }
+
+  60% {
+    transform: rotate(43deg);
+  }
+
+  100% {
+    transform: rotate(47deg);
+  }
+}
+
+@keyframes topLeftHornTilt {
+  0% {
+    transform: rotate(38deg);
+  }
+
+  30% {
+    transform: rotate(44deg);
+  }
+
+  60% {
+    transform: rotate(34deg);
+  }
+
+  100% {
+    transform: rotate(38deg);
+  }
+}
+
+@keyframes rightEarTilt {
+  0% {
+    transform: scale(1,-1) rotate(121deg);
+  }
+
+  30% {
+    transform: scale(1,-1) rotate(124deg);
+  }
+
+  60% {
+    transform: scale(1,-1) rotate(119deg);
+  }
+
+  100% {
+    transform: scale(1,-1) rotate(121deg);
+  }
+}
+
+@keyframes leftEarTilt {
+  0% {
+    transform: rotate(110deg);
+  }
+
+  30% {
+    transform: rotate(106deg);
+  }
+
+  60% {
+    transform: rotate(113deg);
+  }
+
+  100% {
+    transform: rotate(110deg);
+  }
+}
+
+@keyframes headTilt {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  30% {
+    transform: rotate(3deg);
+  }
+
+  60% {
+    transform: rotate(-2deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}

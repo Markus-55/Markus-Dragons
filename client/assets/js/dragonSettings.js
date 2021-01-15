@@ -118,6 +118,9 @@ function renderDragon(dnaCode) {
   sideHornsColor(colors[dnaCode.sideHornsColor], dnaCode.sideHornsColor);
   // Sets the side horns color with the dna code
   $("#sideHornsColor").val(dnaCode.sideHornsColor);
+
+  animationVariations(dnaCode.animation);
+  $("#animation").val(dnaCode.animation);
 }
 
 // Listening for change in headBodyColor id
@@ -182,4 +185,12 @@ $("#sideHornsColor").change(() => {
   var colorVal = $("#sideHornsColor").val();
   // Call function sideHornsColor with the color value of the colors object call and color value as arguments
   sideHornsColor(colors[colorVal], colorVal);
+})
+
+// Listening for change in animation id
+$("#animation").change(() => {
+  // Make a variable animationVal = to the parseInt animation id that returns the value attributes
+  var animationVal = parseInt($("#animation").val());
+  // Call function animationVariations with the animationVal as an argument
+  animationVariations(animationVal);
 })

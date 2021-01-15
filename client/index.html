@@ -9,9 +9,9 @@
   <script src="assets/bootstrap/js/popper.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
+  <link rel="stylesheet" href="assets/css/animations.css">
   <link rel="stylesheet" href="assets/css/mystyle.css">
   <link rel="stylesheet" href="assets/css/colors.css">
-  <link rel="stylesheet" href="assets/css/factory.css">
   <link rel="stylesheet" href="assets/css/frontend.css">
   <link rel="stylesheet" href="assets/css/dragon.css">
 
@@ -121,7 +121,7 @@
             <div class="scales bodyScales scale17"></div>
             <div class="scales bodyScales scale18"></div>
             <div class="scales bodyScales scale19"></div>
-
+            
           </div>
 
           <!-- The ears -->
@@ -140,6 +140,7 @@
 
           <!-- The head of the dragon with scales -->
           <div id="head">
+
             <div class="scales headScales scale1"></div>
             <div class="scales headScales scale2"></div>
             <div class="scales headScales scale3"></div>
@@ -262,6 +263,13 @@
             <label for="sideHornsColor"><b>Side horns color</b><span class="badge badge-dark ml-2" id="sideHornsCode"></span></label>
             <!-- Make an input slider with a minimum number 38 and max 44 -->
             <input type="range" min="57" max="63" class="form-control-range" id="sideHornsColor">
+          </div>
+
+          <div class="form-group">
+            <!-- label with animations -->
+            <label for="animation"><b>Animations</b><span class="badge badge-dark ml-2" id="animationName"></span></label>
+            <!-- Make an input slider with a minimum number 1 and max 5 -->
+            <input type="range" min="1" max="5" class="form-control-range" id="animation">
           </div>
 
         </div>

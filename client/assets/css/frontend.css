@@ -12,6 +12,27 @@ body {
 
 }
 
+.dragonBox {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding-top: 306px;
+    padding-left: 65px;
+    padding-bottom: 141px;
+}
+
+.dragonTributes {
+    padding: 25px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+}
+
+.dnaDiv {
+    position: absolute;
+    left:20px;
+    bottom: 5px;
+
+}
+
 .frontend {
     height: 90vh;
     padding-top: 105px;

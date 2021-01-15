@@ -197,6 +197,50 @@ function hornVariation(hornShapeNum) {
   }
 }
 
+function animationVariations(animationNum) {
+  switch (animationNum) {
+    case 1:
+      resetAnimation();
+      $("#animationName").html("No animation");
+      break
+    case 2:
+      resetAnimation();
+      $("#animationName").html("Head animation");
+      animationTypeHead();
+      break
+  }
+}
+
+function animationTypeHead() {
+  $("#head").addClass("tiltingHead");
+  $(".rightEar").addClass("tiltingRightEar");
+  $(".leftEar").addClass("tiltingLeftEar");
+
+  if(animationVariations() == hornVariation(5)) {
+    $(".topRightHorn").addClass("tiltingRightBladeHorn");
+    $(".topLeftHorn").addClass("tiltingLeftBladeHorn");
+  }
+  else {
+    $(".topRightHorn").addClass("tiltingTopRightHorn");
+    $(".topLeftHorn").addClass("tiltingTopLeftHorn");
+  }
+}
+
+function resetAnimation() {
+  $("#head").removeClass("tiltingHead");
+  $(".rightEar").removeClass("tiltingRightEar");
+  $(".leftEar").removeClass("tiltingLeftEar");
+
+  if(animationVariations() == hornVariation(5)) {
+    $(".topRightHorn").removeClass("tiltingRightBladeHorn");
+    $(".topLeftHorn").removeClass("tiltingLeftBladeHorn");
+  }
+  else {
+    $(".topRightHorn").removeClass("tiltingTopRightHorn");
+    $(".topLeftHorn").removeClass("tiltingTopLeftHorn");
+  }
+}
+
 // Create a function to set the original eyes
 function originalEyes() {
   // Reset the border of the eyes to none
