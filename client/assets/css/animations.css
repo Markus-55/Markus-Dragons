@@ -28,6 +28,78 @@
   animation: leftBladeHornTilt 3s infinite;
 }
 
+/* class for right centered horn animation */
+.tiltingRightCenteredHorn {
+  animation: rightCenteredHornTilt 3s infinite;
+}
+
+/* class for left centered horn animation */
+.tiltingLeftCenteredHorn {
+  animation: leftCenteredHornTilt 3s infinite;
+}
+
+/* class for rounded horn animation */
+.tiltingRoundedHorns {
+  animation: roundedHornTilt 3s infinite;
+}
+
+/* animation for rounded blade horn */
+@keyframes roundedHornTilt {
+  0% {
+    transform:rotate(44deg);
+  }
+
+  30% {
+    transform: rotate(47deg);
+  }
+
+  60% {
+    transform: rotate(42deg);
+  }
+
+  100% {
+    transform: rotate(44deg);
+  }
+}
+
+/* animation for right centered blade horn */
+@keyframes rightCenteredHornTilt {
+  0% {
+    transform:rotate(20deg);
+  }
+
+  30% {
+    transform: rotate(22deg);
+  }
+
+  60% {
+    transform: rotate(19deg);
+  }
+
+  100% {
+    transform: rotate(20deg);
+  }
+}
+
+/* animation for left centered horn */
+@keyframes leftCenteredHornTilt {
+  0% {
+    transform: rotate(65deg);
+  }
+
+  30% {
+    transform: rotate(68deg);
+  }
+
+  60% {
+    transform: rotate(63deg);
+  }
+
+  100% {
+    transform: rotate(65deg);
+  }
+}
+
 /* animation for right blade horn */
 @keyframes rightBladeHornTilt {
   0% {
@@ -65,6 +137,7 @@
     transform: scale(1,-1) rotate(30deg);
   }
 }
+
 
 @keyframes topRightHornTilt {
   0% {

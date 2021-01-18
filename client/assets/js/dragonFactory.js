@@ -146,58 +146,82 @@ function eyeVariation(eyeShapeNum) {
 }
 
 // Make a function hornVariation with the horn shape number as an argument
-function hornVariation(hornShapeNum) {
+function hornVariation(hornShapeNum, animationNum) {
   // Modifies the hornShapeDna id with the horn shape number
   $("#hornShapeDna").html(hornShapeNum);
   // Switch the horn shape number
   switch (hornShapeNum) {
     // If it's case 1
     case 1:
-      // Reset to original horns
-      originalHorns();
       // Set the badge to original
       $("#hornsName").html("Original");
+      // Reset to original horns
+      originalHorns();
+      resetAnimation();
+      if (animationNum == 2) {
+        animationVariations(2, 1);
+      }
       break
     // If it's case 2
     case 2:
       // Reset to original horns
       originalHorns();
+      resetAnimation();
       // Set the badge to centered
       $("#hornsName").html("Centered");
       // Set horn type to centered
       hornsTypeCentered();
+      if (animationNum == 2) {
+        animationVariations(2, 2);
+      }
       break
     // If it's case 3
     case 3:
       // Reset to original horns
       originalHorns();
+      resetAnimation();
       // Set the badge to small
       $("#hornsName").html("Small");
       // Set horn type to small
       hornsTypeSmall();
+      if (animationNum == 2) {
+        animationVariations(2, 3);
+      }
       break
     // If it's case 4
     case 4:
       // Reset to original horns
       originalHorns();
+      resetAnimation();
       // Set the badge to rounded
       $("#hornsName").html("Rounded");
       // Set horn type to rounded
       hornsTypeRounded();
+      if (animationNum == 2) {
+        animationVariations(2, 4);
+      }
       break
     // If it's case 5
     case 5:
       // Reset to original horns
       originalHorns();
+      resetAnimation();
       // Set the badge to blades
       $("#hornsName").html("Blades");
       // Set horn type to blades
       hornsTypeBlades();
+      if (animationNum == 2) {
+        animationVariations(2, 5);
+      }
       break
   }
 }
 
-function animationVariations(animationNum) {
+function animationVariations(animationNum, hornShapeNum) {
+
+  // Modifies the hornShapeDna id with the horn shape number
+  $("#animationDna").html(animationNum);
+
   switch (animationNum) {
     case 1:
       resetAnimation();
@@ -206,39 +230,68 @@ function animationVariations(animationNum) {
     case 2:
       resetAnimation();
       $("#animationName").html("Head animation");
-      animationTypeHead();
+      if (hornShapeNum == 5) {
+        animationBladeHorns();
+      }
+      else if (hornShapeNum == 4) {
+        animationRoundedHorns();
+      }
+      else if (hornShapeNum == 2) {
+        animationCenteredHorns();
+      }
+      else {
+        animationTypeHead();
+      }
       break
   }
+}
+
+function animationBladeHorns() {
+  $(".topRightHorn").addClass("tiltingRightBladeHorn");
+  $(".topLeftHorn").addClass("tiltingLeftBladeHorn");
+  $("#head").addClass("tiltingHead");
+  $(".rightEar").addClass("tiltingRightEar");
+  $(".leftEar").addClass("tiltingLeftEar");
+}
+
+function animationCenteredHorns() {
+  $(".topRightHorn").addClass("tiltingRightCenteredHorn");
+  $(".topLeftHorn").addClass("tiltingLeftCenteredHorn");
+  $("#head").addClass("tiltingHead");
+  $(".rightEar").addClass("tiltingRightEar");
+  $(".leftEar").addClass("tiltingLeftEar");
+}
+
+function animationRoundedHorns() {
+  $("#head").addClass("tiltingHead");
+  $(".rightEar").addClass("tiltingRightEar");
+  $(".leftEar").addClass("tiltingLeftEar");
+  $(".topRightHorn, .topLeftHorn").addClass("tiltingRoundedHorns");
 }
 
 function animationTypeHead() {
   $("#head").addClass("tiltingHead");
   $(".rightEar").addClass("tiltingRightEar");
   $(".leftEar").addClass("tiltingLeftEar");
+  $(".topRightHorn").addClass("tiltingTopRightHorn");
+  $(".topLeftHorn").addClass("tiltingTopLeftHorn");
 
-  if(animationVariations() == hornVariation(5)) {
-    $(".topRightHorn").addClass("tiltingRightBladeHorn");
-    $(".topLeftHorn").addClass("tiltingLeftBladeHorn");
-  }
-  else {
-    $(".topRightHorn").addClass("tiltingTopRightHorn");
-    $(".topLeftHorn").addClass("tiltingTopLeftHorn");
-  }
 }
+
 
 function resetAnimation() {
   $("#head").removeClass("tiltingHead");
   $(".rightEar").removeClass("tiltingRightEar");
   $(".leftEar").removeClass("tiltingLeftEar");
 
-  if(animationVariations() == hornVariation(5)) {
-    $(".topRightHorn").removeClass("tiltingRightBladeHorn");
-    $(".topLeftHorn").removeClass("tiltingLeftBladeHorn");
-  }
-  else {
-    $(".topRightHorn").removeClass("tiltingTopRightHorn");
-    $(".topLeftHorn").removeClass("tiltingTopLeftHorn");
-  }
+  $(".topRightHorn, .topLeftHorn").removeClass("tiltingRoundedHorns");
+  $(".topRightHorn").removeClass("tiltingRightCenteredHorn");
+  $(".topLeftHorn").removeClass("tiltingLeftCenteredHorn");
+  $(".topRightHorn").removeClass("tiltingRightBladeHorn");
+  $(".topLeftHorn").removeClass("tiltingLeftBladeHorn");
+  $(".topRightHorn").removeClass("tiltingTopRightHorn");
+  $(".topLeftHorn").removeClass("tiltingTopLeftHorn");
+
 }
 
 // Create a function to set the original eyes

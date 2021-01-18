@@ -103,7 +103,7 @@ function renderDragon(dnaCode) {
   $("#eyeShape").val(dnaCode.eyeShape);
 
   // Call function hornVariation with the horn shape dna code as an argument
-  hornVariation(dnaCode.hornShape);
+  hornVariation(dnaCode.hornShape, dnaCode.animation);
   // Sets the horn shape with the dna code
   $("#hornShape").val(dnaCode.hornShape);
 
@@ -119,7 +119,7 @@ function renderDragon(dnaCode) {
   // Sets the side horns color with the dna code
   $("#sideHornsColor").val(dnaCode.sideHornsColor);
 
-  animationVariations(dnaCode.animation);
+  animationVariations(dnaCode.animation, dnaCode.hornShape);
   $("#animation").val(dnaCode.animation);
 }
 
@@ -167,8 +167,9 @@ $("#eyeShape").change(() => {
 $("#hornShape").change(() => {
   // Make a variable shape = to the parseInt hornShape is that returns the value attributes
   var shape = parseInt($("#hornShape").val());
+  var animation = parseInt($("#animation").val());
   // Call function hornVariation with the shape as an argument
-  hornVariation(shape);
+  hornVariation(shape, animation);
 })
 
 // Listening for change in topHornsColor id
@@ -191,6 +192,7 @@ $("#sideHornsColor").change(() => {
 $("#animation").change(() => {
   // Make a variable animationVal = to the parseInt animation id that returns the value attributes
   var animationVal = parseInt($("#animation").val());
+  var hornShapeVal = parseInt($("#hornShape").val());
   // Call function animationVariations with the animationVal as an argument
-  animationVariations(animationVal);
+  animationVariations(animationVal, hornShapeVal);
 })
