@@ -97,12 +97,12 @@ function renderDragon(dnaCode) {
   // Sets the eyes color with the dna code
   $("#eyesColor").val(dnaCode.eyesColor);
 
-  // Call function eyeVariation with the eyes shape dna code as an argument
-  eyeVariation(dnaCode.eyeShape);
+  // Call function eyeVariation with the eyes shape dna code and animation dna code as arguments
+  eyeVariation(dnaCode.eyeShape, dnaCode.animation);
   // Sets the the eyes shape with the dna code
   $("#eyeShape").val(dnaCode.eyeShape);
 
-  // Call function hornVariation with the horn shape dna code as an argument
+  // Call function hornVariation with the horn shape dna code and animation dna code as arguments
   hornVariation(dnaCode.hornShape, dnaCode.animation);
   // Sets the horn shape with the dna code
   $("#hornShape").val(dnaCode.hornShape);
@@ -119,7 +119,9 @@ function renderDragon(dnaCode) {
   // Sets the side horns color with the dna code
   $("#sideHornsColor").val(dnaCode.sideHornsColor);
 
+  // Call function animationVariations with the animation dna code and horn shape dna code as arguments
   animationVariations(dnaCode.animation, dnaCode.hornShape);
+  // Sets the animation with the dna code
   $("#animation").val(dnaCode.animation);
 }
 
@@ -159,16 +161,19 @@ $("#eyesColor").change(() => {
 $("#eyeShape").change(() => {
   // Make a variable shape = to the parseInt eyeShape id that returns the value attribute
   var shape = parseInt($("#eyeShape").val());
-  // Call function eyeVariation with the shape as an argument
-  eyeVariation(shape);
+  // Make a variable animation = to the parseInt animation id that returns the value attribute
+  var animation = parseInt($("#animation").val());
+  // Call function eyeVariation with the shape and animation as arguments
+  eyeVariation(shape, animation);
 })
 
 // Listening for change in hornShape id
 $("#hornShape").change(() => {
-  // Make a variable shape = to the parseInt hornShape is that returns the value attributes
+  // Make a variable shape = to the parseInt hornShape id that returns the value attributes
   var shape = parseInt($("#hornShape").val());
+  // Make a variable animation = to the parseInt animation id that returns the value attribute
   var animation = parseInt($("#animation").val());
-  // Call function hornVariation with the shape as an argument
+  // Call function hornVariation with the shape and animation as arguments
   hornVariation(shape, animation);
 })
 
@@ -192,7 +197,18 @@ $("#sideHornsColor").change(() => {
 $("#animation").change(() => {
   // Make a variable animationVal = to the parseInt animation id that returns the value attributes
   var animationVal = parseInt($("#animation").val());
+  // Make a variable hornShapeVal = to the parseInt hornShape id that returns the value attributes
   var hornShapeVal = parseInt($("#hornShape").val());
-  // Call function animationVariations with the animationVal as an argument
-  animationVariations(animationVal, hornShapeVal);
+  // Make a variable eyeShapeVal = to the parseInt eyeShape id that returns the value attributes
+  var eyeShapeVal = parseInt($("#eyeShape").val());
+
+  // If the animationVal is == to 5
+  if(animationVal == 5) {
+    // Call function eyeAnimationVariations with 5 and eyeShapeVal as arguments
+    eyeAnimationVariations(5, eyeShapeVal);
+  }
+  // Else, call function animationVariations with the animationVal and hornShapeVal as arguments
+  else {
+    animationVariations(animationVal, hornShapeVal);
+  }
 })
