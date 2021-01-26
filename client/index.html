@@ -18,14 +18,31 @@
 </head>
 
 <body>
-  <div class="container p-5" style="margin-top: 12vh; margin-bottom: 10vh;">
-    <div align="center">
-      <h1 class="c-white">Dragon-Factory</h1>
-      <p class="c-white">Create your custom dragons</p>
+  <div class="container p-5">
+    <div class="row">
+      <div class="col-lg-12">
+        <div align="center" id="headerId">
+          <h1 class="c-white">Dragon-Factory</h1>
+          <p class="c-white">Create your custom dragons</p>
+        </div>
+      </div>
     </div>
 
     <div class="row">
-      <div class="col-lg-4 dragonBox m-2 light-b-shadow">
+      <div class="col-lg-12">
+        <ul class="nav nav-tabs" id="tabId" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="colorTab" data-toggle="tab" href="#colorTab" role="tab" aria-controls="colorContent" aria-selected="true">Color sliders</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="attributeTab" data-toggle="tab" href="#attributeTab" role="tab" aria-controls="attributeContent" aria-selected="false">Attribute sliders</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4 m-2" id="dragonBox">
 
         <!-- The dragon -->
         <div id="dragon">
@@ -121,7 +138,7 @@
             <div class="scales bodyScales scale17"></div>
             <div class="scales bodyScales scale18"></div>
             <div class="scales bodyScales scale19"></div>
-            
+
           </div>
 
           <!-- The ears -->
@@ -193,7 +210,7 @@
             <span id="wingsTailDna"></span>
             <span id="legsArmsDna"></span>
             <span id="eyesDna"></span>
-            <!-- Dragon atributes -->
+            <!-- Dragon attributes -->
             <span id="eyeShapeDna"></span>
             <span id="hornShapeDna"></span>
             <span id="topHornsDna"></span>
@@ -204,83 +221,97 @@
         </div>
 
       </div>
-      <!-- Make a class column with dragon atributes margin 2 and light blue shadow -->
-      <div class="col-lg-7 dragonTributes m-2 light-b-shadow">
 
-        <!-- dragon colors -->
-        <div id="dragonColors">
-          <div class="form-group">
-            <!-- label with head and body color -->
-            <label for="headBodyColor"><b>Head and body color</b><span class="badge badge-dark ml-2" id="headBodyCode"></span></label>
-            <!-- Make an input slider with a minimum number 1 and max 10 -->
-            <input type="range" min="10" max="19" class="form-control-range" id="headBodyColor">
+      <div class="col-lg-7">
+
+        <div class="tab-content" id="contentTabId">
+          <div class="tab-pane fade show active" id="colorContent" role="tabpanel" aria-labelledby="colorTab">
+
+            <!-- Sliders for attributes -->
+            <div id="colorSliders">
+
+              <div class="form-group">
+                <!-- label with head and body color -->
+                <label for="headBodyColor"><b>Head and body color</b><span class="badge badge-dark ml-2" id="headBodyCode"></span></label>
+                <!-- Make an input slider with a minimum number 1 and max 10 -->
+                <input type="range" min="10" max="19" class="form-control-range" id="headBodyColor">
+              </div>
+
+              <div class="form-group">
+                <!-- label with wings and tail color -->
+                <label for="wingsTailColor"><b>Wings and tail color</b><span class="badge badge-dark ml-2" id="wingsTailCode"></span></label>
+                <!-- Make an input slider with a minimum number 11 and max 20 -->
+                <input type="range" min="20" max="29" class="form-control-range" id="wingsTailColor">
+              </div>
+
+              <div class="form-group">
+                <!-- label with Legs and arms color -->
+                <label for="legsArmsColor"><b>Legs and arms color</b><span class="badge badge-dark ml-2" id="legsArmsCode"></span></label>
+                <!-- Make an input slider with a minimum number 21 and max 30 -->
+                <input type="range" min="30" max="39" class="form-control-range" id="legsArmsColor">
+              </div>
+
+              <div class="form-group">
+                <!-- label with eyes color -->
+                <label for="eyesColor"><b>Eyes color</b><span class="badge badge-dark ml-2" id="eyesCode"></span></label>
+                <!-- Make an input slider with a minimum number 45 and max 54 -->
+                <input type="range" min="40" max="49" class="form-control-range" id="eyesColor">
+              </div>
+            </div>
           </div>
 
-          <div class="form-group">
-            <!-- label with wings and tail color -->
-            <label for="wingsTailColor"><b>Wings and tail color</b><span class="badge badge-dark ml-2" id="wingsTailCode"></span></label>
-            <!-- Make an input slider with a minimum number 11 and max 20 -->
-            <input type="range" min="20" max="29" class="form-control-range" id="wingsTailColor">
-          </div>
+          <div class="tab-pane fade" id="attributeContent" role="tabpanel" aria-labelledby="attributeTab">
 
-          <div class="form-group">
-            <!-- label with Legs and arms color -->
-            <label for="legsArmsColor"><b>Legs and arms color</b><span class="badge badge-dark ml-2" id="legsArmsCode"></span></label>
-            <!-- Make an input slider with a minimum number 21 and max 30 -->
-            <input type="range" min="30" max="39" class="form-control-range" id="legsArmsColor">
-          </div>
+            <!-- Sliders for attributes -->
+            <div id="attributeSliders">
 
-          <div class="form-group">
-            <!-- label with eyes color -->
-            <label for="eyesColor"><b>Eyes color</b><span class="badge badge-dark ml-2" id="eyesCode"></span></label>
-            <!-- Make an input slider with a minimum number 45 and max 54 -->
-            <input type="range" min="40" max="49" class="form-control-range" id="eyesColor">
-          </div>
+              <div class="form-group">
+                <!-- label with eye shapes -->
+                <label for="eyeShape"><b>Eye shapes</b><span class="badge badge-dark ml-2" id="eyesName"></span></label>
+                <!-- Make an input slider with a minimum number 1 and max 7 -->
+                <input type="range" min="1" max="7" class="form-control-range" id="eyeShape">
+              </div>
 
-          <div class="form-group">
-            <!-- label with eye shapes -->
-            <label for="eyeShape"><b>Eye shapes</b><span class="badge badge-dark ml-2" id="eyesName"></span></label>
-            <!-- Make an input slider with a minimum number 1 and max 7 -->
-            <input type="range" min="1" max="7" class="form-control-range" id="eyeShape">
-          </div>
+              <div class="form-group">
+                <!-- label with horn shapes -->
+                <label for="hornShape"><b>Horn shapes</b><span class="badge badge-dark ml-2" id="hornsName"></span></label>
+                <!-- Make an input slider with a minimum number 1 and max 5 -->
+                <input type="range" min="1" max="5" class="form-control-range" id="hornShape">
+              </div>
 
-          <div class="form-group">
-            <!-- label with horn shapes -->
-            <label for="hornShape"><b>Horn shapes</b><span class="badge badge-dark ml-2" id="hornsName"></span></label>
-            <!-- Make an input slider with a minimum number 1 and max 5 -->
-            <input type="range" min="1" max="5" class="form-control-range" id="hornShape">
-          </div>
+              <div class="form-group">
+                <!-- label with top horns color -->
+                <label for="topHornsColor"><b>Top horns color</b><span class="badge badge-dark ml-2" id="topHornsCode"></span></label>
+                <!-- Make an input slider with a minimum number 31 and max 37 -->
+                <input type="range" min="50" max="56" class="form-control-range" id="topHornsColor">
+              </div>
 
-          <div class="form-group">
-            <!-- label with top horns color -->
-            <label for="topHornsColor"><b>Top horns color</b><span class="badge badge-dark ml-2" id="topHornsCode"></span></label>
-            <!-- Make an input slider with a minimum number 31 and max 37 -->
-            <input type="range" min="50" max="56" class="form-control-range" id="topHornsColor">
-          </div>
+              <div class="form-group">
+                <!-- label with side horns color -->
+                <label for="sideHornsColor"><b>Side horns color</b><span class="badge badge-dark ml-2" id="sideHornsCode"></span></label>
+                <!-- Make an input slider with a minimum number 38 and max 44 -->
+                <input type="range" min="57" max="63" class="form-control-range" id="sideHornsColor">
+              </div>
 
-          <div class="form-group">
-            <!-- label with side horns color -->
-            <label for="sideHornsColor"><b>Side horns color</b><span class="badge badge-dark ml-2" id="sideHornsCode"></span></label>
-            <!-- Make an input slider with a minimum number 38 and max 44 -->
-            <input type="range" min="57" max="63" class="form-control-range" id="sideHornsColor">
-          </div>
+              <div class="form-group">
+                <!-- label with animations -->
+                <label for="animation"><b>Animations</b><span class="badge badge-dark ml-2" id="animationName"></span></label>
+                <!-- Make an input slider with a minimum number 1 and max 5 -->
+                <input type="range" min="1" max="5" class="form-control-range" id="animation">
+              </div>
+            </div>
 
-          <div class="form-group">
-            <!-- label with animations -->
-            <label for="animation"><b>Animations</b><span class="badge badge-dark ml-2" id="animationName"></span></label>
-            <!-- Make an input slider with a minimum number 1 and max 5 -->
-            <input type="range" min="1" max="5" class="form-control-range" id="animation">
           </div>
-
         </div>
 
       </div>
 
     </div>
-      <br>
 
   </div>
-  <footer align="left">
+  <br>
+
+  <footer align="left" id="footer">
     <p>Ivan on Tech Academy Bootcamp</p>
   </footer>
 

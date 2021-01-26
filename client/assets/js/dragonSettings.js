@@ -41,6 +41,9 @@ $(document).ready(function() {
 
   // Render the dragon with the default dna code
   renderDragon(defaultDnaCode);
+
+  renderColorSliders();
+  renderAttributeSliders();
 });
 
 // Make a function to get the dna
@@ -212,3 +215,17 @@ $("#animation").change(() => {
     animationVariations(animationVal, hornShapeVal);
   }
 })
+
+function renderColorSliders() {
+  $("#colorTab").click(function(){
+    $("#colorContent").tab("show");
+    $("#attributeContent").hide();
+  });
+}
+
+function renderAttributeSliders() {
+  $("#attributeTab").click(function(){
+    $("#attributeContent").tab("show");
+    $("#colorContent").hide();
+  });
+}

@@ -1,36 +1,95 @@
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+@font-face {
+  font-family: "Poppins";
+  src: url("Poppins-Light.ttf");
 }
+
 html {
-    box-sizing: border-box;
-    overflow-y: scroll;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
+
 body {
-    background: #607d8b;
-
+  background: #2c6f6f;
+  font-family: Poppins;
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
-.dragonBox {
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding-top: 306px;
-    padding-left: 65px;
-    padding-bottom: 141px;
+#headerId {
+  margin-top: -3%;
+  margin-bottom: 11%;
 }
 
-.dragonTributes {
-    padding: 25px;
-    background-color: #e0e0e0;
-    border-radius: 10px;
+#tabId {
+  margin-left: 374px;
+  margin-right: 6%;
+  margin-top: -4%;
+  margin-bottom: -20%;
+  height: 63px;
+}
+
+#colorTab {
+  color: black;
+  font-weight: bold;
+  border-radius: 10px;
+  height: 135%;
+}
+
+#attributeTab {
+  color: black;
+  font-weight: bold;
+  border-radius: 10px;
+  height: 135%;
+}
+
+#dragonBox {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding-top: 306px;
+  padding-left: 65px;
+  padding-bottom: 141px;
+}
+
+#colorSliders {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin-top: 7px;
+  width: 102%;
+  height: 472px;
+  padding: 51px;
+  padding-top: 54px;
+}
+
+#attributeSliders {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin-top: 7px;
+  width: 102%;
+  height: 472px;
+  padding: 51px;
+  padding-top: 54px;
 }
 
 .dnaDiv {
-    position: absolute;
-    left:20px;
-    bottom: 5px;
+  position: absolute;
+  left: 20px;
+  bottom: 5px;
+}
 
+#footer {
+  position: static;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  padding: 2%;
+  background: #f8f8f8;
+  margin-top: 113px;
+}
+
+/**, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
 }
 
 .frontend {
@@ -85,15 +144,6 @@ body {
     margin-bottom: 120px;
 }
 
-footer {
-    position: static;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    padding: 4vh;
-    background: #F8F8F8;
-}
-
 .featureBox {
 
     padding-left:30px;
@@ -125,7 +175,7 @@ footer {
 
 /* BUTTONS */
 
-.red-btn {
+/*.red-btn {
     background-image: -webkit-linear-gradient(0deg, #f14437 0%, #ed5b0d 99%);
     color: #ffffff;
     border-radius: 30px;
@@ -209,4 +259,4 @@ footer {
 	to {
 		transform: translateY(-2560px);
 	}
-}
+}*/
