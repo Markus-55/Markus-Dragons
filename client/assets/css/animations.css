@@ -90,17 +90,17 @@
 
 /* Class for remaining eyes animation */
 .remainingEyes {
-  animation: eyesRemaining 2s alternate infinite;
+  animation: eyesRemaining 3s infinite;
 }
 
 /* Class for happy eyes animation */
 .happyEyes {
-  animation: eyesHappy 2s alternate infinite;
+  animation: eyesHappy 3s infinite;
 }
 
 /* Class for relaxed eyes animation */
 .relaxedEyes {
-  animation: eyesRelaxed 2s alternate infinite;
+  animation: eyesRelaxed 3s infinite;
 }
 
 /* Animation for relaxed eyes */
@@ -109,8 +109,12 @@
     transform: scale(1.0) rotate(22deg);
   }
 
-  50% {
+  30% {
     transform: scale(1.1) rotate(22deg);
+  }
+
+  60% {
+    transform: scale(0.6) rotate(22deg);
   }
 }
 
@@ -120,8 +124,12 @@
     transform: scale(1.0) rotate(244deg);
   }
 
-  50% {
+  30% {
     transform: scale(1.1) rotate(244deg);
+  }
+
+  60% {
+    transform: scale(0.6) rotate(244deg);
   }
 }
 
@@ -131,8 +139,12 @@
     transform: scale(1.0) rotate(57deg);
   }
 
-  50% {
+  30% {
     transform: scale(1.1) rotate(57deg);
+  }
+
+  60% {
+    transform: scale(0.6) rotate(57deg);
   }
 }
 

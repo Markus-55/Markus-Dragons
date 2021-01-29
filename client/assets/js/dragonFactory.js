@@ -1,11 +1,10 @@
 //Random color
-function getColor() {
-  var randomColor = Math.floor(Math.random() * 16777215).toString(16);
-  return randomColor;
+function randomCode(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function genColors() {
-  var colors = [];
+  let colors = [];
   for (var i = 10; i < 99; i++) {
     var color = getColor();
     colors[i] = color;

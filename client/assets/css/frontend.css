@@ -23,7 +23,7 @@ body {
 #tabId {
   margin-left: 374px;
   margin-right: 6%;
-  margin-top: -4%;
+  margin-top: -3%;
   margin-bottom: -20%;
   height: 63px;
 }
@@ -31,15 +31,17 @@ body {
 #colorTab {
   color: black;
   font-weight: bold;
-  border-radius: 10px;
-  height: 135%;
+  border-radius: 10px 10px 0px 0px;
+  height: 71%;
+  transform: translateY(6%);
 }
 
 #attributeTab {
   color: black;
   font-weight: bold;
-  border-radius: 10px;
-  height: 135%;
+  border-radius: 10px 10px 0px 0px;
+  height: 58%;
+  transform: translateY(6%);
 }
 
 #dragonBox {
@@ -48,6 +50,35 @@ body {
   padding-top: 306px;
   padding-left: 65px;
   padding-bottom: 141px;
+}
+
+.nav-pills .nav-link:is(.active) {
+    background-color: #e0e0e0;
+}
+
+.nav-pills .nav-link:not(.active) {
+    background-color: #d0d0d0;
+}
+
+#createDragonBtn {
+  border-radius: 10px;
+  position: absolute;
+  left: 8%;
+  transform: translateY(-98%) translateX(-45%);
+}
+
+#randomDragonBtn {
+  border-radius: 10px;
+  position: absolute;
+  left: 21%;
+  transform: translateY(30rem) translateY(17%) translateX(-20%);
+}
+
+#defaultDragonBtn {
+  border-radius: 10px;
+  position: absolute;
+  left: -10%;
+  transform: translateY(30rem) translateY(17%) translateX(85%);
 }
 
 #colorSliders {
@@ -78,12 +109,10 @@ body {
 
 #footer {
   position: static;
-  bottom: 0;
-  width: 100%;
-  height: 100px;
+  height: 82px;
   padding: 2%;
   background: #f8f8f8;
-  margin-top: 113px;
+  margin-top: 99px;
 }
 
 /**, *::before, *::after {
