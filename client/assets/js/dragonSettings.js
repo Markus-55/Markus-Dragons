@@ -17,10 +17,6 @@ var defaultDnaCode = {
   "lastNum": 1
 }
 
-var randomDnaCode = {
-
-}
-
 // Prepare the document
 $(document).ready(function() {
   // The head and body color is set with the default dna code
@@ -81,6 +77,35 @@ $("#defaultDragonBtn").click(function() {
 
 
 $("#randomDragonBtn").click(function() {
+
+  let randomCode = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+  let randomDnaCode = {
+    "headBodyColor": randomCode(10, 19),
+    "wingsTailColor": randomCode(20, 29),
+    "legsArmsColor": randomCode(30, 39),
+    "eyesColor": parseInt(randomCode(40, 49)),
+
+    "eyeShape": randomCode(1, 7),
+    "hornShape": randomCode(1, 5),
+    "topHornsColor": randomCode(1, 7),
+    "sideHornsColor": randomCode(1, 7),
+    "animation": randomCode(1, 5)
+  }
+
+  /*let randomDnaCode = {
+    "headBodyColor": Math.floor(Math.random() * (19 - 10 + 1)) + 10,
+    "wingsTailColor": Math.floor(Math.random() * (29 - 20 + 1)) + 20,
+    "legsArmsColor": Math.floor(Math.random() * (39 - 30 + 1)) + 30,
+    "eyesColor": Math.floor(Math.random() * (49 - 40 + 1)) + 40,
+
+    "eyeShape": Math.floor(Math.random() * (7 - 1 + 1)) + 1,
+    "hornShape": Math.floor(Math.random() * (5 - 1 + 1)) + 1,
+    "topHornsColor": Math.floor(Math.random() * (7 - 1 + 1)) + 1,
+    "sideHornsColor": Math.floor(Math.random() * (7 - 1 + 1)) + 1,
+    "animation": Math.floor(Math.random() * (5 - 1 + 1)) + 1
+  }*/
+
   renderDragon(randomDnaCode);
 });
 

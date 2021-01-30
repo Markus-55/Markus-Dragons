@@ -1,8 +1,8 @@
 //Random color
-function randomCode(min, max) {
+/*function randomCode(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
-
+*/
 function genColors() {
   let colors = [];
   for (var i = 10; i < 99; i++) {
