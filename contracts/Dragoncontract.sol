@@ -17,16 +17,13 @@ contract Dragoncontract is IERC721 {
   // Make a string tokenSymbol = MD
   string private tokenSymbol = "MD";
 
-  // Make a uint256 tokenTotalSupply
-  uint256 private tokenTotalSupply;
+  // Make a dragons array with the Dragon struct
+  Dragon[] private dragons;
 
   // Make mapping of the dragonOwners with a uint256 that points to an address
   mapping(uint256 => address) private dragonOwners;
   // Make mapping of the tokenBalances with an address that points to a uint256
   mapping(address => uint256) private tokenBalances;
-
-  // Make a dragons array with the Dragon struct
-  Dragon[] private dragons;
 
   struct Dragon {
     // The unique gene features of the dragon
@@ -60,9 +57,9 @@ contract Dragoncontract is IERC721 {
   }
 
   // Make a function to get the total supply
-  function totalSupply() external view returns (uint256) {
+  function totalSupply() public view returns (uint256) {
     // returns the token total supply
-    return tokenTotalSupply;
+    return dragons.length;
   }
 
   // Make a function to get owner off the token id
@@ -73,21 +70,40 @@ contract Dragoncontract is IERC721 {
 
   // Make a function to tranfer to the address with the token id
   function transfer(address _to, uint256 _tokenId) external {
-    // Require so that reciepient cannot transfer to the zero address
-    require(_to != dragonOwners[0], "cannot transfer to the zero address");
-    // Require so that reciepient cannot transfer to the contract address
+    // Require so that recipient cannot transfer to the zero address
+    require(_to != address(0), "cannot transfer to the zero address");
+    // Require so that recipient cannot transfer to the contract address
     require(_to != address(this), "cannot transfer to the contract address");
-    // Require so that token id must be owned by user
-    require(_tokenId == tokenBalances[msg.sender], "token must be owned by user");
+    // Require that the user owns the token
+    require(_owns(msg.sender, _tokenId), "token must be owned by user");
 
-    // users token balance = users token balance subtracted by the token id
-    tokenBalances[msg.sender] = tokenBalances[msg.sender].sub(_tokenId);
-    // recipients token balance = recipients token balance + the token id
-    tokenBalances[_to] = tokenBalances[_to].add(_tokenId);
+    // call function tranfer with from, to and token id as arguments
+    _transfer(msg.sender, _to, _tokenId);
+  }
+
+  // Make a function to tranfer from the address to the address with the token id
+  function _transfer(address _from, address _to, uint256 _tokenId) internal {
+    // increase the token balance of the recipient
+    tokenBalances[_to]++;
+
+    // the dragon owner of the token is = to the recipient
+    dragonOwners[_tokenId] = _to;
+
+    // if the sender is != to the zero address
+    if (_from != address(0)) {
+      // decrease the token balance of the sender
+      tokenBalances[_from]--;
+    }
 
     // emits when a token has been stranfered from sender to recipient with a token id
-    emit Transfer(msg.sender, _to, _tokenId);
+    emit Transfer(_from, _to, _tokenId);
     // emits when the owner enables the approved address to manage the token id
-    emit Approval(msg.sender, _to, _tokenId);
+    emit Approval(_from, _to, _tokenId);
+  }
+
+  // Make a function that checks if the token is the owners token
+  function _owns(address _owner, uint256 _tokenId) internal view returns (bool) {
+    // returns owner is the tokenId dragon owner
+    return _owner == dragonOwners[_tokenId];
   }
 }

@@ -1,5 +1,5 @@
-const Dragoncontract = artifacts.require("Dragoncontract");
+const Token = artifacts.require("Dragoncontract");
 
 module.exports = deployer => {
-  deployer.deploy(Dragoncontract);
+  deployer.deploy(Token);
 };
