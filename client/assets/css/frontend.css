@@ -1,23 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Brawler&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manuale&display=swap');
+
 @font-face {
   font-family: "Poppins";
   src: url("Poppins-Light.ttf");
 }
 
-html {
-  box-sizing: border-box;
-  overflow-y: scroll;
-}
-
 body {
   background: #2c6f6f;
   font-family: Poppins;
-  font-weight: 500;
-  letter-spacing: 1px;
 }
 
 #headerId {
-  margin-top: -3%;
-  margin-bottom: 11%;
+  color: white;
+  padding-left: 41%;
+  margin-bottom: -1%;
 }
 
 #tabId {
@@ -32,8 +29,10 @@ body {
   color: black;
   font-weight: bold;
   border-radius: 10px 10px 0px 0px;
-  height: 71%;
-  transform: translateY(6%);
+  height: 58%;
+  margin-top: 41px;
+  margin-left: -286px;
+  margin-right: 146px;
 }
 
 #attributeTab {
@@ -41,15 +40,9 @@ body {
   font-weight: bold;
   border-radius: 10px 10px 0px 0px;
   height: 58%;
-  transform: translateY(6%);
-}
-
-#dragonBox {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding-top: 306px;
-  padding-left: 65px;
-  padding-bottom: 141px;
+  margin-top: 41px;
+  margin-left: -146px;
+  margin-right: -14px;
 }
 
 .nav-pills .nav-link:is(.active) {
@@ -62,49 +55,59 @@ body {
 
 #createDragonBtn {
   border-radius: 10px;
-  position: absolute;
-  left: 8%;
-  transform: translateY(-98%) translateX(-45%);
+  margin-top: -352px;
+  margin-left: -55px;
+  padding: 6px;
+  font-family: 'Manuale';
+  font-size: 116%;
 }
 
 #randomDragonBtn {
   border-radius: 10px;
-  position: absolute;
-  left: 21%;
-  transform: translateY(30rem) translateY(17%) translateX(-20%);
+  margin-top: -89px;
+  margin-left: 182px;
+  padding: 11px;
+  width: 82%;
+  height: 11%;
+  font-size: 128%;
+  font-weight: bold;
 }
 
 #defaultDragonBtn {
   border-radius: 10px;
-  position: absolute;
-  left: -10%;
-  transform: translateY(30rem) translateY(17%) translateX(85%);
+  margin-top: 429px;
+  margin-left: -51px;
+  padding: 9px;
+  height: 7.5%;
+  font-family: 'Brawler';
+  font-size: 107%;
 }
 
-#colorSliders {
-  background-color: #e0e0e0;
+#dragonBox {
+  background-color: #ffffff;
   border-radius: 10px;
-  margin-top: 7px;
-  width: 102%;
-  height: 472px;
-  padding: 51px;
-  padding-top: 54px;
+  padding-top: 306px;
+  padding-left: 65px;
+  padding-bottom: 12px;
+  margin-top: 56px;
+  margin-left: -23px;
+  margin-right: -25%;
 }
 
-#attributeSliders {
+#colorSliders, #attributeSliders {
   background-color: #e0e0e0;
   border-radius: 10px;
-  margin-top: 7px;
-  width: 102%;
-  height: 472px;
-  padding: 51px;
-  padding-top: 54px;
+  margin-top: 79px;
+  margin-left: 88px;
+  width: 131%;
+  height: 519px;
+  padding: 26px;
+  padding-top: 75px;
 }
 
 .dnaDiv {
-  position: absolute;
-  left: 20px;
-  bottom: 5px;
+  margin-top: -295px;
+  margin-left: -51px;
 }
 
 #footer {
@@ -112,7 +115,7 @@ body {
   height: 82px;
   padding: 2%;
   background: #f8f8f8;
-  margin-top: 99px;
+  margin-top: 203px;
 }
 
 /**, *::before, *::after {

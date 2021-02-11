@@ -88,8 +88,8 @@ $("#randomDragonBtn").click(function() {
 
     "eyeShape": randomCode(1, 7),
     "hornShape": randomCode(1, 5),
-    "topHornsColor": randomCode(1, 7),
-    "sideHornsColor": randomCode(1, 7),
+    "topHornsColor": randomCode(50, 56),
+    "sideHornsColor": randomCode(57, 63),
     "animation": randomCode(1, 5)
   }
 
