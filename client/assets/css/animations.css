@@ -1,154 +1,117 @@
-/* Class for tilting head animation */
 .tiltingHead {
   animation: headTilt 3s infinite;
 }
 
-/* Class for tilting right ear animation */
 .tiltingRightEar {
   animation: rightEarTilt 3s infinite;
 }
 
-/* Class for tilting left ear animation */
 .tiltingLeftEar {
   animation: leftEarTilt 3s infinite;
 }
 
-/* Class for tilting top right horn animation */
-.tiltingTopRightHorn {
-  animation: topRightHornTilt 3s infinite;
+.tiltingTopHorns {
+  animation: topHornTilt 3s infinite;
 }
 
-/* Class for tilting top left horn animation */
-.tiltingTopLeftHorn {
-  animation: topLeftHornTilt 3s infinite;
-}
-
-/* Class for right blade horn animation */
 .tiltingRightBladeHorn {
   animation: rightBladeHornTilt 3s infinite;
 }
 
-/* Class for left blade horn animation */
 .tiltingLeftBladeHorn {
   animation: leftBladeHornTilt 3s infinite;
 }
 
-/* Class for right centered horn animation */
 .tiltingRightCenteredHorn {
   animation: rightCenteredHornTilt 3s infinite;
 }
 
-/* Class for left centered horn animation */
 .tiltingLeftCenteredHorn {
   animation: leftCenteredHornTilt 3s infinite;
 }
 
-/* Class for rounded horns animation */
+.tiltingSmallHorns {
+  animation: smallHornTilt 3s infinite;
+}
+
 .tiltingRoundedHorns {
   animation: roundedHornTilt 3s infinite;
 }
 
-/* Class for side right horn 1 animation */
 .tiltingSideRightHorn1 {
   animation: sideRightHorn1Tilt 3s infinite;
 }
 
-/* Class for side right horn 2 animation */
 .tiltingSideRightHorn2 {
   animation: sideRightHorn2Tilt 3s infinite;
 }
 
-/* Class for side left horn 1 animation */
 .tiltingSideLeftHorn1 {
   animation: sideLeftHorn1Tilt 3s infinite;
 }
 
-/* Class for side left horn 2 animation */
 .tiltingSideLeftHorn2 {
   animation: sideLeftHorn2Tilt 3s infinite;
 }
 
-/* Class for moving tail end 1 animation */
 .movingTailEnd1 {
   animation: tailEnd1Move 1s infinite;
 }
 
-/* Class for moving tail end 2 animation */
 .movingTailEnd2 {
   animation: tailEnd2Move 1s infinite;
 }
 
-/* Class for moving right wing animation */
 .movingRightWing {
   animation: rightWingMove 1s infinite;
 }
 
-/* Class for moving left wing animation */
 .movingLeftWing {
   animation: leftWingMove 1s infinite;
 }
 
-/* Class for remaining eyes animation */
 .remainingEyes {
-  animation: eyesRemaining 3s infinite;
+  animation: eyesRemaining 2.5s linear -0.3s infinite;
 }
 
-/* Class for happy eyes animation */
 .happyEyes {
-  animation: eyesHappy 3s infinite;
+  animation: eyesHappy 2.5s linear -0.3s infinite;
 }
 
-/* Class for relaxed eyes animation */
 .relaxedEyes {
-  animation: eyesRelaxed 3s infinite;
+  animation: eyesRelaxed 2.5s linear -0.3s infinite;
 }
 
-/* Animation for relaxed eyes */
 @keyframes eyesRelaxed {
   0%, 100% {
-    transform: scale(1.0) rotate(22deg);
-  }
-
-  30% {
     transform: scale(1.1) rotate(22deg);
   }
 
-  60% {
+  50% {
     transform: scale(0.6) rotate(22deg);
   }
 }
 
-/* Animation for happy eyes */
 @keyframes eyesHappy {
   0%, 100% {
-    transform: scale(1.0) rotate(244deg);
-  }
-
-  30% {
     transform: scale(1.1) rotate(244deg);
   }
 
-  60% {
+  50% {
     transform: scale(0.6) rotate(244deg);
   }
 }
 
-/* Animation for remaining eyes */
 @keyframes eyesRemaining {
   0%, 100% {
-    transform: scale(1.0) rotate(57deg);
-  }
-
-  30% {
     transform: scale(1.1) rotate(57deg);
   }
 
-  60% {
+  50% {
     transform: scale(0.6) rotate(57deg);
   }
 }
 
-/* Animation for right wing */
 @keyframes rightWingMove {
   0%, 100% {
     transform: rotateY(-357deg) rotateZ(-357deg);
@@ -159,7 +122,6 @@
   }
 }
 
-/* Animation for left wing */
 @keyframes leftWingMove {
   0%, 100% {
     transform: rotateY(-179deg);
@@ -170,7 +132,6 @@
   }
 }
 
-/* Animation for tail end 1 */
 @keyframes tailEnd1Move {
   0%, 100% {
     transform: rotate(437deg);
@@ -185,7 +146,6 @@
   }
 }
 
-/* Animation for tail end 2 */
 @keyframes tailEnd2Move {
   0%, 100% {
     transform: rotate(-33deg);
@@ -200,7 +160,6 @@
   }
 }
 
-/* Animation for side left horn 2 */
 @keyframes sideLeftHorn2Tilt {
   0%, 100% {
     transform: rotate(93deg);
@@ -215,7 +174,6 @@
   }
 }
 
-/* Animation for side left horn 1 */
 @keyframes sideLeftHorn1Tilt {
   0%, 100% {
     transform: rotate(163deg);
@@ -230,7 +188,6 @@
   }
 }
 
-/* Animation for side right horn 2 */
 @keyframes sideRightHorn2Tilt {
   0%, 100% {
     transform: scale(1,-1) rotate(96deg);
@@ -245,7 +202,6 @@
   }
 }
 
-/* Animation for side right horn 1 */
 @keyframes sideRightHorn1Tilt {
   0%, 100% {
     transform: scale(1,-1) rotate(135deg);
@@ -260,7 +216,20 @@
   }
 }
 
-/* Animation for rounded blade horn */
+@keyframes smallHornTilt {
+  0%, 100% {
+    transform: rotate(42deg);
+  }
+
+  30% {
+    transform: rotate(48deg);
+  }
+
+  60% {
+    transform: rotate(38deg);
+  }
+}
+
 @keyframes roundedHornTilt {
   0%, 100% {
     transform:rotate(44deg);
@@ -275,37 +244,34 @@
   }
 }
 
-/* Animation for right centered blade horn */
 @keyframes rightCenteredHornTilt {
   0%, 100% {
-    transform: rotate(20deg);
+    transform: scale(1,-1) rotate(65deg);
   }
 
   30% {
-    transform: rotate(23deg);
+    transform: scale(1,-1) rotate(62deg);
   }
 
   60% {
-    transform: rotate(19deg);
+    transform: scale(1,-1) rotate(67deg);
   }
 }
 
-/* Animation for left centered horn */
 @keyframes leftCenteredHornTilt {
   0%, 100% {
-    transform: rotate(65deg);
+    transform: rotate(66deg);
   }
 
   30% {
-    transform: rotate(68deg);
+    transform: rotate(69deg);
   }
 
   60% {
-    transform: rotate(63deg);
+    transform: rotate(64deg);
   }
 }
 
-/* Animation for right blade horn */
 @keyframes rightBladeHornTilt {
   0%, 100% {
     transform: rotate(30deg);
@@ -320,7 +286,6 @@
   }
 }
 
-/* Animation for left blade horn */
 @keyframes leftBladeHornTilt {
   0%, 100% {
     transform: scale(1,-1) rotate(30deg);
@@ -335,52 +300,34 @@
   }
 }
 
-/* Animation for tilting top right horn */
-@keyframes topRightHornTilt {
+@keyframes topHornTilt {
   0%, 100% {
-    transform: rotate(47deg);
-  }
-
-  30% {
-    transform: rotate(53deg);
-  }
-
-  60% {
-    transform: rotate(43deg);
-  }
-}
-
-/* Animation for tilting top left horn */
-@keyframes topLeftHornTilt {
-  0%, 100% {
-    transform: rotate(38deg);
-  }
-
-  30% {
     transform: rotate(44deg);
   }
 
+  30% {
+    transform: rotate(50deg);
+  }
+
   60% {
-    transform: rotate(34deg);
+    transform: rotate(40deg);
   }
 }
 
-/* Animation for tilting right ear */
 @keyframes rightEarTilt {
   0%, 100% {
     transform: scale(1,-1) rotate(121deg);
   }
 
   30% {
-    transform: scale(1,-1) rotate(124deg);
+    transform: scale(1,-1) rotate(125deg);
   }
 
   60% {
-    transform: scale(1,-1) rotate(119deg);
+    transform: scale(1,-1) rotate(118deg);
   }
 }
 
-/* Animation for tilting left ear */
 @keyframes leftEarTilt {
   0%, 100% {
     transform: rotate(110deg);
@@ -395,7 +342,6 @@
   }
 }
 
-/* Animation for tilting head */
 @keyframes headTilt {
   0%, 100% {
     transform: rotate(0deg);
