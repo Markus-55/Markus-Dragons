@@ -2,18 +2,22 @@ pragma solidity ^0.5.12;
 
 import "./IERC721.sol";
 import "./Safemath.sol";
+import "./Ownable.sol";
 
-contract Dragoncontract is IERC721 {
+contract Dragoncontract is IERC721, Ownable {
 
   using SafeMath for uint256;
 
   string private nameOfToken = "MarkusDragons";
   string private symbolOfToken = "MD";
 
-  Dragon[] private dragons;
-
-  mapping(uint256 => address) private dragonOwners;
-  mapping(address => uint256) private tokenBalances;
+  event Birth(
+    address owner,
+    uint256 dragonId,
+    uint256 femaleId,
+    uint256 maleId,
+    uint256 genes
+  );
 
   struct Dragon {
     uint256 genes;
@@ -21,6 +25,39 @@ contract Dragoncontract is IERC721 {
     uint32 maleId;
     uint32 femaleId;
     uint16 generation;
+  }
+
+  Dragon[] private dragons;
+
+  mapping(uint256 => address) private dragonOwners;
+  mapping(address => uint256) private tokenBalances;
+
+  function createDragonGen0(uint256 _genes) public onlyOwner {
+    _createDragon(0, 0, 0, _genes, msg.sender);
+  }
+
+  function _createDragon(
+    uint256 _femaleId,
+    uint256 _maleId,
+    uint256 _generation,
+    uint256 _genes,
+    address _owner
+  ) private returns (uint256) {
+      Dragon memory _dragon = Dragon({
+        genes: _genes,
+        birthTime: uint64(now),
+        femaleId: uint32(_femaleId),
+        maleId: uint32(_maleId),
+        generation: uint16(_generation)
+      });
+
+      uint256 newDragonId = dragons.push(_dragon).sub(1);
+
+      emit Birth(_owner, newDragonId, _femaleId, _maleId, _genes);
+
+      _transfer(address(0), _owner, newDragonId);
+
+      return newDragonId;
   }
 
   function name() external view returns (string memory tokenName) {
@@ -47,7 +84,7 @@ contract Dragoncontract is IERC721 {
   function transfer(address _to, uint256 _tokenId) external {
     require(_to != address(0), "cannot transfer to the zero address");
     require(_to != address(this), "cannot transfer to the contract address");
-    require(_owns(msg.sender, _tokenId), "token must be owned by user");
+    require(_owns(msg.sender, _tokenId), "token must be owned by sender");
 
     _transfer(msg.sender, _to, _tokenId);
   }
