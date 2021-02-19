@@ -9,11 +9,6 @@ interface IERC721 {
     event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
 
     /**
-     * @dev Emitted when `owner` enables `approved` to manage the `tokenId` token.
-     */
-    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
-
-    /**
      * @dev Returns the number of tokens in ``owner``'s account.
      */
     function balanceOf(address _owner) external view returns (uint256 balance);
