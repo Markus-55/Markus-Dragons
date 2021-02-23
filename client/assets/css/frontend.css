@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Brawler&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manuale&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 
 @font-face {
   font-family: "Poppins";
@@ -13,7 +14,7 @@ body {
 
 #headerContent {
   color: white;
-  padding-left: 41%;
+  padding-left: 28%;
 }
 
 #headerParagraph {
@@ -98,9 +99,9 @@ body {
 }
 
 #footer {
-  position: static;
-  height: 82px;
-  padding: 2%;
+  height: 79px;
   background: #f8f8f8;
-  margin-top: 196px;
+  margin-top: 217px;
+  font-family: 'EB Garamond';
+  font-size: 155%;
 }

@@ -71,15 +71,15 @@
 }
 
 .remainingEyes {
-  animation: eyesRemaining 2.5s linear -0.3s infinite;
+  animation: eyesRemaining 2.5s linear -0.25s infinite;
 }
 
 .happyEyes {
-  animation: eyesHappy 2.5s linear -0.3s infinite;
+  animation: eyesHappy 2.5s linear -0.25s infinite;
 }
 
 .relaxedEyes {
-  animation: eyesRelaxed 2.5s linear -0.3s infinite;
+  animation: eyesRelaxed 2.5s linear -0.25s infinite;
 }
 
 @keyframes eyesRelaxed {
@@ -246,15 +246,15 @@
 
 @keyframes rightCenteredHornTilt {
   0%, 100% {
-    transform: scale(1,-1) rotate(65deg);
+    transform: scale(1,-1) rotate(66deg);
   }
 
   30% {
-    transform: scale(1,-1) rotate(62deg);
+    transform: scale(1,-1) rotate(63deg);
   }
 
   60% {
-    transform: scale(1,-1) rotate(67deg);
+    transform: scale(1,-1) rotate(66deg);
   }
 }
 
@@ -264,11 +264,11 @@
   }
 
   30% {
-    transform: rotate(69deg);
+    transform: rotate(68deg);
   }
 
   60% {
-    transform: rotate(64deg);
+    transform: rotate(66deg);
   }
 }
 

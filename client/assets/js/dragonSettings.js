@@ -5,20 +5,21 @@ var colors = Object.values(allColors());
 
 var defaultDnaCode = {
   // Default dna dragon colors
-  "headBodyColor": 12,
-  "wingsTailColor": 22,
+  "headBodyColor": 11,
+  "wingsTailColor": 23,
   "legsArmsColor": 38,
   "eyesColor": 44,
-  // Default dna dragon atributes
+  // Default dna dragon attributes
   "eyeShape": 3,
-  "hornShape": 4,
-  "topHornsColor": 59,
+  "hornShape": 1,
+  "topHornsColor": 56,
   "sideHornsColor": 61,
   "animation": 1,
   "lastNum": 1
 }
 
 $(document).ready(function() {
+  // sets the colors and attributes dna
   $("#headBodyDna").html(defaultDnaCode.headBodyColor);
   $("#wingsTailDna").html(defaultDnaCode.wingsTailColor);
   $("#legsArmsDna").html(defaultDnaCode.legsArmsColor);
@@ -53,7 +54,6 @@ $("#defaultDragonBtn").click(function() {
   renderDragon(defaultDnaCode);
 });
 
-
 $("#randomDragonBtn").click(function() {
   let randomCode = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -74,6 +74,7 @@ $("#randomDragonBtn").click(function() {
   renderDragon(randomDnaCode);
 });
 
+// Displays the dragon colors & attributes and the number code for the dna
 function renderDragon(dnaCode) {
   headBodyColor(colors[dnaCode.headBodyColor], dnaCode.headBodyColor);
   $("#headBodyColor").val(dnaCode.headBodyColor);
@@ -99,11 +100,12 @@ function renderDragon(dnaCode) {
   sideHornsColor(colors[dnaCode.sideHornsColor], dnaCode.sideHornsColor);
   $("#sideHornsColor").val(dnaCode.sideHornsColor);
 
-  animationVariations(dnaCode.animation, dnaCode.hornShape);
   $("#animation").val(dnaCode.animation);
-
   if(dnaCode.animation == 5) {
     eyeAnimationVariations(dnaCode.eyeShape);
+  }
+  else {
+    animationVariations(dnaCode.animation, dnaCode.hornShape);
   }
 }
 
@@ -140,7 +142,7 @@ $("#eyeShape").change(() => {
 $("#hornShape").change(() => {
   let shape = parseInt($("#hornShape").val());
   let animation = parseInt($("#animation").val());
-  // does the same as eye shape but with horn shape
+  // same as eye shape but with horn shape instead,
   // when animation is tilting head
   hornVariation(shape, animation);
 });
@@ -160,8 +162,9 @@ $("#animation").change(() => {
   let hornShapeVal = parseInt($("#hornShape").val());
   let eyeShapeVal = parseInt($("#eyeShape").val());
 
-  // When animation is dilating eyes, calls function
-  // to separately change the eye shape value
+  // Calls first function if the selected animation is Dilating Eyes
+  // or calls the other function if one of the 4 other animation is selected
+  // customises the animations so that current eye or horn shape is correctly set
   if(animationVal == 5) {
     eyeAnimationVariations(eyeShapeVal);
   }

@@ -53,6 +53,8 @@ function eyeVariation(eyeShapeNum, animationNum) {
     case 1:
       originalEyes();
       $("#eyesName").html("Original");
+      // When animation is dilating eyes call function
+      // to properly set the eye shape
       if(animationNum == 5) {
         eyeAnimationVariations(1);
       }
@@ -114,6 +116,8 @@ function hornVariation(hornShapeNum, animationNum) {
     case 1:
       $("#hornsName").html("Original");
       originalHorns();
+      // same as in eyeVariation but with horn shape instead,
+      // when animation is tilting head
       if(animationNum == 2) {
         animationVariations(2, 1);
       }
@@ -165,6 +169,8 @@ function animationVariations(animationNum, hornShapeNum) {
     case 2:
       resetAnimation();
       $("#animationName").html("Tilting head");
+      // When user switches between differente horn shapes with the slider,
+      // sets the appropriate animation for selected horn shape
       if(hornShapeNum == 5) {
         animationBladeHorns();
       }
@@ -194,6 +200,8 @@ function animationVariations(animationNum, hornShapeNum) {
   }
 }
 
+// Function does the same as case 2 in animationVariations,
+// but for the eye shapes
 function eyeAnimationVariations(eyeShapeNum) {
   resetAnimation();
   $("#animationName").html("Dilating eyes");
@@ -314,6 +322,8 @@ function resetAnimation() {
   $(".pupils").removeClass("relaxedEyes");
   $(".pupils").removeClass("happyEyes");
 
+  // Using .width() to update the animations of Tilting head, when user changes animation with the slider
+  // without this the differente parts of the head will not reset with the Tilting Head animation
   $("#head, .rightEar, .leftEar, .sideRightHorn1, .sideRightHorn2, .sideLeftHorn1, .sideLeftHorn2").width();
 }
 
@@ -405,12 +415,12 @@ function originalHorns() {
 
 function hornsTypeCentered() {
   $(".topRightHorn").css({
-    "transform": "scale(1,-1) rotate(65deg)",
+    "transform": "scale(1,-1) rotate(66deg)",
     "left": "87px"
   });
   $(".topLeftHorn").css({
     "transform": "rotate(66deg)",
-    "left": "21px"
+    "left": "20px"
   });
   $(".topHorns").css({
     "height": "79px",
