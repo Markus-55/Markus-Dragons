@@ -8,8 +8,9 @@ contract Dragoncontract is IERC721, Ownable {
 
   using SafeMath for uint256;
 
-  string private nameOfToken = "MarkusDragons";
-  string private symbolOfToken = "MD";
+  uint256 public constant gen0CreationLimit = 10;
+  string private constant nameOfToken = "MarkusDragons";
+  string private constant symbolOfToken = "MD";
 
   event Birth(
     address owner,
@@ -32,8 +33,31 @@ contract Dragoncontract is IERC721, Ownable {
   mapping(uint256 => address) private dragonOwners;
   mapping(address => uint256) private tokenBalances;
 
-  function createDragonGen0(uint256 _genes) public onlyOwner {
-    _createDragon(0, 0, 0, _genes, msg.sender);
+  uint256 public gen0Total;
+
+  function getDragon(uint256 _tokenId) public view returns (
+    uint256 femaleId,
+    uint256 maleId,
+    uint256 generation,
+    uint256 birthTime,
+    uint256 genes,
+    address owner) {
+      return (
+        uint32(dragons[_tokenId].femaleId),
+        uint32(dragons[_tokenId].maleId),
+        uint16(dragons[_tokenId].generation),
+        uint64(dragons[_tokenId].birthTime),
+        dragons[_tokenId].genes,
+        dragonOwners[_tokenId]
+      );
+    }
+
+  function createDragonGen0(uint256 _genes) public onlyOwner returns (uint256) {
+    require(gen0Total < gen0CreationLimit);
+
+    gen0Total++;
+
+    return _createDragon(0, 0, 0, _genes, msg.sender);
   }
 
   function _createDragon(
@@ -51,7 +75,7 @@ contract Dragoncontract is IERC721, Ownable {
         generation: uint16(_generation)
       });
 
-      uint256 newDragonId = dragons.push(_dragon).sub(1);
+      uint256 newDragonId = dragons.push(_dragon) - 1;
 
       emit Birth(_owner, newDragonId, _femaleId, _maleId, _genes);
 
@@ -77,7 +101,7 @@ contract Dragoncontract is IERC721, Ownable {
   }
 
   function ownerOf(uint256 _tokenId) external view returns (address owner) {
-    require(_tokenId < dragons.length, "token does not exist");
+    require(_tokenId < dragons.length, "Token does not exist");
     return dragonOwners[_tokenId];
   }
 
@@ -90,12 +114,12 @@ contract Dragoncontract is IERC721, Ownable {
   }
 
   function _transfer(address _from, address _to, uint256 _tokenId) internal {
-    tokenBalances[_to].add(1);
+    tokenBalances[_to] = tokenBalances[_to].add(1);
 
     dragonOwners[_tokenId] = _to;
 
     if (_from != address(0)) {
-      tokenBalances[_from].sub(1);
+      tokenBalances[_from] = tokenBalances[_from].sub(1);
     }
 
     emit Transfer(_from, _to, _tokenId);
