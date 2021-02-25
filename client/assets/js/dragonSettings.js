@@ -34,27 +34,39 @@ $(document).ready(function() {
   renderDragon(defaultDnaCode);
 });
 
-function getDna() {
-  let dna = "";
-  dna += $("#headBodyDna").html();
-  dna += $("#wingsTailDna").html();
-  dna += $("#legsArmsDna").html();
-  dna += $("#eyesDna").html();
+function getDragonDna() {
+  let dragonDna = "";
+  dragonDna += $("#headBodyDna").html();
+  dragonDna += $("#wingsTailDna").html();
+  dragonDna += $("#legsArmsDna").html();
+  dragonDna += $("#eyesDna").html();
 
-  dna += $("#eyeShapeDna").html();
-  dna += $("#hornShapeDna").html();
-  dna += $("#topHornsDna").html();
-  dna += $("#sideHornsDna").html();
-  dna += $("#animationDna").html();
-  dna += $("#specialDna").html();
-  return parseInt(dna);
+  dragonDna += $("#eyeShapeDna").html();
+  dragonDna += $("#hornShapeDna").html();
+  dragonDna += $("#topHornsDna").html();
+  dragonDna += $("#sideHornsDna").html();
+  dragonDna += $("#animationDna").html();
+  dragonDna += $("#specialDna").html();
+  return parseInt(dragonDna);
 }
 
-$("#defaultDragonBtn").click(function() {
-  renderDragon(defaultDnaCode);
+$("#createDragonBtn").click(() => {
+    let dnaStr = getDragonDna();
+
+    instance.methods.createDragonGen0(dnaStr).send({}, (error, txHash) => {
+      if(error) {
+        console.log("Failed to create dragon: " + error);
+      }
+      else {
+        console.log("Dragon successfully created, with transaction hash: " + txHash);
+      }
+    });
+
 });
 
-$("#randomDragonBtn").click(function() {
+$("#defaultDragonBtn").click(() => renderDragon(defaultDnaCode));
+
+$("#randomDragonBtn").click(() => {
   let randomCode = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
   // random numbers for each colors and attributes

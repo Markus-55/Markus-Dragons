@@ -35,7 +35,7 @@ contract Dragoncontract is IERC721, Ownable {
 
   uint256 public gen0Total;
 
-  function getDragon(uint256 _tokenId) public view returns (
+  function getDragon(uint256 _tokenId) external view returns (
     uint256 femaleId,
     uint256 maleId,
     uint256 generation,
