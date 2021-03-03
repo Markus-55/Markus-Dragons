@@ -17,19 +17,19 @@ var abi = [
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "femaleId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "maleId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
         "name": "genes",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "dadId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "momId",
         "type": "uint256"
       }
     ],
@@ -104,17 +104,7 @@ var abi = [
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "femaleId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "maleId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "generation",
+        "name": "genes",
         "type": "uint256"
       },
       {
@@ -124,7 +114,17 @@ var abi = [
       },
       {
         "internalType": "uint256",
-        "name": "genes",
+        "name": "dadId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "momId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "generation",
         "type": "uint256"
       },
       {
@@ -147,13 +147,7 @@ var abi = [
       }
     ],
     "name": "createDragonGen0",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"

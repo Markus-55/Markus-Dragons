@@ -21,6 +21,16 @@ body {
   padding-left: 6%;
 }
 
+#createdDragon {
+  box-shadow: 0 6px 20px 0 rgb(0 0 0 / 5%);
+  background-color: #36c68d;
+  border-radius: 10px;
+  margin-bottom: -110px;
+  margin-top: 8px;
+  font-weight: bold;
+  padding: 10px;
+}
+
 #colorTab {
   color: black;
   font-weight: bold;

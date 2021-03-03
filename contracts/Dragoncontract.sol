@@ -15,16 +15,16 @@ contract Dragoncontract is IERC721, Ownable {
   event Birth(
     address owner,
     uint256 dragonId,
-    uint256 femaleId,
-    uint256 maleId,
-    uint256 genes
+    uint256 genes,
+    uint256 dadId,
+    uint256 momId
   );
 
   struct Dragon {
     uint256 genes;
     uint64 birthTime;
-    uint32 maleId;
-    uint32 femaleId;
+    uint32 dadId;
+    uint32 momId;
     uint16 generation;
   }
 
@@ -36,48 +36,44 @@ contract Dragoncontract is IERC721, Ownable {
   uint256 public gen0Total;
 
   function getDragon(uint256 _tokenId) external view returns (
-    uint256 femaleId,
-    uint256 maleId,
-    uint256 generation,
-    uint256 birthTime,
     uint256 genes,
+    uint256 birthTime,
+    uint256 dadId,
+    uint256 momId,
+    uint256 generation,
     address owner) {
+      require(_tokenId < dragons.length, "Token does not exist");
       return (
-        uint32(dragons[_tokenId].femaleId),
-        uint32(dragons[_tokenId].maleId),
-        uint16(dragons[_tokenId].generation),
-        uint64(dragons[_tokenId].birthTime),
         dragons[_tokenId].genes,
+        dragons[_tokenId].birthTime,
+        dragons[_tokenId].dadId,
+        dragons[_tokenId].momId,
+        dragons[_tokenId].generation,
         dragonOwners[_tokenId]
       );
     }
 
-  function createDragonGen0(uint256 _genes) public onlyOwner returns (uint256) {
-    require(gen0Total < gen0CreationLimit);
+  function createDragonGen0(uint256 _genes) external onlyOwner {
+    require(gen0Total < gen0CreationLimit, "The limit of generation 0 dragons is: 10");
 
     gen0Total++;
 
-    return _createDragon(0, 0, 0, _genes, msg.sender);
+    _createDragon(_genes, 0, 0, 0, msg.sender);
   }
 
   function _createDragon(
-    uint256 _femaleId,
-    uint256 _maleId,
-    uint256 _generation,
     uint256 _genes,
+    uint256 _dadId,
+    uint256 _momId,
+    uint256 _generation,
     address _owner
   ) private returns (uint256) {
-      Dragon memory _dragon = Dragon({
-        genes: _genes,
-        birthTime: uint64(now),
-        femaleId: uint32(_femaleId),
-        maleId: uint32(_maleId),
-        generation: uint16(_generation)
-      });
+      Dragon memory _dragon = Dragon(_genes, uint64(now), uint32(_dadId), uint32(_momId), uint16(_generation));
 
-      uint256 newDragonId = dragons.push(_dragon) - 1;
+      uint256 newDragonId = dragons.length;
+      dragons.push(_dragon) - 1;
 
-      emit Birth(_owner, newDragonId, _femaleId, _maleId, _genes);
+      emit Birth(_owner, newDragonId, _genes, _momId, _dadId);
 
       _transfer(address(0), _owner, newDragonId);
 
@@ -113,7 +109,7 @@ contract Dragoncontract is IERC721, Ownable {
     _transfer(msg.sender, _to, _tokenId);
   }
 
-  function _transfer(address _from, address _to, uint256 _tokenId) internal {
+  function _transfer(address _from, address _to, uint256 _tokenId) private {
     tokenBalances[_to] = tokenBalances[_to].add(1);
 
     dragonOwners[_tokenId] = _to;

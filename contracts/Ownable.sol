@@ -5,7 +5,7 @@ contract Ownable {
   address internal owner;
 
   modifier onlyOwner() {
-    require(owner == msg.sender);
+    require(owner == msg.sender, "You are not the owner of this contract");
     _;
   }
 

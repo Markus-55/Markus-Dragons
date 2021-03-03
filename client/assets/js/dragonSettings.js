@@ -50,20 +50,6 @@ function getDragonDna() {
   return parseInt(dragonDna);
 }
 
-$("#createDragonBtn").click(() => {
-    let dnaStr = getDragonDna();
-
-    instance.methods.createDragonGen0(dnaStr).send({}, (error, txHash) => {
-      if(error) {
-        console.log("Failed to create dragon: " + error);
-      }
-      else {
-        console.log("Dragon successfully created, with transaction hash: " + txHash);
-      }
-    });
-
-});
-
 $("#defaultDragonBtn").click(() => renderDragon(defaultDnaCode));
 
 $("#randomDragonBtn").click(() => {
