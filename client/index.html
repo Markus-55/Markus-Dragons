@@ -19,6 +19,21 @@
 </head>
 
 <body>
+
+  <div class="modal fade" id="txHashModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="txHashModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="txHashModalTitle">Transaction successfully sent!</h4>
+        </div>
+        <div class="modal-body" id="txHashModalBody"></div>
+        <div class="modal-footer" id="txHashModalFooter">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
 
     <div id="headerContent">
@@ -33,18 +48,6 @@
         <div id="dragonBox">
 
           <button type="button" class="btn btn-success" id="createDragonBtn">Create Dragon</button>
-
-          <div class="modal fade" id="txHashModal" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title" id="txHashModalTitle"><b>Transaction successfully sent!</b></h4>
-                </div>
-                <div class="modal-body" id="txHashModalBody"></div>
-                <button type="button" class="btn btn-light" data-dismiss="modal" id="txHashCloseBtn">Close</button>
-              </div>
-            </div>
-          </div>
 
           <div id="dragon">
 
@@ -278,7 +281,7 @@
 
       </div>
 
-      <div class="alert alert-dismissible show" role="alert" id="createdDragon" style="display:none">
+      <div class="alert alert-dismissible show" role="alert" id="createdDragon">
         <button type="button" class="close" id="createdDragonClose">
           <span aria-hidden="true">&times;</span>
         </button>

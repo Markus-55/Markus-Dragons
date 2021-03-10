@@ -2,7 +2,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0xF086d3a5f7485F576b47E08bf2A579cbe1EF2A48";
+var contractAddress = "0x97cc6cAc3015899a981D6997d17c17EC285162d4";
 
 $(document).ready(async () => {
   // asks user if they allow the website
@@ -16,6 +16,9 @@ $(document).ready(async () => {
 });
 
 $("#createDragonBtn").click(() => {
+  
+  $("#createdDragon").css("display", "none");
+
   let dnaStr = getDragonDna();
 
   instance.methods.createDragonGen0(dnaStr).send({}, (error, txHash) => {
@@ -24,31 +27,26 @@ $("#createDragonBtn").click(() => {
     }
     else {
       $("#txHashModal").modal();
-      $("#txHashModalBody").prepend(`<p>Transaction hash: ${txHash}</p>`);
+      $("#txHashModalBody").html(`<p>Transaction hash: <br>${txHash}</p>`);
       console.log(txHash);
     }
   });
 });
 
-  $("#txHashCloseBtn").click(() => {
-    $("#txHashModalBody > p").remove();
-  });
-
-  $('#createdDragonClose').click(() => {
-    $("#createdDragon").css("display", "none");
-    $("#createdDragon > p, h5").remove();
-  });
+$('#createdDragonClose').click(() => {
+  $("#createdDragon").css("display", "none");
+});
 
 function birthEvent() {
   instance.events.Birth().on("data", event => {
     $("#createdDragon > p, h5").remove();
     $("#createdDragon").css("display", "block");
     $("#createdDragon").prepend(
-      `<h5><b>Dragon successfully created!</b></h5>
+      `<h5 id="createdDragonTitle">Dragon successfully created!</h5>
       <p>Owner: ${event.returnValues.owner} &nbsp; &nbsp; &nbsp; &nbsp;
       Genes: ${event.returnValues.genes} &nbsp; &nbsp; &nbsp; &nbsp;
       Token Id: ${event.returnValues.dragonId}</p>`);
-  }).on("error", error => {
+  }).on("error", (error, receipt) => {
     console.log(error);
   });
 }

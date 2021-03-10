@@ -21,16 +21,21 @@ body {
   padding-left: 6%;
 }
 
-#txHashModalTitle, #txHashModalBody {
+#txHashModalBody {
   color: #007400;
 }
 
-#txHashCloseBtn {
-  text-align: right;
-  border: 1px solid #00000017;
-  margin-left: 91%;
-  margin-right: 1px;
-  margin-bottom: 1px;
+#txHashModalTitle {
+  font-weight: bold;
+  color: #007400;
+}
+
+#txHashModalFooter {
+  border-top: 0;
+}
+
+#createdDragonTitle {
+  font-weight: bold;
 }
 
 #createdDragon {
@@ -38,12 +43,13 @@ body {
   background-color: #1fe798;
   font-family: Arial;
   border-radius: 10px;
-  margin-bottom: -89px;
+  margin-bottom: -101px;
   margin-top: 6px;
   margin-left: 18px;
-  line-height: 21px;
+  padding-bottom: 0px;
+  line-height: 33px;
   width: 97%;
-  height: 83px;
+  display: none;
 }
 
 #colorTab {
