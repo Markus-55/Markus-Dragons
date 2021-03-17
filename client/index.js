@@ -2,7 +2,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0x97cc6cAc3015899a981D6997d17c17EC285162d4";
+var contractAddress = "0xFb226dD584cF34Fe2d2b4d7b9eaBf622Bf335F7f";
 
 $(document).ready(async () => {
   // asks user if they allow the website
@@ -16,18 +16,26 @@ $(document).ready(async () => {
 });
 
 $("#createDragonBtn").click(() => {
-  
+
   $("#createdDragon").css("display", "none");
 
   let dnaStr = getDragonDna();
 
   instance.methods.createDragonGen0(dnaStr).send({}, (error, txHash) => {
-    if(error) {
-      console.log("Failed to send transaction: " + error);
+    $("#txHashModal").modal();
+    if(error && error.code === -32603) {
+      $("#txHashModalTitle").html("Error: transaction failed!").css("color", "#ad2424");
+      $("#txHashModalBody").html("There cannot be more then 10 gen0Dragons").css("color", "#ad2424");
+      console.log(error);
+    }
+    else if(error) {
+      $("#txHashModalTitle").html("Error: transaction failed!").css("color", "#ad2424");
+      $("#txHashModalBody").html("Failed to send transaction: " + error.message).css("color", "#ad2424");
+      console.log(error);
     }
     else {
-      $("#txHashModal").modal();
-      $("#txHashModalBody").html(`<p>Transaction hash: <br>${txHash}</p>`);
+      $("#txHashModalTitle").html("Transaction successfully sent!").css("color", "#007400");
+      $("#txHashModalBody").html(`<p>Transaction hash: <br>${txHash}</p>`).css("color", "#007400");
       console.log(txHash);
     }
   });
@@ -43,10 +51,11 @@ function birthEvent() {
     $("#createdDragon").css("display", "block");
     $("#createdDragon").prepend(
       `<h5 id="createdDragonTitle">Dragon successfully created!</h5>
+      <p id="addToken">&nbsp; &nbsp;The MD token has been added to your account!</p>
       <p>Owner: ${event.returnValues.owner} &nbsp; &nbsp; &nbsp; &nbsp;
       Genes: ${event.returnValues.genes} &nbsp; &nbsp; &nbsp; &nbsp;
       Token Id: ${event.returnValues.dragonId}</p>`);
   }).on("error", (error, receipt) => {
-    console.log(error);
-  });
+      console.log(error, receipt);
+    });
 }

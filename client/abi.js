@@ -138,6 +138,21 @@ var abi = [
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "allOwnedDragons",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "dragonTokens",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {

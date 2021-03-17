@@ -12,22 +12,22 @@ body {
   font-family: Poppins;
 }
 
+#navColor {
+  background-color: #343434;
+}
+
 #headerContent {
   color: white;
   padding-left: 28%;
+  margin-top: 10px
 }
 
 #headerParagraph {
   padding-left: 6%;
 }
 
-#txHashModalBody {
-  color: #007400;
-}
-
 #txHashModalTitle {
   font-weight: bold;
-  color: #007400;
 }
 
 #txHashModalFooter {
@@ -36,6 +36,10 @@ body {
 
 #createdDragonTitle {
   font-weight: bold;
+}
+
+#createdDragonTitle, #addToken {
+  display: inline;
 }
 
 #createdDragon {
@@ -132,7 +136,14 @@ body {
 #footer {
   height: 79px;
   background: #f8f8f8;
-  margin-top: 217px;
   font-family: 'EB Garamond';
   font-size: 155%;
+}
+
+.m-top1 {
+  margin-top: 201px;
+}
+
+.m-top2 {
+  margin-top: 834px;
 }

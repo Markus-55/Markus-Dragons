@@ -53,6 +53,10 @@ contract Dragoncontract is IERC721, Ownable {
       );
     }
 
+  function allOwnedDragons() external view returns (uint256 dragonTokens) {
+    return tokenBalances[msg.sender];
+  }
+
   function createDragonGen0(uint256 _genes) external onlyOwner {
     require(gen0Total < gen0CreationLimit, "The limit of generation 0 dragons is: 10");
 
@@ -121,7 +125,7 @@ contract Dragoncontract is IERC721, Ownable {
     emit Transfer(_from, _to, _tokenId);
   }
 
-  function _owns(address _claimant, uint256 _tokenId) internal view returns (bool) {
+  function _owns(address _claimant, uint256 _tokenId) private view returns (bool) {
     return _claimant == dragonOwners[_tokenId];
   }
 }
