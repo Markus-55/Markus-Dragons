@@ -1,0 +1,27 @@
+#homeBody {
+  background: #1b3872;
+}
+
+#dragonCard {
+  margin-top: 60px;
+  margin-left: -131px;
+  width: 1346px;
+  height: 793px;
+}
+
+#dragonCardImg {
+  width: 65%;
+}
+
+#dragonCardBtn {
+  background-color: #0f434b;
+  margin-top: 106px;
+  width: 276px;
+  height: 55px;
+  padding: 11px;
+  font-size: 20px;
+}
+
+.m-top3 {
+  margin-top: 804px;
+}

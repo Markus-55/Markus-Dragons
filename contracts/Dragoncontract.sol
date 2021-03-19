@@ -53,9 +53,15 @@ contract Dragoncontract is IERC721, Ownable {
       );
     }
 
-  function allOwnedDragons() external view returns (uint256 dragonTokens) {
-    return tokenBalances[msg.sender];
-  }
+    function allOwnedDragons() external view returns(uint256[] memory) {
+        uint256[] memory ownedDragons = new uint256[](tokenBalances[msg.sender]);
+        for(uint256 i = 0; i < dragons.length; i++) {
+          if(dragonOwners[i] == msg.sender) {
+            ownedDragons[i] = i;
+          }
+        }
+        return ownedDragons;
+    }
 
   function createDragonGen0(uint256 _genes) external onlyOwner {
     require(gen0Total < gen0CreationLimit, "The limit of generation 0 dragons is: 10");

@@ -8,8 +8,20 @@
 }
 
 body {
-  background: #2c6f6f;
   font-family: Poppins;
+}
+
+#createDragonBody {
+  background: #2c6f6f;
+}
+
+#navBarBrand {
+  font-size: 160%;
+  color: #fff
+}
+
+#navBarHome {
+  margin-left: 92rem;
 }
 
 #navColor {
@@ -38,7 +50,7 @@ body {
   font-weight: bold;
 }
 
-#createdDragonTitle, #addToken {
+#createdDragonTitle, #addedTokenText {
   display: inline;
 }
 
@@ -47,7 +59,7 @@ body {
   background-color: #1fe798;
   font-family: Arial;
   border-radius: 10px;
-  margin-bottom: -101px;
+  margin-bottom: -102px;
   margin-top: 6px;
   margin-left: 18px;
   padding-bottom: 0px;
@@ -134,16 +146,12 @@ body {
 }
 
 #footer {
-  height: 79px;
+  height: 63px;
   background: #f8f8f8;
   font-family: 'EB Garamond';
   font-size: 155%;
 }
 
 .m-top1 {
-  margin-top: 201px;
-}
-
-.m-top2 {
-  margin-top: 834px;
+  margin-top: 209px;
 }

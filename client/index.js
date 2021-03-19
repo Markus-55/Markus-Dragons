@@ -2,7 +2,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0xFb226dD584cF34Fe2d2b4d7b9eaBf622Bf335F7f";
+var contractAddress = "0x96BCF44184c94C26D30a2d3d06dacAdafc8abD90";
 
 $(document).ready(async () => {
   // asks user if they allow the website
@@ -51,7 +51,7 @@ function birthEvent() {
     $("#createdDragon").css("display", "block");
     $("#createdDragon").prepend(
       `<h5 id="createdDragonTitle">Dragon successfully created!</h5>
-      <p id="addToken">&nbsp; &nbsp;The MD token has been added to your account!</p>
+      <p id="addedTokenText">&nbsp; &nbsp;The MD token has been added to your account!</p>
       <p>Owner: ${event.returnValues.owner} &nbsp; &nbsp; &nbsp; &nbsp;
       Genes: ${event.returnValues.genes} &nbsp; &nbsp; &nbsp; &nbsp;
       Token Id: ${event.returnValues.dragonId}</p>`);

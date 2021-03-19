@@ -143,9 +143,9 @@ var abi = [
     "name": "allOwnedDragons",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "dragonTokens",
-        "type": "uint256"
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
       }
     ],
     "payable": false,
