@@ -3,7 +3,8 @@ var web3 = new Web3(Web3.givenProvider);
 var instance;
 var user;
 var dragonIds;
-var contractAddress = "0x96BCF44184c94C26D30a2d3d06dacAdafc8abD90";
+var storedDragonsObj;
+var contractAddress = "0xfb4250C3b4d60A955cAA0465b06488C1DEE0F114";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -22,9 +23,12 @@ function storedDragons() {
     else {
       for(let i = 0; i < id.length; i++) {
         dragonIds = id[i];
-        let dragonStr = `<div class="myDragonBox" id="dragonId ${i}">${getStoredDragons()}</div>`
+        let dragonStr = `<div class="myDragonBox" id="dragonId ${i}">
+          ${getStoredDragons()}
+        </div>`;
         $("#dragonObject").append(dragonStr);
         console.log(dragonStr);
+        console.log(storedDragonsObj);
       }
     }
   });
@@ -32,12 +36,30 @@ function storedDragons() {
 
 function getStoredDragons() {
   instance.methods.getDragon(dragonIds).call({}, function(error, values) {
-    if(error) {
-      console.log(error);
+
+    let genes = values.genes.split('');
+
+    storedDragonsObj = {
+      // Dna dragon colors
+      "headBodyColor": genes[0] + genes[1],
+      "wingsTailColor": genes[2] + genes[3],
+      "legsArmsColor": genes[4] + genes[5],
+      "eyesColor": genes[6] + genes[7],
+      // Dna dragon attributes
+      "eyeShape": genes[8],
+      "hornShape": genes[9],
+      "topHornsColor": genes[10] + genes[11],
+      "sideHornsColor": genes[12] + genes[13],
+      "animation": genes[14],
+      "lastNum": genes[15]
     }
-    else {
-      renderDragon(values.genes);
-      console.log(values);
-    }
+    //console.log(error);
+
+    console.log(storedDragonsObj);
+    console.log("dragonIds: " + dragonIds);
+    console.log(values);
+    console.log("genes[0]: " + genes[0]);
   });
+  console.log(storedDragonsObj);
+  return renderDragon(storedDragonsObj);
 }

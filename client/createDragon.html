@@ -19,7 +19,6 @@
   <link rel="stylesheet" href="assets/css/home.css">
   <link rel="stylesheet" href="assets/css/myDragons.css">
 </head>
-
 <body id="createDragonBody">
 
   <div class="modal fade" id="txHashModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="txHashModalTitle" aria-hidden="true">
@@ -38,14 +37,19 @@
 
   <nav class="navbar navbar-expand navbar-dark" id="navColor">
     <a class="navbar-brand" href="createDragon.html" id="navBarBrand">Dragon Factory</a>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="index.html" id="navBarHome">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="myDragons.html">My Dragons</a>
-      </li>
-    </ul>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="myDragons.html">My Dragons</a>
+        </li>
+      </ul>
+    </div>
   </nav>
 
   <div class="container">
@@ -304,15 +308,14 @@
 
   </div>
 
-<footer id="footer" class="m-top1">
-  <p>Ivan on Tech Academy Bootcamp</p>
-</footer>
+  <footer id="footer" class="m-top1">
+    <p>Ivan on Tech Academy Bootcamp</p>
+  </footer>
 
 </body>
-<script src="./index.js"></script>
 <script src="assets/js/colors.js"></script>
-<script src="assets/js/dragonStorage.js"></script>
 <script src="assets/js/dragonSettings.js"></script>
 <script src="assets/js/dragonFactory.js"></script>
+<script src="./index.js"></script>
 
 </html>
