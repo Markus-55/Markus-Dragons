@@ -1,8 +1,11 @@
+/* index.js is using functions from Dragoncontract.sol to send the transaction txHash
+   and also shows the birth event of when a dragon has been created with their informations */
+
 var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0xfb4250C3b4d60A955cAA0465b06488C1DEE0F114";
+var contractAddress = "0xA3f3512504592eaE41f1bE0079d3bB43461f387E";
 
 $(document).ready(async () => {
   // asks user if they allow the website

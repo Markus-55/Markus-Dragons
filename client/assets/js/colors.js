@@ -1,4 +1,4 @@
-/* Colors used in dragonFactory.js */
+/* Colors used for the dragons */
 
 var colors = {
 00: "ae494f",
