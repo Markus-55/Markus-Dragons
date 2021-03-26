@@ -47,7 +47,7 @@ function getDragonDna() {
   dragonDna += $("#sideHornsDna").html();
   dragonDna += $("#animationDna").html();
   dragonDna += $("#specialDna").html();
-  return parseInt(dragonDna);
+  return dragonDna;
 }
 
 $("#defaultDragonBtn").click(() => renderDragon(defaultDnaCode));
@@ -100,7 +100,7 @@ function renderDragon(dnaCode) {
 
   $("#animation").val(dnaCode.animation);
   if(dnaCode.animation == 5) {
-    eyeAnimationVariations(dnaCode.eyeShape);
+    eyeAnimationVariations(dnaCode.eyeShape, dnaCode.animation);
   }
   else {
     animationVariations(dnaCode.animation, dnaCode.hornShape);
@@ -164,7 +164,7 @@ $("#animation").change(() => {
   // or calls the other function if one of the 4 other animation is selected
   // customises the animations so that current eye or horn shape is correctly set
   if(animationVal == 5) {
-    eyeAnimationVariations(eyeShapeVal);
+    eyeAnimationVariations(eyeShapeVal, animationVal);
   }
   else {
     animationVariations(animationVal, hornShapeVal);

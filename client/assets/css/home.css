@@ -2,26 +2,34 @@
   background: #1b3872;
 }
 
-#dragonCard {
-  margin-top: 60px;
-  margin-left: -131px;
-  width: 1346px;
-  height: 793px;
+#homeBox {
+  background-color: #003966;
+  border-radius: 10px;
+  padding-left: 48px;
+  padding-top: 7px;
+  margin-top: 118px;
+  height: 544px;
+  box-shadow: 0 6px 20px 0 rgb(0 0 0 / 54%);
 }
 
-#dragonCardImg {
-  width: 65%;
+#homeText {
+  font-weight: bold;
+  font-size: 23px;
+  margin-top: 326px;
+  color: black;
 }
 
-#dragonCardBtn {
+#dragonHomeBtn {
   background-color: #0f434b;
-  margin-top: 106px;
-  width: 276px;
-  height: 55px;
-  padding: 11px;
-  font-size: 20px;
+  border-radius: 10px;
+  margin-top: 35px;
+  margin-left: 4px;
+  width: 401px;
+  height: 91px;
+  padding: 31px;
+  font-size: 23px;
 }
 
 .m-top3 {
-  margin-top: 804px;
+  margin-top: 180px;
 }

@@ -202,7 +202,9 @@ function animationVariations(animationNum, hornShapeNum) {
 
 // Function does the same as case 2 in animationVariations,
 // but for the eye shapes
-function eyeAnimationVariations(eyeShapeNum) {
+function eyeAnimationVariations(eyeShapeNum, animationNum) {
+  $("#animationDna").html(animationNum);
+
   resetAnimation();
   $("#animationName").html("Dilating eyes");
   if(eyeShapeNum == 2) {

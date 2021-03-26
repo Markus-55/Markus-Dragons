@@ -2,6 +2,56 @@
   background: #3d9b9b;
 }
 
+#myDragonBox {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding-left: 48px;
+  padding-top: 7px;
+  margin-top: 54px;
+  height: 488px;
+  box-shadow: 0 6px 20px 0 rgb(0 0 0 / 33%);
+}
+
+#myDragon {
+  position: absolute;
+  margin-top: 80px;
+}
+
+#idDragon {
+  margin-left: -39px;
+  font-weight: bold;
+  margin-bottom: -30px;
+}
+
+#myDragonDna {
+  margin-top: -95px;
+  margin-left: 9px;
+}
+
+#generation {
+  margin-top: 23px;
+  margin-left: 9px;
+  font-weight: bold;
+}
+
+#birthTime {
+  margin-top: -46px;
+  margin-left: 9px;
+  font-weight: bold;
+}
+
+#dadId {
+  margin-top: 20px;
+  margin-left: 9px;
+  font-weight: bold;
+}
+
+#momId {
+  margin-top: -24px;
+  margin-left: 87px;
+  font-weight: bold;
+}
+
 .m-top2 {
   margin-top: 842px;
 }
