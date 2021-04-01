@@ -2,61 +2,54 @@
 
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-  <title>Academy dragons</title>
+    <title>Academy dragons</title>
 
-  <script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <script src="assets/bootstrap/js/popper.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/web3.min.js"></script>
-  <script src="./abi.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <script src="assets/bootstrap/js/popper.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
-  <link rel="stylesheet" href="assets/css/animations.css">
-  <link rel="stylesheet" href="assets/css/frontend.css">
-  <link rel="stylesheet" href="assets/css/dragon.css">
-  <link rel="stylesheet" href="assets/css/home.css">
-</head>
+    <link rel="stylesheet" href="assets/css/home.css">
+  </head>
 
-<body id="homeBody">
+  <body>
 
-  <nav class="navbar navbar-expand navbar-dark" id="navColor">
-    <a class="navbar-brand" href="createDragon.html" id="navBarBrand">Dragon Factory</a>
-    <ul class="navbar-nav">
-      <li class="nav-item active" id="navBarHome">
-        <a class="nav-link" href="index.html" >Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="myDragons.html">My Dragons</a>
-      </li>
-    </ul>
-  </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+      <a class="navbar-brand" href="dragonCreation.html">Dragon Factory<span class="sr-only">(current)</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="myDragons.html">My Dragons<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-lg">
-        <div id="homeBox">
-          <p id="homeText">Click on the button to start creating your MarkusDragons Tokens!</p>
-          <a href="createDragon.html" class="btn btn-primary" id="dragonHomeBtn">Create your Dragons!</a>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg">
+          <div id="homeBox">
+            <p class="homeText">Click on the button to start creating your MarkusDragons Tokens!</p>
+            <a href="dragonCreation.html" class="btn btn-info homeBtn">Create your Dragons!</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
+    <footer>
+      <p>Ivan on Tech Academy Bootcamp</p>
+    </footer>
 
-
-
-
-<footer id="footer" class="m-top3">
-  <p>Ivan on Tech Academy Bootcamp</p>
-</footer>
-
-</body>
-<script src="assets/js/colors.js"></script>
-<script src="assets/js/dragonSettings.js"></script>
-<script src="assets/js/dragonFactory.js"></script>
+  </body>
 
 </html>

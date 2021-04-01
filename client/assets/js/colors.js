@@ -75,7 +75,3 @@ var colors = {
 65: "46193f",
 66: "d43500"
 }
-
-function allColors(){
-return colors;
-}

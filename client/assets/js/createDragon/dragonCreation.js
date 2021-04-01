@@ -1,11 +1,11 @@
-/* index.js is using functions from Dragoncontract.sol to send the transaction txHash
+/* dragonCreation.js is using functions from Dragoncontract.sol to send the transaction txHash
    and also shows the birth event of when a dragon has been created with their informations */
 
 var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0x5DE98d1E02cBE3Ce072F26eE108725cd34b4663D";
+var contractAddress = "0x90eA32b62E5015b855c3D276A4a8A6036ef45463";
 
 $(document).ready(async () => {
   // asks user if they allow the website
@@ -44,7 +44,7 @@ $("#createDragonBtn").click(() => {
   });
 });
 
-$('#createdDragonClose').click(() => {
+$('.close').click(() => {
   $("#createdDragon").css("display", "none");
 });
 

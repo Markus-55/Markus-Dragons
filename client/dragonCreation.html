@@ -1,0 +1,322 @@
+<!-- The page where you create your dragons -->
+
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>Academy dragons</title>
+
+    <script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <script src="assets/bootstrap/js/popper.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/web3.min.js"></script>
+    <script src="assets/js/abi.js"></script>
+
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/dragon.css">
+    <link rel="stylesheet" href="assets/css/frontend.css">
+  </head>
+
+  <body>
+    <div class="modal fade" id="txHashModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="txHashModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="txHashModalTitle"></h4>
+          </div>
+          <div class="modal-body" id="txHashModalBody"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+      <a class="navbar-brand" href="#">Dragon Factory<span class="sr-only">(current)</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="myDragons.html">My Dragons<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div id="headerContent">
+        <h2>Create your custom dragons!</h2>
+      </div>
+
+      <div class="row">
+
+        <!-- The box with the created dragons with it's DNA -->
+        <div class="col-lg-5">
+          <div id="dragonBox">
+
+            <button type="button" class="btn btn-success" id="createDragonBtn">Create Dragon</button>
+
+            <div id="dragon">
+
+              <div id="rightWing">
+                <div class="wings rightWingPart1"></div>
+                <div class="wings rightWingPart2"></div>
+                <div class="wings rightWingPart3"></div>
+                <div class="wings rightWingPart4"></div>
+              </div>
+              <div id="leftWing">
+                <div class="wings leftWingPart1"></div>
+                <div class="wings leftWingPart2"></div>
+                <div class="wings leftWingPart3"></div>
+                <div class="wings leftWingPart4"></div>
+              </div>
+
+              <div id="tail">
+                <div class="tailScale tailScale1"></div>
+                <div class="tailScale tailScale2"></div>
+                <div class="tailScale tailScale3"></div>
+                <div class="tailScale tailScale4"></div>
+                <div class="tailScale tailScale5"></div>
+                <div class="tailScale tailScale6"></div>
+                <div class="tailScale tailScale7"></div>
+                <div class="tailScale tailScale8"></div>
+                <div class="tailScale tailScale9"></div>
+                <div class="tailScale tailScale10"></div>
+                <div class="tailScale tailScale11"></div>
+                <div class="tailScale tailScale12"></div>
+                <div class="tailScale tailScale13"></div>
+                <div class="tailScale tailScale14"></div>
+                <div class="tailScale tailScale15"></div>
+                <div class="tailScale tailScale16"></div>
+                <div class="tailScale tailScale17"></div>
+                <div class="tailScale tailScale18"></div>
+                <div class="tailScale tailScale19"></div>
+                <div class="tailScale tailScale20"></div>
+                <div class="tailScale tailScale21"></div>
+                <div class="tailScale tailScale22"></div>
+                <div class="tailScale tailScale23"></div>
+                <div class="tailScale tailScale24"></div>
+                <div class="tailScale tailScale25"></div>
+                <div class="tailScale tailScale26"></div>
+                <div class="tailScale tailScale27"></div>
+                <div class="tailScale tailScale28"></div>
+                <div class="tailScale tailScale29"></div>
+                <div class="tailScale tailScale30"></div>
+                <div class="tailScale tailScale31"></div>
+                <div class="tailScale tailScale32"></div>
+
+                <div class="tail tailPart1"></div>
+                <div class="tail tailPart2"></div>
+                <div class="tail tailPart3"></div>
+                <div class="tail tailPart4"></div>
+                <div class="tail tailPart5"></div>
+                <div class="tail tailPart6"></div>
+                <div class="tail tailPart7"></div>
+
+                <div class="tailEnd tailEnd1"></div>
+                <div class="tailEnd tailEnd2"></div>
+              </div>
+
+              <div id="body">
+                <div class="feet rightFoot"></div>
+                <div class="feet leftFoot"></div>
+
+                <div class="legs rightLeg"></div>
+                <div class="legs leftLeg"></div>
+
+                <div class="arms rightArm"></div>
+                <div class="arms leftArm"></div>
+
+                <div class="hand handPart1"></div>
+                <div class="hand handPart2"></div>
+                <div class="hand handPart3"></div>
+                <div class="hand handPart4"></div>
+
+                <div class="scales armScales scale11"></div>
+                <div class="scales armScales scale12"></div>
+                <div class="scales armScales scale13"></div>
+                <div class="scales armScales scale14"></div>
+                <div class="scales armScales scale15"></div>
+                <div class="scales armScales scale16"></div>
+                <div class="scales bodyScales scale17"></div>
+                <div class="scales bodyScales scale18"></div>
+                <div class="scales bodyScales scale19"></div>
+
+              </div>
+
+              <div class="ears rightEar"></div>
+              <div class="ears leftEar"></div>
+
+              <div class="topHorns topRightHorn"></div>
+              <div class="topHorns topLeftHorn"></div>
+
+              <div class="sideHorns sideRightHorn1"></div>
+              <div class="sideHorns sideRightHorn2"></div>
+              <div class="sideHorns sideLeftHorn1"></div>
+              <div class="sideHorns sideLeftHorn2"></div>
+
+              <div id="head">
+
+                <div class="scales headScales scale1"></div>
+                <div class="scales headScales scale2"></div>
+                <div class="scales headScales scale3"></div>
+                <div class="scales headScales scale4"></div>
+                <div class="scales headScales scale5"></div>
+                <div class="scales headScales scale6"></div>
+                <div class="scales headScales scale7"></div>
+                <div class="scales headScales scale8"></div>
+                <div class="scales headScales scale9"></div>
+                <div class="scales headScales scale10"></div>
+
+                <div class="eyes rightEye">
+                  <div class="pupils">
+                    <div class="innerPupils"></div>
+                  </div>
+                </div>
+                <div class="eyes leftEye">
+                  <div class="pupils">
+                    <div class="innerPupils"></div>
+                  </div>
+                </div>
+
+                <div class="nose nostril1"></div>
+                <div class="nose nostril2"></div>
+
+                <div class="mouth mouthPart1"></div>
+                <div class="mouth mouthPart2"></div>
+                <div class="mouth mouthPart3"></div>
+                <div class="mouth mouthPart4"></div>
+                <div class="mouth mouthPart5"></div>
+                <div class="mouth mouthPart6"></div>
+                <div class="mouth mouthPart7"></div>
+
+                <div class="teeth tooth1"></div>
+                <div class="teeth tooth2"></div>
+
+              </div>
+
+            </div>
+
+            <br>
+            <div id="dragonDna">
+              <b>
+                DNA:
+                <!-- Colors -->
+                <span id="headBodyDna"></span>
+                <span id="wingsTailDna"></span>
+                <span id="legsArmsDna"></span>
+                <span id="eyesDna"></span>
+                <!-- Dragon attributes -->
+                <span id="eyeShapeDna"></span>
+                <span id="hornShapeDna"></span>
+                <span id="topHornsDna"></span>
+                <span id="sideHornsDna"></span>
+                <span id="animationDna"></span>
+                <span id="specialDna"></span>
+              </b>
+            </div>
+
+          <button type="button" class="btn btn-primary" id="defaultDragonBtn">Default Dragon</button>
+
+          </div>
+        </div>
+
+        <!-- The pill-tabs to change between the colors and attributes sliders -->
+        <div class="col-lg-7">
+          <ul class="nav nav-pills" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="colorTab" data-toggle="pill" href="#colorContent" role="tab" aria-controls="colorContent" aria-selected="true">Color sliders</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="attributeTab" data-toggle="pill" href="#attributeContent" role="tab" aria-controls="attributeContent" aria-selected="false">Attribute sliders</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+
+            <div class="tab-pane active" id="colorContent" role="tabpanel" aria-labelledby="colorTab">
+              <div class="form-group">
+                <label for="headBodyColor"><b>Head and body color</b><span class="badge badge-dark ml-2" id="headBodyCode"></span></label>
+                <input type="range" min="10" max="20" class="form-control-range" id="headBodyColor">
+              </div>
+
+              <div class="form-group">
+                <label for="wingsTailColor"><b>Wings and tail color</b><span class="badge badge-dark ml-2" id="wingsTailCode"></span></label>
+                <input type="range" min="21" max="31" class="form-control-range" id="wingsTailColor">
+              </div>
+
+              <div class="form-group">
+                <label for="legsArmsColor"><b>Legs and arms color</b><span class="badge badge-dark ml-2" id="legsArmsCode"></span></label>
+                <input type="range" min="32" max="42" class="form-control-range" id="legsArmsColor">
+              </div>
+
+              <div class="form-group">
+                <label for="eyesColor"><b>Eyes color</b><span class="badge badge-dark ml-2" id="eyesCode"></span></label>
+                <input type="range" min="43" max="52" class="form-control-range" id="eyesColor">
+              </div>
+            </div>
+
+            <div class="tab-pane" id="attributeContent" role="tabpanel" aria-labelledby="attributeTab">
+              <div class="form-group">
+                <label for="eyeShape"><b>Eye shapes</b><span class="badge badge-dark ml-2" id="eyesName"></span></label>
+                <input type="range" min="1" max="7" class="form-control-range" id="eyeShape">
+              </div>
+
+              <div class="form-group">
+                <label for="hornShape"><b>Horn shapes</b><span class="badge badge-dark ml-2" id="hornsName"></span></label>
+                <input type="range" min="1" max="5" class="form-control-range" id="hornShape">
+              </div>
+
+              <div class="form-group">
+                <label for="topHornsColor"><b>Top horns color</b><span class="badge badge-dark ml-2" id="topHornsCode"></span></label>
+                <input type="range" min="53" max="59" class="form-control-range" id="topHornsColor">
+              </div>
+
+              <div class="form-group">
+                <label for="sideHornsColor"><b>Side horns color</b><span class="badge badge-dark ml-2" id="sideHornsCode"></span></label>
+                <input type="range" min="60" max="66" class="form-control-range" id="sideHornsColor">
+              </div>
+
+              <div class="form-group">
+                <label for="animation"><b>Animations</b><span class="badge badge-dark ml-2" id="animationName"></span></label>
+                <input type="range" min="1" max="5" class="form-control-range" id="animation">
+              </div>
+            </div>
+
+          <button type="button" class="btn btn-warning" id="randomDragonBtn">Random Dragon</button>
+          </div>
+
+        </div>
+
+        <div class="alert alert-dismissible show" role="alert" id="createdDragon">
+          <button type="button" class="close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <footer>
+      <p>Ivan on Tech Academy Bootcamp</p>
+    </footer>
+
+  </body>
+
+<script src="assets/js/colors.js"></script>
+<script src="assets/js/createDragon/dragonSettings.js"></script>
+<script src="assets/js/createDragon/dragonFactory.js"></script>
+<script src="assets/js/createDragon/dragonCreation.js"></script>
+
+</html>

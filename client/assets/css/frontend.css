@@ -9,18 +9,10 @@
 
 body {
   font-family: Poppins;
-}
-
-#createDragonBody {
   background: #2c6f6f;
 }
 
-#navBarBrand {
-  font-size: 160%;
-  color: #fff
-}
-
-#navColor {
+nav {
   background-color: #343434;
 }
 
@@ -34,11 +26,11 @@ body {
   padding-left: 6%;
 }
 
-#txHashModalTitle {
+.modal-title {
   font-weight: bold;
 }
 
-#txHashModalFooter {
+.modal-footer {
   border-top: 0;
 }
 
@@ -141,13 +133,10 @@ body {
   margin-left: -51px;
 }
 
-#footer {
+footer {
   height: 63px;
   background: #f8f8f8;
   font-family: 'EB Garamond';
   font-size: 155%;
-}
-
-.m-top1 {
   margin-top: 209px;
 }

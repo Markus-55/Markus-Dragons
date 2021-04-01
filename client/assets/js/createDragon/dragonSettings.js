@@ -1,21 +1,19 @@
 /* dragonSettings.js creats objects for default and random dna,
    calls the functions in dragonFactory.js to render colors and attributes */
 
-var colors = Object.values(allColors());
-
 var defaultDnaCode = {
   // Default dna dragon colors
-  "headBodyColor": 11,
-  "wingsTailColor": 23,
-  "legsArmsColor": 38,
-  "eyesColor": 44,
+  headBodyColor: 11,
+  wingsTailColor: 23,
+  legsArmsColor: 38,
+  eyesColor: 44,
   // Default dna dragon attributes
-  "eyeShape": 3,
-  "hornShape": 1,
-  "topHornsColor": 56,
-  "sideHornsColor": 61,
-  "animation": 1,
-  "lastNum": 1
+  eyeShape: 3,
+  hornShape: 1,
+  topHornsColor: 56,
+  sideHornsColor: 61,
+  animation: 1,
+  lastNum: 1
 }
 
 $(document).ready(function() {
@@ -57,16 +55,17 @@ $("#randomDragonBtn").click(() => {
 
   // random numbers for each colors and attributes
   let randomDnaCode = {
-    "headBodyColor": randomCode(10, 20),
-    "wingsTailColor": randomCode(21, 31),
-    "legsArmsColor": randomCode(32, 42),
-    "eyesColor": parseInt(randomCode(43, 52)),
+    headBodyColor: randomCode(10, 20),
+    wingsTailColor: randomCode(21, 31),
+    legsArmsColor: randomCode(32, 42),
+    eyesColor: parseInt(randomCode(43, 52)),
 
-    "eyeShape": randomCode(1, 7),
-    "hornShape": randomCode(1, 5),
-    "topHornsColor": randomCode(53, 59),
-    "sideHornsColor": randomCode(60, 66),
-    "animation": randomCode(1, 5)
+    eyeShape: randomCode(1, 7),
+    hornShape: randomCode(1, 5),
+    topHornsColor: randomCode(53, 59),
+    sideHornsColor: randomCode(60, 66),
+    animation: randomCode(1, 5),
+    //"lastNum": randomCode(, 1)
   }
 
   renderDragon(randomDnaCode);
@@ -98,13 +97,15 @@ function renderDragon(dnaCode) {
   sideHornsColor(colors[dnaCode.sideHornsColor], dnaCode.sideHornsColor);
   $("#sideHornsColor").val(dnaCode.sideHornsColor);
 
-  $("#animation").val(dnaCode.animation);
   if(dnaCode.animation == 5) {
-    eyeAnimationVariations(dnaCode.eyeShape, dnaCode.animation);
+    eyeAnimationVariations(dnaCode.eyeShape);
   }
   else {
     animationVariations(dnaCode.animation, dnaCode.hornShape);
   }
+  $("#animation").val(dnaCode.animation);
+
+  specialNum(dnaCode.lastNum);
 }
 
 // Listens for changes when the users moves the slider and
