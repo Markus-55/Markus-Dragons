@@ -142,7 +142,7 @@ function dragonHtml(id) {
         <span id="specialDna"></span>
       </b>
     </div>
-    <ul>
+    <ul class="dragonInfo">
       <li id="birthTime"></li>
       <li id="generation"></li>
       <li>
@@ -154,6 +154,28 @@ function dragonHtml(id) {
 
   //console.log(dragonStr);
   $("#dragonObject").prepend(dragonStr);
+}
+
+function dragonObj(dragonData) {
+  let genes = dragonData.genes.split('');
+
+  let storedDragonsObj = {
+    // Dna dragon colors
+    headBodyColor: genes[0] + genes[1],
+    wingsTailColor: genes[2] + genes[3],
+    legsArmsColor: genes[4] + genes[5],
+    eyesColor: genes[6] + genes[7],
+    // Dna dragon attributes
+    eyeShape: genes[8],
+    hornShape: genes[9],
+    topHornsColor: genes[10] + genes[11],
+    sideHornsColor: genes[12] + genes[13],
+    animation: genes[14],
+    lastNum: genes[15]
+  }
+
+  //console.log(storedDragonsObj)
+  return storedDragonsObj;
 }
 
 function dragonDetails(dragonData, id) {

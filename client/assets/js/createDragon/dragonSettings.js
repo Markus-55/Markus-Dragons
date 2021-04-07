@@ -65,7 +65,6 @@ $("#randomDragonBtn").click(() => {
     topHornsColor: randomCode(53, 59),
     sideHornsColor: randomCode(60, 66),
     animation: randomCode(1, 5),
-    //"lastNum": randomCode(, 1)
   }
 
   renderDragon(randomDnaCode);
@@ -105,7 +104,6 @@ function renderDragon(dnaCode) {
   }
   $("#animation").val(dnaCode.animation);
 
-  specialNum(dnaCode.lastNum);
 }
 
 // Listens for changes when the users moves the slider and

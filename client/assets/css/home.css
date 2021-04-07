@@ -1,17 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
-
-@font-face {
-  font-family: "Poppins";
-  src: url("Poppins-Light.ttf");
-}
-
 body {
-  font-family: Poppins;
   background: #2e9e8c;
-}
-
-nav {
-  background-color: #343434;
 }
 
 #homeBox {
@@ -19,33 +7,25 @@ nav {
   border-radius: 10px;
   padding-left: 48px;
   padding-top: 7px;
-  margin-top: 118px;
-  height: 544px;
+  margin-top: 180px;
+  height: 488px;
   box-shadow: 0 6px 20px 0 rgb(0 0 0 / 54%);
 }
 
 .homeText {
   font-weight: bold;
-  font-size: 23px;
-  margin-top: 326px;
+  font-size: 19px;
+  padding-top: 297px;
   color: black;
 }
 
 .homeBtn {
   background-color: #0f434b;
   border-radius: 10px;
-  margin-top: 35px;
-  margin-left: 4px;
-  width: 401px;
-  height: 91px;
-  padding: 31px;
-  font-size: 23px;
+  line-height: 49px;
+  font-size: 17px;
 }
 
 footer {
-  height: 63px;
-  background: #f8f8f8;
-  font-family: 'EB Garamond';
-  font-size: 155%;
   margin-top: 180px;
 }

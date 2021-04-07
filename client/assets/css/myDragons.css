@@ -1,23 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
-
-@font-face {
-  font-family: "Poppins";
-  src: url("Poppins-Light.ttf");
-}
-
 body {
-  font-family: Poppins;
   background: #3d9b9b;
-}
-
-nav {
-  background-color: #343434;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
 }
 
 #myDragonBox {
@@ -50,10 +32,12 @@ ul {
   font-weight: bold;
 }
 
+.dragonInfo {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 footer {
-  height: 63px;
-  background: #f8f8f8;
-  font-family: 'EB Garamond';
-  font-size: 155%;
-  margin-top: 301px;
+  margin-top: 84px;
 }

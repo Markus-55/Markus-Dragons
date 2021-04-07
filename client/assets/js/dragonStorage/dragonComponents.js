@@ -41,7 +41,6 @@ function eyeVariation(eyeShapeNum, animationNum, id) {
   $(`#dragonId${id} #eyeShapeDna`).html(eyeShapeNum);
   switch (eyeShapeNum) {
     case 1:
-      originalEyes(id);
       // When animation is dilating eyes call function
       // to properly set the eye shape
       if(animationNum == 5) {
@@ -49,42 +48,36 @@ function eyeVariation(eyeShapeNum, animationNum, id) {
       }
       break
     case 2:
-      originalEyes(id);
       eyesTypeHappy(id);
       if(animationNum == 5) {
         eyeAnimationVariations(2, id);
       }
       break
     case 3:
-      originalEyes(id);
       eyesTypeRound(id);
       if(animationNum == 5) {
         eyeAnimationVariations(3, id);
       }
       break
     case 4:
-      originalEyes(id);
       eyesTypeRelaxed(id);
       if(animationNum == 5) {
         eyeAnimationVariations(4, id);
       }
       break
     case 5:
-      originalEyes(id);
       eyesTypePointy(id);
       if(animationNum == 5) {
         eyeAnimationVariations(5, id);
       }
       break
     case 6:
-      originalEyes(id);
       eyesTypeHorizontal(id);
       if(animationNum == 5) {
         eyeAnimationVariations(6, id);
       }
       break
     case 7:
-      originalEyes(id);
       eyesTypeMoon(id);
       if(animationNum == 5) {
         eyeAnimationVariations(7, id);
@@ -98,7 +91,6 @@ function hornVariation(hornShapeNum, animationNum, id) {
   $(`#dragonId${id} #hornShapeDna`).html(hornShapeNum);
   switch (hornShapeNum) {
     case 1:
-      originalHorns(id);
       // same as in eyeVariation but with horn shape instead,
       // when animation is tilting head
       if(animationNum == 2) {
@@ -106,28 +98,24 @@ function hornVariation(hornShapeNum, animationNum, id) {
       }
       break
     case 2:
-      originalHorns(id);
       hornsTypeCentered(id);
       if(animationNum == 2) {
         animationVariations(2, 2, id);
       }
       break
     case 3:
-      originalHorns(id);
       hornsTypeSmall(id);
       if(animationNum == 2) {
         animationVariations(2, 3, id);
       }
       break
     case 4:
-      originalHorns(id);
       hornsTypeRounded(id);
       if(animationNum == 2) {
         animationVariations(2, 4, id);
       }
       break
     case 5:
-      originalHorns(id);
       hornsTypeBlades(id);
       if(animationNum == 2) {
         animationVariations(2, 5, id);
@@ -270,23 +258,6 @@ function animationRoundedHorns(id) {
   $(`#dragonId${id} .sideLeftHorn2`).addClass("tiltingSideLeftHorn2");
 }
 
-function originalEyes(id) {
-  $(`#dragonId${id} .eyes`).css("border", "none");
-  $(`#dragonId${id} .pupils`).css({
-    "border": "none",
-    "transform": "rotate(57deg)",
-    "left": "1px"
-  });
-  $(`#dragonId${id} .innerPupils`).css({
-    "box-shadow": "2px 4px 3px -1px black",
-    "transform": "rotate(160deg)",
-    "height": "15px",
-    "width": "15px",
-    "left": "8px",
-    "top": "6px"
-  });
-}
-
 function eyesTypeHappy(id) {
   $(`#dragonId${id} .pupils`).css("transform", "rotate(244deg)");
 }
@@ -341,18 +312,6 @@ function eyesTypeMoon(id) {
     "width": "20px",
     "left": "2px",
     "top": "10px"
-  });
-}
-
-function originalHorns(id) {
-  $(`#dragonId${id} .topRightHorn`).css("left", "92px");
-  $(`#dragonId${id} .topLeftHorn`).css("left", "29px");
-  $(`#dragonId${id} .topHorns`).css({
-    "border-radius": "0px 90px",
-    "transform": "rotate(44deg)",
-    "height": "65px",
-    "width": "63px",
-    "top": "-20px"
   });
 }
 

@@ -218,10 +218,6 @@ function eyeAnimationVariations(eyeShapeNum) {
   }
 }
 
-function specialNum(lastNum) {
-  $("#specialDna").html(lastNum)
-}
-
 function animationHappyEyes() {
   $(".pupils").addClass("happyEyes");
 }

@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0x90eA32b62E5015b855c3D276A4a8A6036ef45463";
+var contractAddress = "0x24111090619286F1844caeE5bAA458195222958E";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -51,26 +51,4 @@ function controlFunction(dragonData, id) {
   dragonDetails(dragonData, id);
 
   renderOwnedDragons(dnaObject, id);
-}
-
-function dragonObj(dragonData) {
-  let genes = dragonData.genes.split('');
-
-  let storedDragonsObj = {
-    // Dna dragon colors
-    headBodyColor: genes[0] + genes[1],
-    wingsTailColor: genes[2] + genes[3],
-    legsArmsColor: genes[4] + genes[5],
-    eyesColor: genes[6] + genes[7],
-    // Dna dragon attributes
-    eyeShape: genes[8],
-    hornShape: genes[9],
-    topHornsColor: genes[10] + genes[11],
-    sideHornsColor: genes[12] + genes[13],
-    animation: genes[14],
-    lastNum: genes[15]
-  }
-
-  //console.log(storedDragonsObj)
-  return storedDragonsObj;
 }
