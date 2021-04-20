@@ -33,6 +33,9 @@ contract Dragoncontract is IERC721, Ownable {
   mapping(uint256 => address) private dragonOwners;
   mapping(address => uint256) private tokenBalances;
 
+  mapping(uint256 => address) private approvedByDragonIndex;
+  mapping(address => mapping(address => bool)) private operatorApproval;
+
   uint256 public gen0Total;
 
   function getDragon(uint256 _tokenId) external view returns (
@@ -129,6 +132,45 @@ contract Dragoncontract is IERC721, Ownable {
     }
 
     emit Transfer(_from, _to, _tokenId);
+  }
+
+  function approve(address _approved, uint256 _tokenId) external {
+    require(_approved != address(0), "The approved cannot be the 0 address");
+    require(_approved != address(this), "The approved cannot be the contract address");
+    require(_tokenId < dragons.length, "Token does not exist");
+    require(dragonOwners[_tokenId] == msg.sender, "You are not the owner of this token ID");
+
+    _approve(_approved, _tokenId);
+  }
+
+  function _approve(address _approved, uint256 _tokenId) private {
+
+    approvedByDragonIndex[_tokenId] = _approved;
+
+    emit Approval(msg.sender, _approved, _tokenId);
+  }
+
+  function setApprovalForAll(address _operator, bool _approved) external onlyOwner {
+    require(_operator != address(0), "Operator cannot be the 0 address");
+    require(_operator != address(this), "Operator cannot be the contract address");
+
+    _setApprovalForAll(_operator, _approved);
+  }
+
+  function _setApprovalForAll(address _operator, bool _approved) private {
+    operatorApproval[msg.sender][_operator] = _approved;
+
+    emit ApprovalForAll(msg.sender, _operator, _approved);
+  }
+
+  function getApproved(uint256 _tokenId) external view returns (address) {
+    require(_tokenId < dragons.length, "Token does not exist");
+
+    return approvedByDragonIndex[_tokenId];
+  }
+
+  function isApprovedForAll(address _owner, address _operator) external view returns (bool) {
+    return operatorApproval[_owner][_operator];
   }
 
   function _owns(address _claimant, uint256 _tokenId) private view returns (bool) {
