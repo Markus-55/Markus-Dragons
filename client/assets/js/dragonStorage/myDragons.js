@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0xd5A1842d521A697E57C7288A942110a5c9ccAdf5";
+var contractAddress = "0xc97fc1230671a42FC129B90A560f02f48E43439d";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -14,33 +14,20 @@ $(document).ready(async () => {
 
   console.log(instance);
 
-  ownedDragons();
+  ownedDragons().catch(error => console.log(error));
 });
 
-function ownedDragons() {
-  instance.methods.allOwnedDragons().call({}, (error, ownedDragonIds) => {
-    if(error) {
-      console.log(error)
-    }
-    else {
-      for(let i = 0; i < ownedDragonIds.length; i++) {
-        let id = ownedDragonIds[i];
-
-        getMyDragons(id);
-      }
-    }
-  });
+async function ownedDragons() {
+  let ownedDragonIds = await instance.methods.allOwnedDragons().call();
+  for(let i = 0; i < ownedDragonIds.length; i++) {
+    let id = ownedDragonIds[i];
+    getMyDragons(id).catch(error => console.log(error));
+  }
 }
 
-function getMyDragons(id) {
-  instance.methods.getDragon(id).call({}, (error, dragonData) => {
-    if(error) {
-      console.log(error)
-    }
-    else {
-      controlFunction(dragonData, id);
-    }
-  });
+async function getMyDragons(id) {
+  let dragonData = await instance.methods.getDragon(id).call();
+  controlFunction(dragonData, id);
 }
 
 function controlFunction(dragonData, id) {

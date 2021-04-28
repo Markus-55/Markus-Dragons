@@ -1,6 +1,7 @@
 pragma solidity ^0.5.12;
 
 import "./IERC721.sol";
+import "./IERC721Receiver.sol";
 import "./Safemath.sol";
 import "./Ownable.sol";
 
@@ -11,6 +12,8 @@ contract Dragoncontract is IERC721, Ownable {
   uint256 public constant gen0CreationLimit = 10;
   string private constant nameOfToken = "MarkusDragons";
   string private constant symbolOfToken = "MD";
+
+  bytes4 private constant ERC721VerificationNum = bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
 
   event Birth(
     address owner,
@@ -115,9 +118,7 @@ contract Dragoncontract is IERC721, Ownable {
   }
 
   function transfer(address _to, uint256 _tokenId) external {
-    require(_to != address(0), "cannot transfer to the zero address");
-    require(_to != address(this), "cannot transfer to the contract address");
-    require(_owns(msg.sender, _tokenId), "token must be owned by sender");
+    require(_owns(msg.sender, _tokenId), "Token must be owned by sender");
 
     _transfer(msg.sender, _to, _tokenId);
   }
@@ -129,6 +130,7 @@ contract Dragoncontract is IERC721, Ownable {
 
     if (_from != address(0)) {
       tokenBalances[_from] = tokenBalances[_from].sub(1);
+      delete approvedByDragonIndex[_tokenId];
     }
 
     emit Transfer(_from, _to, _tokenId);
@@ -136,9 +138,8 @@ contract Dragoncontract is IERC721, Ownable {
 
   function approve(address _approved, uint256 _tokenId) external {
     require(_approved != address(0), "The approved cannot be the 0 address");
-    require(_approved != address(this), "The approved cannot be the contract address");
     require(_tokenId < dragons.length, "Token does not exist");
-    require(dragonOwners[_tokenId] == msg.sender, "You are not the owner of this token ID");
+    require(_owns(msg.sender, _tokenId), "You are not the owner of this token ID");
 
     _approve(_approved, _tokenId);
   }
@@ -151,6 +152,7 @@ contract Dragoncontract is IERC721, Ownable {
   }
 
   function setApprovalForAll(address _operator, bool _approved) external onlyOwner {
+    require(_operator != msg.sender, "You cannot set yourself as operator");
     require(_operator != address(0), "Operator cannot be the 0 address");
     require(_operator != address(this), "Operator cannot be the contract address");
 
@@ -171,6 +173,65 @@ contract Dragoncontract is IERC721, Ownable {
 
   function isApprovedForAll(address _owner, address _operator) external view returns (bool) {
     return operatorApproval[_owner][_operator];
+  }
+
+  function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes calldata _data) external {
+    _safeTransferRequire(_from, _to, _tokenId);
+
+    _safeTransfer(_from, _to, _tokenId, _data);
+  }
+
+  function safeTransferFrom(address _from, address _to, uint256 _tokenId) external {
+    _safeTransferRequire(_from, _to, _tokenId);
+
+    _safeTransfer(_from, _to, _tokenId, "");
+  }
+
+  function _safeTransfer(address _from, address _to, uint256 _tokenId, bytes memory _data) private {
+    _transfer(_from, _to, _tokenId);
+    require(_checkERC721Support(_from, _to, _tokenId, _data), "Contract does not support ERC721 tokens");
+  }
+
+  function transferFrom(address _from, address _to, uint256 _tokenId) external {
+    require(_to != address(0), "Cannot transfer to zero address");
+    require(_tokenId < dragons.length, "Token does not exist");
+    require(msg.sender == _from || _isApproved(msg.sender, _tokenId) || _isApprovedForAll(_from, msg.sender), "The owner must be the address from, approved or an operator of the owner");
+    require(_owns(_from, _tokenId), "Token must be owned by address from");
+
+    _transfer(_from, _to, _tokenId);
+  }
+
+  function _isApproved(address _claimant, uint256 _tokenId) private view returns (bool) {
+    return _claimant == approvedByDragonIndex[_tokenId];
+  }
+
+  function _isApprovedForAll(address _owner, address _operator) private view returns (bool) {
+    return operatorApproval[_owner][_operator];
+  }
+
+  function _checkERC721Support(address _from, address _to, uint256 _tokenId, bytes memory _data) private returns (bool) {
+    if(!_isContract(_to)) {
+      return true;
+    }
+    else {
+      bytes4 returnData = IERC721Receiver(_to).onERC721Received(msg.sender, _from, _tokenId, _data);
+      return returnData == ERC721VerificationNum;
+    }
+  }
+
+  function _isContract(address _to) private view returns (bool) {
+    uint32 size;
+    assembly{
+      size := extcodesize(_to)
+    }
+    return size > 0;
+  }
+
+  function _safeTransferRequire(address _from, address _to, uint256 _tokenId) private view {
+    require(_to != address(0), "Cannot transfer to 0 address");
+    require(_tokenId < dragons.length, "Token does not exist");
+    require(msg.sender == _from || _isApproved(msg.sender, _tokenId) || _isApprovedForAll(_from, msg.sender), "The owner must be the address from, approved or an operator of the owner");
+    require(_owns(_from, _tokenId), "Token must be owned by the address from");
   }
 
   function _owns(address _claimant, uint256 _tokenId) private view returns (bool) {

@@ -1,0 +1,465 @@
+{
+  "contractName": "IERC721Receiver",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_operator",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_data",
+          "type": "bytes"
+        }
+      ],
+      "name": "onERC721Received",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_operator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"onERC721Received\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/markusbielaszka/Documents/Crypto-Dragons/contracts/IERC721Receiver.sol\":\"IERC721Receiver\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/markusbielaszka/Documents/Crypto-Dragons/contracts/IERC721Receiver.sol\":{\"keccak256\":\"0x9104ee27497bf56d553b0c13d6b371981fc7e4575118b4c0c134fea8235b7cd0\",\"urls\":[\"bzz-raw://184174152320f567f4b2d43786dafd0e9b4344bbb4bc15ad9e556e539dede2f5\",\"dweb:/ipfs/Qmd13PY8dcFZA7yfNsExU2CdknnPksmo1WKoV5ERGkKajP\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.12;\n\ninterface IERC721Receiver {\n  function onERC721Received(address _operator, address _from, uint _tokenId, bytes calldata _data) external returns (bytes4);\n}\n",
+  "sourcePath": "/Users/markusbielaszka/Documents/Crypto-Dragons/contracts/IERC721Receiver.sol",
+  "ast": {
+    "absolutePath": "/Users/markusbielaszka/Documents/Crypto-Dragons/contracts/IERC721Receiver.sol",
+    "exportedSymbols": {
+      "IERC721Receiver": [
+        1019
+      ]
+    },
+    "id": 1020,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1005,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".12"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1019,
+        "linearizedBaseContracts": [
+          1019
+        ],
+        "name": "IERC721Receiver",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1018,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "onERC721Received",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1014,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1007,
+                  "name": "_operator",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1018,
+                  "src": "82:17:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1006,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "82:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1009,
+                  "name": "_from",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1018,
+                  "src": "101:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1008,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "101:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1011,
+                  "name": "_tokenId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1018,
+                  "src": "116:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1010,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "116:4:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1013,
+                  "name": "_data",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1018,
+                  "src": "131:20:2",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1012,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "131:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "81:71:2"
+            },
+            "returnParameters": {
+              "id": 1017,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1016,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1018,
+                  "src": "171:6:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 1015,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "171:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "170:8:2"
+            },
+            "scope": 1019,
+            "src": "56:123:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1020,
+        "src": "26:155:2"
+      }
+    ],
+    "src": "0:182:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/markusbielaszka/Documents/Crypto-Dragons/contracts/IERC721Receiver.sol",
+    "exportedSymbols": {
+      "IERC721Receiver": [
+        1019
+      ]
+    },
+    "id": 1020,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1005,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".12"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1019,
+        "linearizedBaseContracts": [
+          1019
+        ],
+        "name": "IERC721Receiver",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1018,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "onERC721Received",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1014,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1007,
+                  "name": "_operator",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1018,
+                  "src": "82:17:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1006,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "82:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1009,
+                  "name": "_from",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1018,
+                  "src": "101:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1008,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "101:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1011,
+                  "name": "_tokenId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1018,
+                  "src": "116:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1010,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "116:4:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1013,
+                  "name": "_data",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1018,
+                  "src": "131:20:2",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1012,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "131:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "81:71:2"
+            },
+            "returnParameters": {
+              "id": 1017,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1016,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1018,
+                  "src": "171:6:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 1015,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "171:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "170:8:2"
+            },
+            "scope": 1019,
+            "src": "56:123:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1020,
+        "src": "26:155:2"
+      }
+    ],
+    "src": "0:182:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.12+commit.7709ece9.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2021-04-28T13:04:06.330Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
