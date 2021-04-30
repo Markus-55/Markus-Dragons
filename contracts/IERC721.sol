@@ -21,7 +21,7 @@ interface IERC721 {
     /**
      * @dev Returns the number of tokens in ``owner``'s account.
      */
-    function balanceOf(address owner) external view returns (uint256 balance);
+    function balanceOf(address _owner) external view returns (uint256 balance);
 
     /*
      * @dev Returns the total number of tokens in circulation.
@@ -45,7 +45,7 @@ interface IERC721 {
      *
      * - `tokenId` must exist.
      */
-    function ownerOf(uint256 tokenId) external view returns (address owner);
+    function ownerOf(uint256 _tokenId) external view returns (address owner);
 
 
      /* @dev Transfers `tokenId` token from `msg.sender` to `to`.
@@ -59,7 +59,7 @@ interface IERC721 {
      *
      * Emits a {Transfer} event.
      */
-    function transfer(address to, uint256 tokenId) external;
+    function transfer(address _to, uint256 _tokenId) external;
 
     /// @notice Change or reaffirm the approved address for an NFT
     /// @dev The zero address indicates there is no approved address.

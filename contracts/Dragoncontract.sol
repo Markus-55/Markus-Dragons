@@ -15,6 +15,10 @@ contract Dragoncontract is IERC721, Ownable {
 
   bytes4 private constant ERC721VerificationNum = bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
 
+  bytes4 private constant interfaceIdERC721 = 0x80ac58cd;
+
+  bytes4 private constant interfaceIdERC165 = 0x01ffc9a7;
+
   event Birth(
     address owner,
     uint256 dragonId,
@@ -40,6 +44,10 @@ contract Dragoncontract is IERC721, Ownable {
   mapping(address => mapping(address => bool)) private operatorApproval;
 
   uint256 public gen0Total;
+
+  function supportsInterface(bytes4 _interfaceId) external view returns (bool) {
+    return (_interfaceId == interfaceIdERC721 || _interfaceId == interfaceIdERC165);
+  }
 
   function getDragon(uint256 _tokenId) external view returns (
     uint256 genes,
@@ -171,42 +179,34 @@ contract Dragoncontract is IERC721, Ownable {
     return approvedByDragonIndex[_tokenId];
   }
 
-  function isApprovedForAll(address _owner, address _operator) external view returns (bool) {
+  function isApprovedForAll(address _owner, address _operator) public view returns (bool) {
     return operatorApproval[_owner][_operator];
   }
 
-  function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes calldata _data) external {
-    _safeTransferRequire(_from, _to, _tokenId);
+  function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory _data) public {
+    require(_transferFromRequire(msg.sender, _from, _to, _tokenId));
 
     _safeTransfer(_from, _to, _tokenId, _data);
   }
 
   function safeTransferFrom(address _from, address _to, uint256 _tokenId) external {
-    _safeTransferRequire(_from, _to, _tokenId);
-
-    _safeTransfer(_from, _to, _tokenId, "");
+    safeTransferFrom(_from, _to, _tokenId, "");
   }
 
   function _safeTransfer(address _from, address _to, uint256 _tokenId, bytes memory _data) private {
     _transfer(_from, _to, _tokenId);
+
     require(_checkERC721Support(_from, _to, _tokenId, _data), "Contract does not support ERC721 tokens");
   }
 
   function transferFrom(address _from, address _to, uint256 _tokenId) external {
-    require(_to != address(0), "Cannot transfer to zero address");
-    require(_tokenId < dragons.length, "Token does not exist");
-    require(msg.sender == _from || _isApproved(msg.sender, _tokenId) || _isApprovedForAll(_from, msg.sender), "The owner must be the address from, approved or an operator of the owner");
-    require(_owns(_from, _tokenId), "Token must be owned by address from");
+    require(_transferFromRequire(msg.sender,_from, _to, _tokenId));
 
     _transfer(_from, _to, _tokenId);
   }
 
   function _isApproved(address _claimant, uint256 _tokenId) private view returns (bool) {
     return _claimant == approvedByDragonIndex[_tokenId];
-  }
-
-  function _isApprovedForAll(address _owner, address _operator) private view returns (bool) {
-    return operatorApproval[_owner][_operator];
   }
 
   function _checkERC721Support(address _from, address _to, uint256 _tokenId, bytes memory _data) private returns (bool) {
@@ -227,11 +227,12 @@ contract Dragoncontract is IERC721, Ownable {
     return size > 0;
   }
 
-  function _safeTransferRequire(address _from, address _to, uint256 _tokenId) private view {
+  function _transferFromRequire(address _spender, address _from, address _to, uint256 _tokenId) private view returns (bool) {
     require(_to != address(0), "Cannot transfer to 0 address");
     require(_tokenId < dragons.length, "Token does not exist");
-    require(msg.sender == _from || _isApproved(msg.sender, _tokenId) || _isApprovedForAll(_from, msg.sender), "The owner must be the address from, approved or an operator of the owner");
     require(_owns(_from, _tokenId), "Token must be owned by the address from");
+
+    return _spender == _from || _isApproved(_spender, _tokenId) || isApprovedForAll(_from, _spender);
   }
 
   function _owns(address _claimant, uint256 _tokenId) private view returns (bool) {
