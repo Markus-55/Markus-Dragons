@@ -16,7 +16,6 @@ contract Dragoncontract is IERC721, Ownable {
   bytes4 private constant ERC721VerificationNum = bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
 
   bytes4 private constant interfaceIdERC721 = 0x80ac58cd;
-
   bytes4 private constant interfaceIdERC165 = 0x01ffc9a7;
 
   event Birth(
@@ -45,7 +44,16 @@ contract Dragoncontract is IERC721, Ownable {
 
   uint256 public gen0Total;
 
-  function supportsInterface(bytes4 _interfaceId) external view returns (bool) {
+  function breed(uint256 _dadId, uint256 _momId) external returns (uint256) {
+    require(_owns(msg.sender, _dadId) && _owns(msg.sender, _momId), "You do not own the dad and/or the mom dragon");
+
+    uint256 newDna = _mixDna(dragons[_dadId].genes, dragons[_momId].genes);
+    uint256 newDragonGen = _newGeneration(dragons[_dadId].generation, dragons[_momId].generation);
+
+    _createDragon(newDna, _dadId, _momId, newDragonGen, msg.sender);
+  }
+
+  function supportsInterface(bytes4 _interfaceId) external pure returns (bool) {
     return (_interfaceId == interfaceIdERC721 || _interfaceId == interfaceIdERC165);
   }
 
@@ -233,6 +241,24 @@ contract Dragoncontract is IERC721, Ownable {
     require(_owns(_from, _tokenId), "Token must be owned by the address from");
 
     return _spender == _from || _isApproved(_spender, _tokenId) || isApprovedForAll(_from, _spender);
+  }
+
+  function _mixDna(uint256 _dadDna, uint256 _momDna) private pure returns (uint256) {
+    uint256 firstHalf = _dadDna / 100000000;
+    uint256 secondHalf = _momDna % 100000000;
+
+    uint256 newDna = firstHalf * 100000000;
+    newDna = newDna + secondHalf;
+    return newDna;
+  }
+
+  function _newGeneration(uint256 _dadGen, uint256 _momGen) private pure returns (uint256) {
+    if(_dadGen >= _momGen) {
+      return _dadGen + 1;
+    }
+    else {
+      return _momGen + 1;
+    }
   }
 
   function _owns(address _claimant, uint256 _tokenId) private view returns (bool) {
