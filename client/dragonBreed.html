@@ -1,0 +1,95 @@
+<!--  -->
+
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>Academy dragons</title>
+
+    <script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <script src="assets/bootstrap/js/popper.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/web3.min.js"></script>
+    <script src="assets/js/abi.js"></script>
+
+    <link rel="stylesheet" href="assets/css/dragon.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/frontend.css">
+    <link rel="stylesheet" href="assets/css/myDragons.css">
+    <link rel="stylesheet" href="assets/css/dragonBreed.css">
+  </head>
+
+  <body>
+
+    <div class="modal fade" id="dragonModal" tabindex="-1" role="dialog" aria-labelledby="dragonModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="dragonModalTitle">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="row modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
+      <a class="navbar-brand" href="#">Markus-Dragons</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="myDragons.html">My Dragons</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dragonCreation.html">Dragon Factory</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Breeding<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <div id="dadDragonBox"></div>
+          <button type="button" class="btn btn-info dadDragonBtn" data-toggle="modal" data-target="#dragonModal">
+            <p>Dad dragon</p>
+          </button>
+        </div>
+        <div class="col-6">
+          <div id="momDragonBox"></div>
+          <button type="button" class="btn btn-info momDragonBtn" data-toggle="modal" data-target="#dragonModal">
+            <p>Mom dragon</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Ivan on Tech Academy Bootcamp</p>
+    </footer>
+
+  </body>
+<script src="assets/js/Breeding/dragonBreed.js"></script>
+<script src="assets/js/dragonStorage/dragonComponents.js"></script>
+<script src="assets/js/Breeding/displayDadMom.js"></script>
+<script src="assets/js/colors.js"></script>
+
+
+</html>

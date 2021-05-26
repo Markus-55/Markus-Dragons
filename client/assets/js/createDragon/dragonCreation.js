@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0xE4c2973CB464675648F76901CbB1752B4133e6db";
+var contractAddress = "0x98202620bc402Acb3d02846Ba22419471FDF462D";
 
 $(document).ready(async () => {
   // asks user if they allow the website
@@ -44,9 +44,7 @@ $("#createDragonBtn").click(() => {
   });
 });
 
-$('.close').click(() => {
-  $("#createdDragon").css("display", "none");
-});
+$('.close').click(() => $("#createdDragon").css("display", "none"));
 
 function birthEvent() {
   instance.events.Birth().on("data", event => {

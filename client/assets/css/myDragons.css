@@ -38,6 +38,10 @@ body {
   margin: 0;
 }
 
+#myDragonBox:hover {
+  box-shadow: 0 6px 20px 0 rgb(0 0 0 / 90%);
+}
+
 footer {
   margin-top: 84px;
 }

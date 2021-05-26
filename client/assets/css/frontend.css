@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Brawler&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manuale&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap');
 
 @font-face {
   font-family: "Poppins";
@@ -14,6 +15,11 @@ body {
 
 nav {
   background-color: #343434;
+}
+
+.navbar-brand {
+  font-size: 1.6rem;
+  font-family: "Hind Siliguri";
 }
 
 #headerContent {

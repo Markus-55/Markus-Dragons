@@ -1,0 +1,46 @@
+body {
+  
+}
+
+#dadDragonBox, #momDragonBox {
+  background-color: #ffffff;
+  justify-content: center;
+  border-radius: 10px;
+  padding-top: 7px;
+  margin-top: 160px;
+  height: 488px;
+  box-shadow: 0 6px 20px 0 rgb(0 0 0 / 15%);
+}
+
+#dadDragonBox {
+  margin-left: 112px;
+}
+
+#momDragonBox {
+  margin-right: 112px;
+}
+
+.dadDragonBtn, .momDragonBtn {
+  margin-top: -64px;
+  margin-left: 243px;
+  height: 44px;
+  width: 158px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  border-radius: 11px;
+}
+
+.momDragonBtn {
+  margin-left: 135px;
+}
+
+#myDragonBox {
+  padding-top: 0px;
+  margin-top: 28px;
+  height: 398px;
+}
+
+footer {
+  margin-top: 200px;
+}
