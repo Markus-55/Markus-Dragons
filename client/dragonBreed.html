@@ -28,7 +28,7 @@
       <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="dragonModalTitle">Modal title</h5>
+            <h5 class="modal-title" id="dragonModalTitle">Choose dragons to breed!</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -66,17 +66,14 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-6">
+        <div class="col-xl-6 col-md-6 col-sm-12">
+          <button type="button" class="btn btn-success breedBtn">Breed</button>
           <div id="dadDragonBox"></div>
-          <button type="button" class="btn btn-info dadDragonBtn" data-toggle="modal" data-target="#dragonModal">
-            <p>Dad dragon</p>
-          </button>
+          <button type="button" class="btn btn-info dadDragonBtn" data-toggle="modal" data-target="#dragonModal">Dad dragon</button>
         </div>
-        <div class="col-6">
+        <div class="col-xl-6 col-md-6 col-sm-12">
           <div id="momDragonBox"></div>
-          <button type="button" class="btn btn-info momDragonBtn" data-toggle="modal" data-target="#dragonModal">
-            <p>Mom dragon</p>
-          </button>
+          <button type="button" class="btn btn-info momDragonBtn" data-toggle="modal" data-target="#dragonModal">Mom dragon</button>
         </div>
       </div>
     </div>
@@ -88,8 +85,7 @@
   </body>
 <script src="assets/js/Breeding/dragonBreed.js"></script>
 <script src="assets/js/dragonStorage/dragonComponents.js"></script>
-<script src="assets/js/Breeding/displayDadMom.js"></script>
+<script src="assets/js/Breeding/showBreedDragons.js"></script>
 <script src="assets/js/colors.js"></script>
-
 
 </html>
