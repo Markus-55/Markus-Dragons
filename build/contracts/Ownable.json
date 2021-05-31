@@ -8,15 +8,15 @@
       "type": "constructor"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/Crypto-Dragons/contracts/Ownable.sol\":\"Ownable\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Crypto-Dragons/contracts/Ownable.sol\":{\"keccak256\":\"0x96bf98859c5e29e33ade55e08b870359589ce83fd03bda95c730bffc993d90bc\",\"urls\":[\"bzz-raw://e8290de9728827a482c5b32278c17ca14f070b9d3c0d784b66869bc4c2545904\",\"dweb:/ipfs/QmUM8NTkfHJMD4h1JyTZNfLVRJ57YyWbWr8X6rThBdaJBA\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550603e80605d6000396000f3fe6080604052600080fdfea265627a7a72315820e465ce45c273c6f1dea92463e6d1f96f27539f29959cda5cd4b756ca16c8629064736f6c634300050c0032",
-  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820e465ce45c273c6f1dea92463e6d1f96f27539f29959cda5cd4b756ca16c8629064736f6c634300050c0032",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/markusbielaszka/Documents/Crypto-Dragons/contracts/Ownable.sol\":\"Ownable\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/markusbielaszka/Documents/Crypto-Dragons/contracts/Ownable.sol\":{\"keccak256\":\"0x96bf98859c5e29e33ade55e08b870359589ce83fd03bda95c730bffc993d90bc\",\"urls\":[\"bzz-raw://e8290de9728827a482c5b32278c17ca14f070b9d3c0d784b66869bc4c2545904\",\"dweb:/ipfs/QmUM8NTkfHJMD4h1JyTZNfLVRJ57YyWbWr8X6rThBdaJBA\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550603e80605d6000396000f3fe6080604052600080fdfea265627a7a7231582072e99a357a312461a79012a42440f61a1dfecd7e5f79026279ba2ac55dc34eba64736f6c634300050c0032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a7231582072e99a357a312461a79012a42440f61a1dfecd7e5f79026279ba2ac55dc34eba64736f6c634300050c0032",
   "sourceMap": "26:214:4:-;;;188:49;8:9:-1;5:2;;;30:1;27;20:12;5:2;188:49:4;222:10;214:5;;:18;;;;;;;;;;;;;;;;;;26:214;;;;;;",
   "deployedSourceMap": "26:214:4:-;;;;;",
   "source": "pragma solidity ^0.5.12;\n\ncontract Ownable {\n\n  address internal owner;\n\n  modifier onlyOwner() {\n    require(owner == msg.sender, \"You are not the owner of this contract\");\n    _;\n  }\n\n  constructor() public{\n    owner = msg.sender;\n  }\n\n}\n",
-  "sourcePath": "C:\\Crypto-Dragons\\contracts\\Ownable.sol",
+  "sourcePath": "/Users/markusbielaszka/Documents/Crypto-Dragons/contracts/Ownable.sol",
   "ast": {
-    "absolutePath": "/C/Crypto-Dragons/contracts/Ownable.sol",
+    "absolutePath": "/Users/markusbielaszka/Documents/Crypto-Dragons/contracts/Ownable.sol",
     "exportedSymbols": {
       "Ownable": [
         1146
@@ -332,7 +332,7 @@
     "src": "0:241:4"
   },
   "legacyAST": {
-    "absolutePath": "/C/Crypto-Dragons/contracts/Ownable.sol",
+    "absolutePath": "/Users/markusbielaszka/Documents/Crypto-Dragons/contracts/Ownable.sol",
     "exportedSymbols": {
       "Ownable": [
         1146
@@ -653,7 +653,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.0",
-  "updatedAt": "2021-05-26T09:11:07.795Z",
+  "updatedAt": "2021-05-26T18:58:19.563Z",
   "devdoc": {
     "methods": {}
   },

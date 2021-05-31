@@ -39,13 +39,14 @@ contract Dragoncontract is IERC721, Ownable {
   mapping(uint256 => address) private dragonOwners;
   mapping(address => uint256) private tokenBalances;
 
-  mapping(uint256 => address) private approvedByDragonIndex;
+  mapping(uint256 => address) private dragonIndexToApproved;
   mapping(address => mapping(address => bool)) private operatorApproval;
 
   uint256 public gen0Total;
 
   function breed(uint256 _dadId, uint256 _momId) external returns (uint256) {
-    require(_owns(msg.sender, _dadId) && _owns(msg.sender, _momId), "You do not own the dad and/or the mom dragon");
+    require(_owns(msg.sender, _dadId), "You do not own the dad dragon");
+    require(_owns(msg.sender, _momId), "You do not own the mom dragon");
 
     uint256 newDna = _mixDna(dragons[_dadId].genes, dragons[_momId].genes);
     uint256 newDragonGen = _newGeneration(dragons[_dadId].generation, dragons[_momId].generation);
@@ -134,6 +135,8 @@ contract Dragoncontract is IERC721, Ownable {
   }
 
   function transfer(address _to, uint256 _tokenId) external {
+    require(_to != address(0), "Cannot transfer to 0 address");
+    require(_to != address(this), "Cannot transfer to contract address");
     require(_owns(msg.sender, _tokenId), "Token must be owned by sender");
 
     _transfer(msg.sender, _to, _tokenId);
@@ -146,36 +149,23 @@ contract Dragoncontract is IERC721, Ownable {
 
     if (_from != address(0)) {
       tokenBalances[_from] = tokenBalances[_from].sub(1);
-      delete approvedByDragonIndex[_tokenId];
+      delete dragonIndexToApproved[_tokenId];
     }
 
     emit Transfer(_from, _to, _tokenId);
   }
 
   function approve(address _approved, uint256 _tokenId) external {
-    require(_approved != address(0), "The approved cannot be the 0 address");
-    require(_tokenId < dragons.length, "Token does not exist");
-    require(_owns(msg.sender, _tokenId), "You are not the owner of this token ID");
+    require(_owns(msg.sender, _tokenId) || operatorApproval[dragonOwners[_tokenId]][msg.sender], "You are not the owner or the operator of this token ID");
 
-    _approve(_approved, _tokenId);
-  }
-
-  function _approve(address _approved, uint256 _tokenId) private {
-
-    approvedByDragonIndex[_tokenId] = _approved;
+    dragonIndexToApproved[_tokenId] = _approved;
 
     emit Approval(msg.sender, _approved, _tokenId);
   }
 
-  function setApprovalForAll(address _operator, bool _approved) external onlyOwner {
+  function setApprovalForAll(address _operator, bool _approved) external {
     require(_operator != msg.sender, "You cannot set yourself as operator");
-    require(_operator != address(0), "Operator cannot be the 0 address");
-    require(_operator != address(this), "Operator cannot be the contract address");
 
-    _setApprovalForAll(_operator, _approved);
-  }
-
-  function _setApprovalForAll(address _operator, bool _approved) private {
     operatorApproval[msg.sender][_operator] = _approved;
 
     emit ApprovalForAll(msg.sender, _operator, _approved);
@@ -184,7 +174,7 @@ contract Dragoncontract is IERC721, Ownable {
   function getApproved(uint256 _tokenId) external view returns (address) {
     require(_tokenId < dragons.length, "Token does not exist");
 
-    return approvedByDragonIndex[_tokenId];
+    return dragonIndexToApproved[_tokenId];
   }
 
   function isApprovedForAll(address _owner, address _operator) public view returns (bool) {
@@ -208,13 +198,13 @@ contract Dragoncontract is IERC721, Ownable {
   }
 
   function transferFrom(address _from, address _to, uint256 _tokenId) external {
-    require(_transferFromRequire(msg.sender,_from, _to, _tokenId));
+    require(_transferFromRequire(msg.sender, _from, _to, _tokenId));
 
     _transfer(_from, _to, _tokenId);
   }
 
   function _isApproved(address _claimant, uint256 _tokenId) private view returns (bool) {
-    return _claimant == approvedByDragonIndex[_tokenId];
+    return _claimant == dragonIndexToApproved[_tokenId];
   }
 
   function _checkERC721Support(address _from, address _to, uint256 _tokenId, bytes memory _data) private returns (bool) {
@@ -253,12 +243,7 @@ contract Dragoncontract is IERC721, Ownable {
   }
 
   function _newGeneration(uint256 _dadGen, uint256 _momGen) private pure returns (uint256) {
-    if(_dadGen >= _momGen) {
-      return _dadGen + 1;
-    }
-    else {
-      return _momGen + 1;
-    }
+    return (_dadGen >= _momGen ? _dadGen + 1 : _momGen + 1);
   }
 
   function _owns(address _claimant, uint256 _tokenId) private view returns (bool) {
