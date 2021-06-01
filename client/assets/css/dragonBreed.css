@@ -1,5 +1,9 @@
 body {
+  background: #139393;
+}
 
+#dragonModal {
+  background: #139393;
 }
 
 .breedBtn {
@@ -34,6 +38,24 @@ body {
   font-weight: bold;
   color: black;
   border-radius: 11px;
+}
+
+#dragonBirth {
+  box-shadow: 0 6px 20px 0 rgb(0 0 0 / 5%);
+  background-color: #1fe798;
+  font-family: Arial;
+  border-radius: 10px;
+  margin-bottom: -102px;
+  margin-top: 6px;
+  margin-left: 18px;
+  padding-bottom: 0px;
+  line-height: 33px;
+  width: 97%;
+  display: none;
+}
+
+.myNewDragon {
+  color: black;
 }
 
 #myDragonBox {

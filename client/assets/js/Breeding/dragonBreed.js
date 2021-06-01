@@ -4,7 +4,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0xEddd3aA83354369801616ff0764Af41E7A4B7A7A";
+var contractAddress = "0x6042b7bdC154ddBAf29813a7eCebf4A047c3100E";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -14,6 +14,7 @@ $(document).ready(async () => {
   console.log(instance);
 
   ownedDragons();
+  birthEvent();
 });
 
 async function ownedDragons() {
@@ -35,35 +36,75 @@ function ControlFunction(dragonData, id) {
   let dnaObject = dragonObj(dragonData);
 
   renderOwnedDragons(dnaObject, id);
-
-  breedDragons(dragonData, id);
 }
 
-function breedDragons(dragonData, id) {
+$(".breedBtn").click(() => {
 
-  $(".breedBtn").click(() => {
+  $("#dragonBirth").css("display", "none");
 
-    let dadId = getDadId(id);
-    let momId = getMomId(id);
+  if(dadId == undefined || momId == undefined) {
+    $("#breedModal").modal();
+    $("#breedModalTitle").html("Error!").css("color", "#ad2424");
+    $(".breedModalBody").html("Please select both dad & mom dragons to breed").css("color", "#ad2424");
+  }
+  else if(dadId != momId) {
+    instance.methods.breed(dadId, momId).send({}, (error, txHash) => {
+      $("#breedModal").modal();
+      if(error) {
+        $("#breedModalTitle").html("Error: transaction failed!").css("color", "#ad2424");
+        $(".breedModalBody").html("Failed to send transaction: " + error.message).css("color", "#ad2424");
+      }
+      else {
+        $("#breedModalTitle").html("Transaction successfully sent!").css("color", "#007400");
+        $(".breedModalBody").html(`<p>Transaction hash: <br>${txHash}</p>`).css("color", "#007400");
+      }
+    });
+  }
+  else {
+    $("#breedModal").modal();
+    $("#breedModalTitle").html("Error!").css("color", "#ad2424");
+    $(".breedModalBody").html("<p>Please choose another dragon,<br>the dragon has already been selected</p>").css("color", "#ad2424");
+  }
+});
 
-    // if(/*2 dragons selected*/) {
-      instance.methods.breed(dadId, momId).send({}, (error, txHash) => {
-        if(error) {
-          console.log(error);
-        }
-        // else if(){
-        //   console.log();
-        // }
-        else {
-          console.log(txHash);
-        }
-      });
-    }
-    // else {
-    //   alert("You need to select 2 dragons");
-    // }
+$('.close').click(() => $("#dragonBirth").css("display", "none"));
+
+//var newDragonId;
+
+function birthEvent() {
+  instance.events.Birth().on("data", event => {
+    $("#dragonBirth > p, h5").remove();
+    $("#dragonBirth").css("display", "block");
+    $("#dragonBirth").prepend(
+      `<h5 id="createdDragonTitle">Dragons successfully breeded!</h5>
+      <p id="addedTokenText">&nbsp; &nbsp;The MD token has been added to your account!
+      &nbsp; &nbsp; <button type="button" class="btn btn-outline-info myNewDragon">Info</button></p>
+      <p>Owner: ${event.returnValues.owner} &nbsp; &nbsp; &nbsp; &nbsp;
+      Genes: ${event.returnValues.genes} &nbsp; &nbsp; &nbsp; &nbsp;
+      Token Id: ${event.returnValues.dragonId}</p>`);
+
+      //newDragonId = event.returnValues.dragonId;
+
+      showNewDragon(event.returnValues.dragonId);
+  }).on("error", (error, receipt) => {
+      console.log(error, receipt);
   });
 }
+
+
+// $(".breedBtn").click(() => {
+//     return dadId == undefined || momId == undefined ?
+//       // $("#errorModal").modal();
+//       // $(".errorModalBody").html("Please choose the dad & mom dragon to breed")
+//
+//       console.log("You csaweeeeon together")
+//
+//     : dadId != momId ?
+//         instance.methods.breed(dadId, momId).send({}, (error, txHash) => {
+//           return (error ? console.log(error) : console.log(txHash));
+//         })
+//     : alert("You cannot breed the same dragon together");
+// });
 
 // √ DISPLAY box for mom & dad dragons (dragonBreed.html)
 // √ CLICK button to CHOOSE dad dragon & other button for mom dragon

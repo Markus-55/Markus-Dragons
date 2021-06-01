@@ -125,14 +125,18 @@ function dragonHtml(id) {
   </div>`;
 
   //console.log(dragonStr);
-  $(".modal-body").prepend(dragonStr);
+  $(".dragonModalBody").prepend(dragonStr);
 
   selectDragons(id);
 }
 
+var clickedDadBtn = false;
+var clickedMomBtn = false;
+
+var dadId;
+var momId;
+
 function selectDragons(id) {
-  let clickedDadBtn = false;
-  let clickedMomBtn = false;
 
   $(".dadDragonBtn").click(() => {
     clickedDadBtn = true;
@@ -143,29 +147,31 @@ function selectDragons(id) {
     clickedDadBtn = false;
   });
 
-  let breedStr = $(`#dragonId${id} #myDragon`);
-
-
   $(`#dragonId${id}`).click(() => {
+    let breedStr = $(`#dragonId${id} #myDragon`);
+
     if(clickedDadBtn) {
       $("#dadDragonBox").html(breedStr);
-      //getDadId(id);
+      dadId = id;
     }
     if(clickedMomBtn) {
       $("#momDragonBox").html(breedStr);
-      //getMomId(id);
+      momId = id;
     }
     $("#dragonModal").modal("hide");
   });
 }
 
-// function getDadId(id) {
-//   return id;
-// }
-//
-// function getMomId(id) {
-//   return id;
-// }
+function showNewDragon(id) {
+  $(".myNewDragon").click(() => {
+
+    let newDragon = $(`#dragonId${id/*newDragonId*/} #myDragon`);
+    console.log(newDragon);
+
+    $("#newDragonModal").modal();
+    $("#newDragonModalBody").prepend(newDragon);
+  });
+}
 
 function dragonObj(dragonData) {
   let genes = dragonData.genes.split('');
