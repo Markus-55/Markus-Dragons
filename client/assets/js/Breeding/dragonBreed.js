@@ -4,7 +4,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0x6042b7bdC154ddBAf29813a7eCebf4A047c3100E";
+var contractAddress = "0xd6eecE557e5219362d01347DF0aE00A68A1Fe4F7";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -69,8 +69,6 @@ $(".breedBtn").click(() => {
 
 $('.close').click(() => $("#dragonBirth").css("display", "none"));
 
-//var newDragonId;
-
 function birthEvent() {
   instance.events.Birth().on("data", event => {
     $("#dragonBirth > p, h5").remove();
@@ -78,14 +76,12 @@ function birthEvent() {
     $("#dragonBirth").prepend(
       `<h5 id="createdDragonTitle">Dragons successfully breeded!</h5>
       <p id="addedTokenText">&nbsp; &nbsp;The MD token has been added to your account!
-      &nbsp; &nbsp; <button type="button" class="btn btn-outline-info myNewDragon">Info</button></p>
+      &nbsp; &nbsp; &nbsp; &nbsp; <button type="button" class="btn btn-info babyDragonBtn">Show baby dragon</button></p>
       <p>Owner: ${event.returnValues.owner} &nbsp; &nbsp; &nbsp; &nbsp;
       Genes: ${event.returnValues.genes} &nbsp; &nbsp; &nbsp; &nbsp;
       Token Id: ${event.returnValues.dragonId}</p>`);
 
-      //newDragonId = event.returnValues.dragonId;
-
-      showNewDragon(event.returnValues.dragonId);
+      newDragonHtml(event.returnValues.dragonId);
   }).on("error", (error, receipt) => {
       console.log(error, receipt);
   });

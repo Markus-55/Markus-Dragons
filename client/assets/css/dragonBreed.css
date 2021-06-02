@@ -1,9 +1,15 @@
-body {
+body, #dragonModal, #babyModal {
   background: #139393;
 }
 
-#dragonModal {
-  background: #139393;
+.babyModalContent {
+  border-radius: 17px;
+}
+
+#babyModalBody {
+  padding-top: 0px;
+  height: 344px;
+  padding-left: 154px;
 }
 
 .breedBtn {
@@ -54,8 +60,12 @@ body {
   display: none;
 }
 
-.myNewDragon {
+.babyDragonBtn {
   color: black;
+  height: 35px;
+  line-height: 0px;
+  border-radius: 10px;
+  font-weight: bold;
 }
 
 #myDragonBox {

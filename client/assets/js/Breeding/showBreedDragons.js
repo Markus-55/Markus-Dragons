@@ -162,17 +162,6 @@ function selectDragons(id) {
   });
 }
 
-function showNewDragon(id) {
-  $(".myNewDragon").click(() => {
-
-    let newDragon = $(`#dragonId${id/*newDragonId*/} #myDragon`);
-    console.log(newDragon);
-
-    $("#newDragonModal").modal();
-    $("#newDragonModalBody").prepend(newDragon);
-  });
-}
-
 function dragonObj(dragonData) {
   let genes = dragonData.genes.split('');
 
