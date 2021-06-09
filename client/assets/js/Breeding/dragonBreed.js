@@ -4,7 +4,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0xd6eecE557e5219362d01347DF0aE00A68A1Fe4F7";
+var contractAddress = "0x96499565f9b97bc0A33b28D5DBBd222bc250d478";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -74,7 +74,7 @@ function birthEvent() {
     $("#dragonBirth > p, h5").remove();
     $("#dragonBirth").css("display", "block");
     $("#dragonBirth").prepend(
-      `<h5 id="createdDragonTitle">Dragons successfully breeded!</h5>
+      `<h5 id="createdDragonTitle">Dragons successfully bred!</h5>
       <p id="addedTokenText">&nbsp; &nbsp;The MD token has been added to your account!
       &nbsp; &nbsp; &nbsp; &nbsp; <button type="button" class="btn btn-info babyDragonBtn">Show baby dragon</button></p>
       <p>Owner: ${event.returnValues.owner} &nbsp; &nbsp; &nbsp; &nbsp;

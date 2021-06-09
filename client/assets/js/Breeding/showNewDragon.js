@@ -122,8 +122,13 @@ function newDragonHtml(id) {
       </div>
     </div>`;
 
+    $(".breedBtn").click(() => {
+      $(`#babyModalBody > #dragonId${id}`).remove();
+      $("#babyModalBody").css("display", "block");
+    });
+
     $(".babyDragonBtn").click(() => {
-      $(`#dragonId${id}`).remove();
+      $(`#babyModalBody > #dragonId${id}`).remove();
 
       $("#babyModal").modal();
       $("#babyModalBody").prepend(newDragonHtml);

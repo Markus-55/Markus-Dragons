@@ -3,15 +3,15 @@
 
 var defaultDnaCode = {
   // Default dna dragon colors
-  headBodyColor: 11,
+  headBodyColor: 40,
   wingsTailColor: 23,
-  legsArmsColor: 38,
-  eyesColor: 44,
+  legsArmsColor: 91,
+  eyesColor: 15,
   // Default dna dragon attributes
   eyeShape: 3,
   hornShape: 1,
-  topHornsColor: 56,
-  sideHornsColor: 61,
+  topHornsColor: 61,
+  sideHornsColor: 65,
   animation: 1,
   lastNum: 1
 }
@@ -55,15 +55,15 @@ $("#randomDragonBtn").click(() => {
 
   // random numbers for each colors and attributes
   let randomDnaCode = {
-    headBodyColor: randomCode(10, 20),
-    wingsTailColor: randomCode(21, 31),
-    legsArmsColor: randomCode(32, 42),
-    eyesColor: parseInt(randomCode(43, 52)),
+    headBodyColor: randomCode(10, 91),
+    wingsTailColor: randomCode(10, 91),
+    legsArmsColor: randomCode(10, 91),
+    eyesColor: parseInt(randomCode(10, 91)),
 
     eyeShape: randomCode(1, 7),
     hornShape: randomCode(1, 5),
-    topHornsColor: randomCode(53, 59),
-    sideHornsColor: randomCode(60, 66),
+    topHornsColor: randomCode(10, 91),
+    sideHornsColor: randomCode(10, 91),
     animation: randomCode(1, 5),
   }
 

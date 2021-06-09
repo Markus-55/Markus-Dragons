@@ -233,13 +233,70 @@ contract Dragoncontract is IERC721, Ownable {
     return _spender == _from || _isApproved(_spender, _tokenId) || isApprovedForAll(_from, _spender);
   }
 
-  function _mixDna(uint256 _dadDna, uint256 _momDna) private pure returns (uint256) {
-    uint256 firstHalf = _dadDna / 100000000;
-    uint256 secondHalf = _momDna % 100000000;
+  function _mixDna(uint256 _dadDna, uint256 _momDna) public view returns (uint256) {
+    uint256[8] memory geneArray;
 
-    uint256 newDna = firstHalf * 100000000;
-    newDna = newDna + secondHalf;
-    return newDna;
+    uint8 random = uint8(now % 256);
+    uint256 randomIndex = uint256(now % 8);
+    uint8 randomEyes = uint8((now % 7) + 1);
+    uint8 HornOrAnimation = uint8((now % 5) + 1);
+    uint8 randomColor = uint8((now % 82) + 10);
+
+    uint256 i = 1;
+    uint256 index = 7;
+
+    for(i = 1; i <= 128; i=i*2) {
+      if(random & i != 0) {
+        if(randomIndex == 4 && index == 4) {
+          geneArray[randomIndex] += randomEyes;
+          geneArray[randomIndex] *= 10;
+          geneArray[randomIndex] += HornOrAnimation;
+        }
+        else if(randomIndex == 7 && index == 7) {
+          geneArray[randomIndex] += HornOrAnimation;
+          geneArray[randomIndex] *= 10;
+          geneArray[randomIndex] += 1;
+        }
+        else if(randomIndex == index) {
+          geneArray[randomIndex] = randomColor;
+        }
+        else {
+          geneArray[index] = uint8(_momDna % 100);
+        }
+      }
+      else {
+        if(randomIndex == 4 && index == 4) {
+          geneArray[randomIndex] += randomEyes;
+          geneArray[randomIndex] *= 10;
+          geneArray[randomIndex] += HornOrAnimation;
+        }
+        else if(randomIndex == 7 && index == 7) {
+          geneArray[randomIndex] += HornOrAnimation;
+          geneArray[randomIndex] *= 10;
+          geneArray[randomIndex] += 1;
+        }
+        else if(randomIndex == index) {
+          geneArray[randomIndex] = randomColor;
+        }
+        else {
+          geneArray[index] = uint8(_dadDna % 100);
+        }
+      }
+      _momDna = _momDna / 100;
+      _dadDna = _dadDna / 100;
+
+      index = index - 1;
+    }
+
+    uint256 newGene;
+
+    for(i = 0; i < 8; i++) {
+      newGene = newGene + geneArray[i];
+      if(i != 7) {
+        newGene = newGene * 100;
+      }
+    }
+    return newGene;
   }
 
   function _newGeneration(uint256 _dadGen, uint256 _momGen) private pure returns (uint256) {
