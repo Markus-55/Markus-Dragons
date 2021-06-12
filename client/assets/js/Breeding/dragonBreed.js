@@ -1,10 +1,11 @@
-/* dragonBreed.js */
+/* dragonBreed.js is calling the smart contract with the given information
+  to breed the dragons and displaying all the errors and notifications */
 
 var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0x96499565f9b97bc0A33b28D5DBBd222bc250d478";
+var contractAddress = "0xC3d03056a6806E6eef7BCEf3875387359638C3a6";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();

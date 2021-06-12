@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Brawler&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manuale&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap');
 
 @font-face {
@@ -140,9 +139,7 @@ nav {
 }
 
 footer {
-  height: 63px;
-  background: #f8f8f8;
-  font-family: 'EB Garamond';
-  font-size: 155%;
-  margin-top: 209px;
+  font-size: 115%;
+  color: black;
+  margin-top: 229px;
 }

@@ -72,7 +72,7 @@ function eyeVariation(eyeShapeNum, animationNum, id) {
       }
       break
     case 6:
-      eyesTypeHorizontal(id);
+      eyesTypeZen(id);
       if(animationNum == 5) {
         eyeAnimationVariations(6, id);
       }
@@ -294,7 +294,7 @@ function eyesTypePointy(id) {
   });
 }
 
-function eyesTypeHorizontal(id) {
+function eyesTypeZen(id) {
   $(`#dragonId${id} .innerPupils`).css({
     "box-shadow": "inset 20px 20px black",
     "transform": "rotate(44deg)",

@@ -1,31 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Candal&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ramabhadra&display=swap');
+
 body {
-  background: #2e9e8c;
+  background: #009191;
 }
 
-#homeBox {
+h1 {
+  color: black;
+  font-family: 'Candal';
+  font-size: 27px;
+  margin-top: 69px;
+  margin-left: 89px;
+}
+
+.createInfoBtn, .breedInfoBtn, .galleryInfoBtn, .marketplaceInfoBtn {
+  background-color: #0f434b;
+  border-radius: 13px;
+  line-height: 42px;
+  font-size: 17px;
+  margin-top: 51px;
+  margin-bottom: -105px;
+  height: 54px;
+  width: 213px;
+}
+
+.breedInfoBtn {
+  margin-left: 324px;
+}
+
+.galleryInfoBtn {
+  width: 249px;
+  margin-top: 13px;
+}
+
+.marketplaceInfoBtn {
+  margin-top: 13px;
+  margin-left: 329px;
+}
+
+.createInfoBox, .breedInfoBox, .galleryInfoBox, .marketplaceInfoBox {
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 17px;
   padding-left: 48px;
   padding-top: 7px;
-  margin-top: 180px;
-  height: 488px;
+  margin-top: 114px;
+  height: 536px;
   box-shadow: 0 6px 20px 0 rgb(0 0 0 / 54%);
 }
 
-.homeText {
-  font-weight: bold;
-  font-size: 19px;
-  padding-top: 297px;
-  color: black;
+.galleryInfoBox, .marketplaceInfoBox {
+  margin-top: 80px;
 }
 
-.homeBtn {
-  background-color: #0f434b;
-  border-radius: 10px;
-  line-height: 49px;
-  font-size: 17px;
+.infoContent {
+  margin-left: -35px;
+}
+
+h3 {
+  font-family: 'Ramabhadra';
+  color: black;
+  font-weight: bold;
+  font-size: 27px;
+  margin-top: 17px;
+}
+
+.createInfoH3 {
+  margin-left: 142px;
+}
+
+.breedInfoH3 {
+  margin-left: 221px;
+}
+
+.galleryInfoH3 {
+  margin-left: 205px;
+}
+
+.marketplaceInfoH3 {
+  margin-left: 180px;
+}
+
+.createInfo, .breedInfo, .galleryInfo, .marketplaceInfo {
+  font-family: 'Ramabhadra';
+  font-weight: bold;
+  font-size: 18px;
+  color: black;
+  padding: 27px;
+  margin-top: -21px;
+}
+
+.createInfoImage {
+  width: 100%;
+  margin-left: -19px;
+}
+
+.breedInfoImage {
+  width: 87%;
+  margin-left: 18px;
+}
+
+.galleryInfoImage {
+  margin-left: -41px;
+  width: 106%;
+  margin-top: 16px;
+}
+
+.marketplaceInfoImage {
+  width: 104%;
+  height: 52%;
+  margin-left: -36px;
+  margin-top: -5px;
 }
 
 footer {
-  margin-top: 180px;
+  margin-top: 194px;
 }

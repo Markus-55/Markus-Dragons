@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0x96499565f9b97bc0A33b28D5DBBd222bc250d478";
+var contractAddress = "0xC3d03056a6806E6eef7BCEf3875387359638C3a6";
 
 $(document).ready(async () => {
   // asks user if they allow the website
@@ -28,7 +28,7 @@ $("#createDragonBtn").click(() => {
     $("#txHashModal").modal();
     if(error && error.code === -32603) {
       $("#txHashModalTitle").html("Error: transaction failed!").css("color", "#ad2424");
-      $("#txHashModalBody").html("There cannot be more then 10 gen0Dragons").css("color", "#ad2424");
+      $("#txHashModalBody").html("You cannot create more then 20 dragons").css("color", "#ad2424");
       //console.log(error);
     }
     else if(error) {

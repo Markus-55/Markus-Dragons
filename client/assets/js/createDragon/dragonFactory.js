@@ -93,8 +93,8 @@ function eyeVariation(eyeShapeNum, animationNum) {
       break
     case 6:
       originalEyes();
-      $("#eyesName").html("Horizontal");
-      eyesTypeHorizontal();
+      $("#eyesName").html("Zen");
+      eyesTypeZen();
       if(animationNum == 5) {
         eyeAnimationVariations(6);
       }
@@ -382,7 +382,7 @@ function eyesTypePointy() {
   });
 }
 
-function eyesTypeHorizontal() {
+function eyesTypeZen() {
   $(".innerPupils").css({
     "box-shadow": "inset 20px 20px black",
     "transform": "rotate(44deg)",
