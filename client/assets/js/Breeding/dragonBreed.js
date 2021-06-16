@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0xC3d03056a6806E6eef7BCEf3875387359638C3a6";
+var contractAddress = "0xE2A8f020D041c4E92D2B4CF46999e027E5b1CFf3";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -82,39 +82,10 @@ function birthEvent() {
       Genes: ${event.returnValues.genes} &nbsp; &nbsp; &nbsp; &nbsp;
       Token Id: ${event.returnValues.dragonId}</p>`);
 
+      $('.babyDragonBtn').click(() => $(`.babyDragonBtn`).remove());
+
       newDragonHtml(event.returnValues.dragonId);
   }).on("error", (error, receipt) => {
       console.log(error, receipt);
   });
 }
-
-
-// $(".breedBtn").click(() => {
-//     return dadId == undefined || momId == undefined ?
-//       // $("#errorModal").modal();
-//       // $(".errorModalBody").html("Please choose the dad & mom dragon to breed")
-//
-//       console.log("You csaweeeeon together")
-//
-//     : dadId != momId ?
-//         instance.methods.breed(dadId, momId).send({}, (error, txHash) => {
-//           return (error ? console.log(error) : console.log(txHash));
-//         })
-//     : alert("You cannot breed the same dragon together");
-// });
-
-// √ DISPLAY box for mom & dad dragons (dragonBreed.html)
-// √ CLICK button to CHOOSE dad dragon & other button for mom dragon
-
-  // √ OPEN modal with all owned dragons dragons
-  // √ SELECT dad and mom dragon
-    // √ DISPLAY selected dragons
-      // √ DISABLE already selected dad or mom dragon
-  // DISABLE breed button before mom & dad dragons are selected
-  // ENABLE breed button if both mom & dad dragons are selected
-    // CLICK breed button
-      // Call instance.methods.getDragon(dadId) and getDragon(momId) (dragonBreed.js)
-        // CALL instance.methods.breed(dadId, momId);
-
-// CALL instance.events.Birth().on("data", event => {})
-// MESSAGE with LINK to myDragons.html to check new dragon

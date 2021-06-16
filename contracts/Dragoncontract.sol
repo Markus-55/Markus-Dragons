@@ -41,7 +41,7 @@ contract Dragoncontract is IERC721, Ownable {
   mapping(uint256 => address) private dragonOwners;
   mapping(address => uint256) private tokenBalances;
 
-  mapping(uint256 => address) private dragonIndexToApproved;
+  mapping(uint256 => address) private tokenApprovedAddresses;
   mapping(address => mapping(address => bool)) private operatorApproval;
 
   uint256 public gen0Total;
@@ -159,7 +159,7 @@ contract Dragoncontract is IERC721, Ownable {
 
     if (_from != address(0)) {
       tokenBalances[_from] = tokenBalances[_from].sub(1);
-      delete dragonIndexToApproved[_tokenId];
+      delete tokenApprovedAddresses[_tokenId];
     }
 
     emit Transfer(_from, _to, _tokenId);
@@ -168,7 +168,7 @@ contract Dragoncontract is IERC721, Ownable {
   function approve(address _approved, uint256 _tokenId) external {
     require(_owns(msg.sender, _tokenId) || operatorApproval[dragonOwners[_tokenId]][msg.sender], "You are not the owner or the operator of this token ID");
 
-    dragonIndexToApproved[_tokenId] = _approved;
+    tokenApprovedAddresses[_tokenId] = _approved;
 
     emit Approval(msg.sender, _approved, _tokenId);
   }
@@ -184,7 +184,7 @@ contract Dragoncontract is IERC721, Ownable {
   function getApproved(uint256 _tokenId) external view returns (address) {
     require(_tokenId < dragons.length, "Token does not exist");
 
-    return dragonIndexToApproved[_tokenId];
+    return tokenApprovedAddresses[_tokenId];
   }
 
   function isApprovedForAll(address _owner, address _operator) public view returns (bool) {
@@ -214,7 +214,7 @@ contract Dragoncontract is IERC721, Ownable {
   }
 
   function _isApproved(address _claimant, uint256 _tokenId) private view returns (bool) {
-    return _claimant == dragonIndexToApproved[_tokenId];
+    return _claimant == tokenApprovedAddresses[_tokenId];
   }
 
   function _checkERC721Support(address _from, address _to, uint256 _tokenId, bytes memory _data) private returns (bool) {
@@ -243,74 +243,48 @@ contract Dragoncontract is IERC721, Ownable {
     return _spender == _from || _isApproved(_spender, _tokenId) || isApprovedForAll(_from, _spender);
   }
 
-  function _mixDna(uint256 _dadDna, uint256 _momDna) public view returns (uint256) {
+  function _mixDna(uint256 _dadDna, uint256 _momDna) private view returns (uint256) {
     uint256[8] memory geneArray;
 
     uint8 random = uint8(now % 256);
-    uint256 randomIndex = uint256(now % 8);
+    uint256 randomIndex = uint8(now % 8);
     uint8 randomEyes = uint8((now % 7) + 1);
     uint8 HornOrAnimation = uint8((now % 5) + 1);
     uint8 randomColor = uint8((now % 82) + 10);
 
-    uint256 i = 1;
-    uint256 index = 7;
+    uint256 i;
+    uint8 index = 7;
 
     for(i = 1; i <= 128; i=i*2) {
-      if(random & i != 0) {
-        if(randomIndex == 4 && index == 4) {
-          geneArray[randomIndex] += randomEyes;
-          geneArray[randomIndex] *= 10;
-          geneArray[randomIndex] += HornOrAnimation;
-        }
-        else if(randomIndex == 7 && index == 7) {
-          geneArray[randomIndex] += HornOrAnimation;
-          geneArray[randomIndex] *= 10;
-          geneArray[randomIndex] += 1;
-        }
-        else if(randomIndex == index) {
-          geneArray[randomIndex] = randomColor;
-        }
-        else {
-          geneArray[index] = uint8(_momDna % 100);
-        }
-      }
-      else {
-        if(randomIndex == 4 && index == 4) {
-          geneArray[randomIndex] += randomEyes;
-          geneArray[randomIndex] *= 10;
-          geneArray[randomIndex] += HornOrAnimation;
-        }
-        else if(randomIndex == 7 && index == 7) {
-          geneArray[randomIndex] += HornOrAnimation;
-          geneArray[randomIndex] *= 10;
-          geneArray[randomIndex] += 1;
-        }
-        else if(randomIndex == index) {
-          geneArray[randomIndex] = randomColor;
-        }
-        else {
-          geneArray[index] = uint8(_dadDna % 100);
-        }
-      }
-      _momDna = _momDna / 100;
-      _dadDna = _dadDna / 100;
+      geneArray[index] = random & i != 0 ? _momDna % 100 : _dadDna % 100;
 
-      index = index - 1;
+      _momDna /= 100;
+      _dadDna /= 100;
+
+      index--;
     }
 
-    uint256 newGene;
+    if(randomIndex == 4) {
+      geneArray[randomIndex] = (randomEyes * 10) + HornOrAnimation;
+    }
+    else if(randomIndex == 7) {
+      geneArray[randomIndex] = (HornOrAnimation * 10) + 1;
+    }
+    else geneArray[randomIndex] = randomColor;
+
+    uint256 newDna;
 
     for(i = 0; i < 8; i++) {
-      newGene = newGene + geneArray[i];
+      newDna += geneArray[i];
       if(i != 7) {
-        newGene = newGene * 100;
+        newDna *= 100;
       }
     }
-    return newGene;
+    return newDna;
   }
 
   function _newGeneration(uint256 _dadGen, uint256 _momGen) private pure returns (uint256) {
-    return (_dadGen >= _momGen ? _dadGen + 1 : _momGen + 1);
+    return _dadGen >= _momGen ? _dadGen + 1 : _momGen + 1;
   }
 
   function _owns(address _claimant, uint256 _tokenId) private view returns (bool) {

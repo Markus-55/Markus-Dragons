@@ -2,6 +2,7 @@ function dragonHtml(id) {
   let dragonStr =
   `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${id}">
     <div id="myDragonBox">
+      <div id="idDragon">Dragon ID: ${id}</div>
       <div id="myDragon">
         <div id="rightWing">
           <div class="wings rightWingPart1"></div>
@@ -122,10 +123,31 @@ function dragonHtml(id) {
         </div>
       </div>
     </div>
+    <div id="myDragonDna">
+      <b>
+        DNA:
+        <!-- Colors -->
+        <span id="headBodyDna"></span>
+        <span id="wingsTailDna"></span>
+        <span id="legsArmsDna"></span>
+        <span id="eyesDna"></span>
+        <!-- Dragon attributes -->
+        <span id="eyeShapeDna"></span>
+        <span id="hornShapeDna"></span>
+        <span id="topHornsDna"></span>
+        <span id="sideHornsDna"></span>
+        <span id="animationDna"></span>
+        <span id="specialDna"></span>
+      </b>
+    </div>
   </div>`;
 
   //console.log(dragonStr);
   $(".dragonModalBody").prepend(dragonStr);
+
+  $(`#dragonId${id}`).click(() => {
+    $(`.dragonModalBody #dragonId${id}`).css("display", "none");
+  });
 
   selectDragons(id);
 }

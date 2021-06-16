@@ -16,12 +16,23 @@ body, #dragonModal, #babyModal {
   background-color: #018f01;
   margin-top: 105px;
   margin-bottom: -160px;
-  margin-left: 10px;
   font-weight: bold;
   font-size: 19px;
   border-radius: 11px;
   width: 135px;
   height: 48px;
+}
+
+.dragonResetBtn {
+  font-weight: bold;
+  margin-top: 107px;
+  margin-bottom: -155px;
+  font-size: 19px;
+  border-radius: 10px;
+  width: 249px;
+  height: 46px;
+  line-height: 34px;
+  background-color: #ffda00;
 }
 
 #dadDragonBox, #momDragonBox {
@@ -38,8 +49,8 @@ body, #dragonModal, #babyModal {
 .dadDragonBtn, .momDragonBtn {
   margin-top: -64px;
   margin-left: 26px;
-  height: 44px;
-  width: 158px;
+  height: 49px;
+  width: 232px;
   font-size: 20px;
   font-weight: bold;
   color: black;
@@ -69,9 +80,9 @@ body, #dragonModal, #babyModal {
 }
 
 #myDragonBox {
-  padding-top: 0px;
-  margin-top: 28px;
-  height: 398px;
+  margin-top: 21px;
+  margin-bottom: 70px;
+  height: 418px;
 }
 
 footer {

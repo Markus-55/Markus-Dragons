@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div class="modal fade" id="babyModal" tabindex="-1" role="dialog" aria-labelledby="babyModalTitle" aria-hidden="true">
+    <div class="modal fade" id="babyModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="babyModalTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content babyModalContent">
           <div class="modal-header">
@@ -97,11 +97,12 @@
         <div class="col-xl-6 col-md-6 col-sm-12">
           <button type="button" class="btn btn-success breedBtn">Breed</button>
           <div id="dadDragonBox"></div>
-          <button type="button" class="btn btn-info dadDragonBtn" data-toggle="modal" data-target="#dragonModal">Dad dragon</button>
+          <button type="button" class="btn btn-info dadDragonBtn" data-toggle="modal" data-target="#dragonModal">Select Dad dragon</button>
         </div>
         <div class="col-xl-6 col-md-6 col-sm-12">
+          <a href="dragonBreed.html" class="btn btn-warning dragonResetBtn">Reset selected dragons</a>
           <div id="momDragonBox"></div>
-          <button type="button" class="btn btn-info momDragonBtn" data-toggle="modal" data-target="#dragonModal">Mom dragon</button>
+          <button type="button" class="btn btn-info momDragonBtn" data-toggle="modal" data-target="#dragonModal">Select Mom dragon</button>
         </div>
 
         <div class="alert alert-dismissible show" role="alert" id="dragonBirth">

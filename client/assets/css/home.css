@@ -24,18 +24,9 @@ h1 {
   width: 213px;
 }
 
-.breedInfoBtn {
-  margin-left: 324px;
-}
-
-.galleryInfoBtn {
+.galleryInfoBtn, .marketplaceInfoBtn {
   width: 249px;
   margin-top: 13px;
-}
-
-.marketplaceInfoBtn {
-  margin-top: 13px;
-  margin-left: 329px;
 }
 
 .createInfoBox, .breedInfoBox, .galleryInfoBox, .marketplaceInfoBox {
