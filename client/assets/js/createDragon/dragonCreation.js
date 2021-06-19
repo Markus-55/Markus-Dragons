@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var instance;
 var user;
-var contractAddress = "0xE2A8f020D041c4E92D2B4CF46999e027E5b1CFf3";
+var contractAddress = "0x17085003f65a62a8b1A11Cd051bC3081DE4bCFDc";
 
 $(document).ready(async () => {
   // asks user if they allow the website

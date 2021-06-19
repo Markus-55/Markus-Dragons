@@ -47,6 +47,10 @@ contract Dragoncontract is IERC721, Ownable {
   uint256 public gen0Total;
   uint256 public userCreationTotal;
 
+  constructor() public {
+    _createDragon(uint256(-1), 0, 0, 0, address(0));
+  }
+
   function breed(uint256 _dadId, uint256 _momId) external returns (uint256) {
     require(_owns(msg.sender, _dadId), "You do not own the dad dragon");
     require(_owns(msg.sender, _momId), "You do not own the mom dragon");
@@ -287,7 +291,7 @@ contract Dragoncontract is IERC721, Ownable {
     return _dadGen >= _momGen ? _dadGen + 1 : _momGen + 1;
   }
 
-  function _owns(address _claimant, uint256 _tokenId) private view returns (bool) {
+  function _owns(address _claimant, uint256 _tokenId) public view returns (bool) {
     return _claimant == dragonOwners[_tokenId];
   }
 }
