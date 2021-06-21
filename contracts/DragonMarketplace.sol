@@ -28,8 +28,9 @@ contract DragonMarketplace is Ownable, IDragonMarketplace {
   }
 
   function getOffer(uint256 _tokenId) external view returns (address seller, uint256 price, uint256 index, uint256 tokenId, bool active) {
-    Offer storage offer = tokenIdToOffer[_tokenId];
-    return (offer.seller, offer.price, offer.index, offer.tokenId, offer.active);
+    require(tokenIdToOffer[_tokenId].active, "There is no offer for this token ID");
+
+    return (tokenIdToOffer[_tokenId].seller, tokenIdToOffer[_tokenId].price, tokenIdToOffer[_tokenId].index, tokenIdToOffer[_tokenId].tokenId, tokenIdToOffer[_tokenId].active);
   }
 
   function getAllTokenOnSale() external view returns(uint256[] memory listOfOffers) {
@@ -45,34 +46,33 @@ contract DragonMarketplace is Ownable, IDragonMarketplace {
 
   function setOffer(uint256 _price, uint256 _tokenId) external {
     require(_dragonContract._owns(msg.sender, _tokenId), "You are not the owner of the tokenId");
-    require(tokenIdToOffer[_tokenId].active != true, "You cannot have more then one offer for a token at a time");
-    require(_dragonContract.isApprovedForAll(msg.sender, address(this)), "Marketplace contract is not an approved opperator");
+    require(!tokenIdToOffer[_tokenId].active, "You cannot have more then one offer for a token at a time");
+    require(_dragonContract.isApprovedForAll(msg.sender, address(this)), "Marketplace contract is not an approved operator");
 
     Offer memory _newOffer = Offer(msg.sender, _price, offers.length, _tokenId, true);
     tokenIdToOffer[_tokenId] = _newOffer;
     offers.push(_newOffer);
 
-    emit MarketTransaction("Create offer", msg.sender, _tokenId);
+    emit MarketTransaction("Offer Created", msg.sender, _tokenId);
   }
 
     function removeOffer(uint256 _tokenId) external {
-      require(_dragonContract._owns(msg.sender, _tokenId), "You do not own the token ID");
-
       Offer memory offer = tokenIdToOffer[_tokenId];
 
-      delete tokenIdToOffer[_tokenId];
-      offers[offer.index].active = false;
+      require(offer.seller == msg.sender, "Only the seller of the Token Id can remove an offer");
 
-      emit MarketTransaction("Remove offer", msg.sender, _tokenId);
+      _offerRemove(_tokenId);
+
+      emit MarketTransaction("Offer removed", msg.sender, _tokenId);
     }
 
     function buyDragon(uint256 _tokenId) external payable {
       Offer memory offer = tokenIdToOffer[_tokenId];
-      require(msg.value == offer.price, "msg.value must be equal to the price of tokenId");
-      require(tokenIdToOffer[_tokenId].active == true, "Token ID is not for sale");
 
-      delete tokenIdToOffer[_tokenId];
-      offers[offer.index].active = false;
+      require(offer.price == msg.value, "The price needs to be equal to the offer of Token ID");
+      require(offer.active, "There is no offer for this token ID");
+
+      _offerRemove(_tokenId);
 
       if(offer.price > 0) {
         offer.seller.transfer(offer.price);
@@ -80,6 +80,11 @@ contract DragonMarketplace is Ownable, IDragonMarketplace {
 
       _dragonContract.safeTransferFrom(offer.seller, msg.sender, _tokenId);
 
-      emit MarketTransaction("Buy", msg.sender, _tokenId);
+      emit MarketTransaction("Token ID purchased", msg.sender, _tokenId);
+    }
+
+    function _offerRemove(uint256 _tokenId) private {
+      delete tokenIdToOffer[_tokenId];
+      offers[tokenIdToOffer[_tokenId].index].active = false;
     }
 }
