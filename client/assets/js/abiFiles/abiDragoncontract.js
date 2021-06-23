@@ -1,4 +1,4 @@
-var abi = [
+var abiDragoncontract = [
   {
     "inputs": [],
     "payable": false,

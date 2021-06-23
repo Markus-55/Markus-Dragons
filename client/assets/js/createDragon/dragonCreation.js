@@ -3,18 +3,18 @@
 
 var web3 = new Web3(Web3.givenProvider);
 
-var instance;
+var dragonContractInstance;
 var user;
-var contractAddress = "0x71c1159258925705988D8f7dFf15A14101f9F8EC";
+var dragonContractAddress = "0x3979E88E8B02aa623382a949e24D5Af668821793";
 
 $(document).ready(async () => {
   // asks user if they allow the website
   // to use their MetaMask account to interact with the blockchain
   let accounts = await window.ethereum.enable();
-  instance = new web3.eth.Contract(abi, contractAddress, {from: accounts[0]});
+  dragonContractInstance = new web3.eth.Contract(abiDragoncontract, dragonContractAddress, {from: accounts[0]});
   user = accounts[0];
 
-  //console.log(instance);
+  //console.log(dragonContractInstance);
   birthEvent();
 });
 
@@ -24,7 +24,7 @@ $("#createDragonBtn").click(() => {
 
   let dnaStr = getDragonDna();
 
-  instance.methods.createDragonGen0(dnaStr).send({}, (error, txHash) => {
+  dragonContractInstance.methods.createDragonGen0(dnaStr).send({}, (error, txHash) => {
     $("#txHashModal").modal();
     if(error && error.code === -32603) {
       $("#txHashModalTitle").html("Error: transaction failed!").css("color", "#ad2424");
@@ -47,7 +47,7 @@ $("#createDragonBtn").click(() => {
 $('.close').click(() => $("#createdDragon").css("display", "none"));
 
 function birthEvent() {
-  instance.events.Birth().on("data", event => {
+  dragonContractInstance.events.Birth().on("data", event => {
     $("#createdDragon > p, h5").remove();
     $("#createdDragon").css("display", "block");
     $("#createdDragon").prepend(

@@ -35,10 +35,11 @@ contract DragonMarketplace is Ownable, IDragonMarketplace {
 
   function getAllTokenOnSale() external view returns(uint256[] memory listOfOffers) {
     uint256[] memory tokensForSale = new uint256[](offers.length);
-
+    uint256 counter = 0;
     for(uint256 i = 0; i < offers.length; i++) {
       if(offers[i].active == true) {
-        tokensForSale[i] = offers[i].tokenId;
+        tokensForSale[counter] = offers[i].tokenId;
+        counter++;
       }
     }
     return tokensForSale;

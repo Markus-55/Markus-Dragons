@@ -3,23 +3,23 @@
 
 var web3 = new Web3(Web3.givenProvider);
 
-var instance;
+var dragonContractInstance;
 var user;
-var contractAddress = "0x71c1159258925705988D8f7dFf15A14101f9F8EC";
+var dragonContractAddress = "0x3979E88E8B02aa623382a949e24D5Af668821793";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
-  instance = new web3.eth.Contract(abi, contractAddress, {from: accounts[0]});
+  dragonContractInstance = new web3.eth.Contract(abiDragoncontract, dragonContractAddress, {from: accounts[0]});
   user = accounts[0];
 
-  console.log(instance);
+  console.log(dragonContractInstance);
 
   ownedDragons();
   birthEvent();
 });
 
 async function ownedDragons() {
-  let ownedDragonIds = await instance.methods.allOwnedDragons().call();
+  let ownedDragonIds = await dragonContractInstance.methods.allOwnedDragons().call();
   for(let i = 0; i < ownedDragonIds.length; i++) {
     let id = ownedDragonIds[i];
     getMyDragons(id).catch(error => console.log(error));
@@ -27,7 +27,7 @@ async function ownedDragons() {
 }
 
 async function getMyDragons(id) {
-  let dragonData = await instance.methods.getDragon(id).call();
+  let dragonData = await dragonContractInstance.methods.getDragon(id).call();
   ControlFunction(dragonData, id);
 }
 
@@ -49,7 +49,7 @@ $(".breedBtn").click(() => {
     $(".breedModalBody").html("Please select both dad & mom dragons to breed").css("color", "#ad2424");
   }
   else if(dadId != momId) {
-    instance.methods.breed(dadId, momId).send({}, (error, txHash) => {
+    dragonContractInstance.methods.breed(dadId, momId).send({}, (error, txHash) => {
       $("#breedModal").modal();
       if(error) {
         $("#breedModalTitle").html("Error: transaction failed!").css("color", "#ad2424");
@@ -71,7 +71,7 @@ $(".breedBtn").click(() => {
 $('.close').click(() => $("#dragonBirth").css("display", "none"));
 
 function birthEvent() {
-  instance.events.Birth().on("data", event => {
+  dragonContractInstance.events.Birth().on("data", event => {
     $("#dragonBirth > p, h5").remove();
     $("#dragonBirth").css("display", "block");
     $("#dragonBirth").prepend(

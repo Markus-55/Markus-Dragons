@@ -85,9 +85,11 @@ contract Dragoncontract is IERC721, Ownable {
 
     function allOwnedDragons() external view returns(uint256[] memory) {
         uint256[] memory ownedDragons = new uint256[](tokenBalances[msg.sender]);
+        uint256 counter = 0;
         for(uint256 i = 0; i < dragons.length; i++) {
           if(dragonOwners[i] == msg.sender) {
-            ownedDragons[i] = i;
+            ownedDragons[counter] = i;
+            counter++;
           }
         }
         return ownedDragons;

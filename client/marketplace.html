@@ -1,4 +1,4 @@
-<!-- myDragons.html displays the dragons of the owner -->
+<!--  -->
 
 <html lang="en">
 
@@ -13,33 +13,17 @@
     <script src="assets/bootstrap/js/popper.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/web3.min.js"></script>
-    <script src="assets/js/abiFiles/abiDragoncontract.js"></script>
     <script src="assets/js/abiFiles/abiMarketplace.js"></script>
+    <script src="assets/js/abiFiles/abiDragoncontract.js"></script>
 
-    <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/dragon.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/frontend.css">
     <link rel="stylesheet" href="assets/css/myDragons.css">
+    <link rel="stylesheet" href="assets/css/marketplace.css">
   </head>
 
   <body>
-
-    <div class="modal fade" id="removeOfferModal" tabindex="-1" role="dialog" aria-labelledby="removeOfferTitle" aria-hidden="true">
-      <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" id="removeOfferTitle"></h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="row modal-body removeOfferBody"></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
       <a class="navbar-brand" href="#">Markus-Dragons</a>
@@ -51,8 +35,8 @@
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">My Dragons<span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="myDragons.html">My Dragons</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="dragonCreation.html">Dragon Factory</a>
@@ -60,27 +44,24 @@
           <li class="nav-item">
             <a class="nav-link" href="dragonBreed.html">Breeding</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="marketplace.html">Marketplace</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="marketplace.html">Marketplace<span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>
     </nav>
 
     <div class="container-fluid">
-      <button type="button" class="btn btn-warning offersToRemove">View or remove your offers</button>
-      <div class="row" id="dragonObject"></div>
+      <a class="btn btn-primary" href="myDragons.html" role="button">Sell dragons</a>
+      <div class="row" id="tokenOffers"></div>
     </div>
-
     <footer>
       <p>Ivan on Tech Academy Bootcamp</p>
     </footer>
 
   </body>
-<script src="assets/js/colors.js"></script>
-<script src="assets/js/dragonStorage/myDragons.js"></script>
+<script src="assets/js/Marketplace/dragonMarketplace.js"></script>
 <script src="assets/js/dragonStorage/dragonComponents.js"></script>
-<script src="assets/js/dragonStorage/shownDragons.js"></script>
-<script src="assets/js/Marketplace/offerRemove.js"></script>
+<script src="assets/js/colors.js"></script>
 
 </html>

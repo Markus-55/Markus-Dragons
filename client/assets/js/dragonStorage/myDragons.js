@@ -3,22 +3,47 @@
 
 var web3 = new Web3(Web3.givenProvider);
 
-var instance;
+var dragonContractInstance;
+var marketplaceInstance;
+
 var user;
-var contractAddress = "0x71c1159258925705988D8f7dFf15A14101f9F8EC";
+var marketplaceAddress = "0x8d58471447F7fd79c6Eb1862F8E4aa9428A0E911";
+var dragonContractAddress = "0x3979E88E8B02aa623382a949e24D5Af668821793";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
-  instance = new web3.eth.Contract(abi, contractAddress, {from: accounts[0]});
+  dragonContractInstance = new web3.eth.Contract(abiDragoncontract, dragonContractAddress, {from: accounts[0]});
+  marketplaceInstance = new web3.eth.Contract(abiMarketplace, marketplaceAddress, {from: accounts[0]});
   user = accounts[0];
 
-  console.log(instance);
+  console.log(dragonContractInstance);
 
   ownedDragons().catch(error => console.log(error));
+  marketplaceOperator();
+  removeOffers();
 });
 
+async function marketplaceOperator() {
+  let isOperator = await dragonContractInstance.methods.isApprovedForAll(user, marketplaceAddress).call();
+
+  if(isOperator) {
+    console.log("Marketplace set as operator");
+  }
+  else {
+    dragonContractInstance.methods.setApprovalForAll(marketplaceAddress, true).send({}, (error, txHash) => {
+      if(error) {
+        console.log(error);
+      }
+      else {
+        console.log(txHash);
+      }
+    });
+  }
+
+}
+
 async function ownedDragons() {
-  let ownedDragonIds = await instance.methods.allOwnedDragons().call();
+  let ownedDragonIds = await dragonContractInstance.methods.allOwnedDragons().call();
   for(let i = 0; i < ownedDragonIds.length; i++) {
     let id = ownedDragonIds[i];
     getMyDragons(id).catch(error => console.log(error));
@@ -26,7 +51,7 @@ async function ownedDragons() {
 }
 
 async function getMyDragons(id) {
-  let dragonData = await instance.methods.getDragon(id).call();
+  let dragonData = await dragonContractInstance.methods.getDragon(id).call();
   controlFunction(dragonData, id);
 }
 
