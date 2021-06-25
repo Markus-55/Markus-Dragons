@@ -2,21 +2,21 @@ async function removeOffers() {
   let allOffers = await marketplaceInstance.methods.getAllTokenOnSale().call();
   let ownedDragonIds = await dragonContractInstance.methods.allOwnedDragons().call();
 
-  for(let i = 0; i < offers.length; i++) {
-    if(ownedDragonIds[i] && allOffers[i]) {
-      let id = allOffers[i];
-      getIdToRemove(id).catch(error => console.log(error));
-    }
+  for(let i = 0; i < ownedDragonIds.length; i++) {
+    let id = ownedDragonIds[i];
+    let offerData = await marketplaceInstance.methods.getOffer(id).call();
+
+    getIdToRemove(id, offerData).catch(error => console.log(error));
   }
 }
 
-async function getIdToRemove(id) {
+async function getIdToRemove(id, offerData) {
   let dragonData = await dragonContractInstance.methods.getDragon(id).call();
-  controlFunctionRemoveOffers(dragonData, id);
+  controlFunctionRemoveOffers(dragonData, id, offerData);
 }
 
-function controlFunctionRemoveOffers(dragonData, id) {
-  dragonRemoveHtml(id);
+function controlFunctionRemoveOffers(dragonData, id, offerData) {
+  dragonRemoveHtml(id, offerData);
 
   let dnaObject = dragonObj(dragonData);
 
@@ -76,10 +76,10 @@ function renderActiveDragons(dnaObject, id) {
   specialNum(dnaObject.lastNum, id);
 }
 
-async function dragonRemoveHtml(id) {
-  let removeOfferStr =
+async function dragonRemoveHtml(id, offerData) {
+  let offerStr =
   `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${id}">
-    <div id="myDragonBox">
+    <div id="removeDragonBox">
       <div id="idDragon">Dragon ID: ${id}</div>
       <div id="myDragon">
         <div id="rightWing">
@@ -201,28 +201,46 @@ async function dragonRemoveHtml(id) {
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-warning removeOffer">Remove dragon</button>
+    <ul class="dragonInfo">
+      <li id="offerPrice">Price: ${offerData.price}</li>
+    </ul>
+    <button type="button" class="btn btn-warning removeOffer">Remove offer</button>
   </div>`;
 
-  //console.log(removeOfferStr);
-  $(".removeOfferBody").prepend(removeOfferStr);
+  //console.log(offerStr);
   $(`#dragonId${0}`).remove();
-
-  $(".offersToRemove").click(() => {
-    $("#removeOfferModal").modal();
+  $(".myOffers").click(() => {
+    $("#myOffersModal").modal();
   });
 
-  let offerData = await marketplaceInstance.methods.getOffer(id).call();
+  if(!offerData.active) {
+    $(`.myOffersBody #dragonId${id}`).remove();
+  }
+  else {
+    $(`.myOffersBody #dragonId${id}`).remove();
+    $(".myOffersBody").prepend(offerStr);
+  }
 
   $(`#dragonId${id} > .removeOffer`).click(() => {
 
     marketplaceInstance.methods.removeOffer(id).send({}, (error, txHash) => {
       if(error) {
         console.log(error);
+        $("#myOffersModal").modal("hide");
+
+        $("#sellOrRemoveModal").modal();
+        $("#sellOrRemoveTitle").html("Error: transaction failed!").css("color", "#ad2424");
+        $(".sellOrRemoveBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
       }
       else {
         console.log(txHash);
-        console.log(id);
+        $("#myOffersModal").modal("hide");
+
+        $("#sellOrRemoveModal").modal();
+        $("#sellOrRemoveTitle").html("Offer successfully removed!").css("color", "#007400");
+        $(".sellOrRemoveBody").html(`<p>Transaction hash: <br>${txHash}</p>`).css("color", "#007400");
+
+        $(".sellOrRemoveClose").click(() => location.reload());
       }
     });
   });

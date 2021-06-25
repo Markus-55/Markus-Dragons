@@ -4,8 +4,8 @@ var marketplaceInstance;
 var dragonContractInstance;
 
 var user;
-var marketplaceAddress = "0x8d58471447F7fd79c6Eb1862F8E4aa9428A0E911";
-var dragonContractAddress = "0x3979E88E8B02aa623382a949e24D5Af668821793";
+var marketplaceAddress = "0xA5cf3af287F997CC049dAff649a52A92F491e0b7";
+var dragonContractAddress = "0x0d84a5C7239B4040fC85D8821E63565fb0Ba8C1C";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -22,24 +22,23 @@ async function allActiveOffers() {
   let allOffers = await marketplaceInstance.methods.getAllTokenOnSale().call();
 
   for(let i = 0; i < allOffers.length; i++) {
-    if(allOffers[i]) {
-      let id = allOffers[i];
-      getActiveOffer(id).catch(error => console.log(error));
-    }
+    let id = allOffers[i];
+    let activeOffer = await marketplaceInstance.methods.getActiveStatus(id).call();
+    getActiveOffer(id, activeOffer).catch(error => console.log(error));
   }
 }
 
-async function getActiveOffer(id) {
+async function getActiveOffer(id, activeOffer) {
   let offerData = await marketplaceInstance.methods.getOffer(id).call();
   let dragonData = await dragonContractInstance.methods.getDragon(id).call();
 
-  controlFunction(offerData, dragonData, id);
+  controlFunction(dragonData, id, offerData, activeOffer);
 }
 
-function controlFunction(offerData, dragonData, id) {
-  dragonOfferHtml(id);
+function controlFunction(dragonData, id, offerData, activeOffer) {
+  dragonOfferHtml(id, offerData, activeOffer);
 
-  activeDragonDetails(offerData, dragonData, id);
+  activeDragonDetails(dragonData, id, offerData);
 
   let dnaObject = dragonObj(dragonData);
 
@@ -68,20 +67,18 @@ function dragonObj(dragonData) {
   return storedDragonsObj;
 }
 
-function activeDragonDetails(offerData, dragonData, id) {
-  $(`#dragonId${id} #birthTime`).append(`Birth time: ${dragonData.birthTime}`);
+function activeDragonDetails(dragonData, id, offerData) {
+  $(`#dragonId${id} #birthTime`).append(`Birth time: ${toReadableTime(dragonData.birthTime)}`);
   $(`#dragonId${id} #generation`).append(`Generation: ${dragonData.generation}`);
   $(`#dragonId${id} #dadId`).append(`dadId: ${dragonData.dadId}`);
   $(`#dragonId${id} #momId`).append(`momId: ${dragonData.momId}`);
 
-  $(`#dragonId${id} .offerBtn`).click(() => {
+  $(`#dragonId${id} .offerInfo`).click(() => {
     $("#offerModal").modal();
     $(".offerModalBody").html(`
       Seller address: ${offerData.seller}<br>
       Token price: ${offerData.price}`);
   });
-
-
 }
 
 function renderActiveDragons(dnaObject, id) {
@@ -117,7 +114,7 @@ function renderActiveDragons(dnaObject, id) {
 
 
 
-function dragonOfferHtml(id) {
+async function dragonOfferHtml(id, offerData, activeOffer) {
   let dragonOfferStr =
   `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${id}">
 
@@ -125,14 +122,14 @@ function dragonOfferHtml(id) {
       <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="modal-title" id="offerModalTitle"></h3>
+            <h3 class="modal-title" id="offerModalTitle">Offer details:</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="row modal-body offerModalBody"></div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -286,9 +283,38 @@ function dragonOfferHtml(id) {
         <span id="momId"></span>
       </li>
     </ul>
-    <button type="button" class="btn btn-primary offerBtn" data-toggle="modal" data-target=".bd-example-modal-xl">Offer info</button>
+    <button type="button" class="btn btn-primary offerInfo" data-toggle="modal" data-target=".bd-example-modal-xl">Offer info</button>
   </div>`;
 
   //console.log(dragonOfferStr);
-  $("#tokenOffers").prepend(dragonOfferStr);
+  $(`#dragonId${0}`).remove();
+
+  if(!activeOffer) {
+    $(`#dragonId${id}`).remove();
+  }
+  else {
+    $(`#dragonId${id}`).remove();
+    $("#tokenOffers").prepend(dragonOfferStr);
+  }
+
+  $(`#dragonId${id} .buyBtn`).click(() => {
+    marketplaceInstance.methods.buyDragon(id).send({from: user, value: offerData.price}, (error, txHash) => {
+      $("#buyModal").modal();
+      if(error && error.code === -32603) {
+        $("#buyTitle").html("Error: transaction failed!").css("color", "#ad2424");
+        $(".buyBody").html("You cannot buy your own offer").css("color", "#ad2424");
+      }
+      else if(error) {
+        $("#buyTitle").html("Error: transaction failed!").css("color", "#ad2424");
+        $(".buyBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
+        console.log(error);
+      }
+      else {
+        $("#buyTitle").html("Offer successfully bought!").css("color", "#007400");
+        $(".buyBody").html(`<p>Transaction hash: <br>${txHash}</p>`).css("color", "#007400");
+        $(".buyClose").click(() => location.reload());
+        console.log(txHash);
+      }
+    });
+  });
 }

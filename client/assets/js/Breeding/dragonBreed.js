@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var dragonContractInstance;
 var user;
-var dragonContractAddress = "0x3979E88E8B02aa623382a949e24D5Af668821793";
+var dragonContractAddress = "0x0d84a5C7239B4040fC85D8821E63565fb0Ba8C1C";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();

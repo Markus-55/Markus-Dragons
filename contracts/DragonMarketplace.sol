@@ -28,9 +28,11 @@ contract DragonMarketplace is Ownable, IDragonMarketplace {
   }
 
   function getOffer(uint256 _tokenId) external view returns (address seller, uint256 price, uint256 index, uint256 tokenId, bool active) {
-    require(tokenIdToOffer[_tokenId].active, "There is no offer for this token ID");
-
     return (tokenIdToOffer[_tokenId].seller, tokenIdToOffer[_tokenId].price, tokenIdToOffer[_tokenId].index, tokenIdToOffer[_tokenId].tokenId, tokenIdToOffer[_tokenId].active);
+  }
+
+  function getActiveStatus(uint256 _tokenId) external view returns (bool active) {
+    return tokenIdToOffer[_tokenId].active;
   }
 
   function getAllTokenOnSale() external view returns(uint256[] memory listOfOffers) {
@@ -72,6 +74,7 @@ contract DragonMarketplace is Ownable, IDragonMarketplace {
 
       require(offer.price == msg.value, "The price needs to be equal to the offer of Token ID");
       require(offer.active, "There is no offer for this token ID");
+      require(offer.seller != msg.sender, "You cannot buy your own dragon");
 
       _offerRemove(_tokenId);
 

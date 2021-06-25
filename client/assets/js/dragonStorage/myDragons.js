@@ -7,8 +7,8 @@ var dragonContractInstance;
 var marketplaceInstance;
 
 var user;
-var marketplaceAddress = "0x8d58471447F7fd79c6Eb1862F8E4aa9428A0E911";
-var dragonContractAddress = "0x3979E88E8B02aa623382a949e24D5Af668821793";
+var marketplaceAddress = "0xA5cf3af287F997CC049dAff649a52A92F491e0b7";
+var dragonContractAddress = "0x0d84a5C7239B4040fC85D8821E63565fb0Ba8C1C";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -16,7 +16,7 @@ $(document).ready(async () => {
   marketplaceInstance = new web3.eth.Contract(abiMarketplace, marketplaceAddress, {from: accounts[0]});
   user = accounts[0];
 
-  console.log(dragonContractInstance);
+  console.log(marketplaceInstance);
 
   ownedDragons().catch(error => console.log(error));
   marketplaceOperator();
@@ -46,17 +46,20 @@ async function ownedDragons() {
   let ownedDragonIds = await dragonContractInstance.methods.allOwnedDragons().call();
   for(let i = 0; i < ownedDragonIds.length; i++) {
     let id = ownedDragonIds[i];
-    getMyDragons(id).catch(error => console.log(error));
+    let offerData = await marketplaceInstance.methods.getOffer(id).call();
+
+    getMyDragons(id, offerData).catch(error => console.log(error));
   }
 }
 
-async function getMyDragons(id) {
+async function getMyDragons(id, offerData) {
   let dragonData = await dragonContractInstance.methods.getDragon(id).call();
-  controlFunction(dragonData, id);
+
+  controlFunction(dragonData, id, offerData);
 }
 
-function controlFunction(dragonData, id) {
-  dragonHtml(id);
+function controlFunction(dragonData, id, offerData) {
+  dragonHtml(id, offerData);
 
   let dnaObject = dragonObj(dragonData);
 

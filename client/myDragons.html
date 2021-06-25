@@ -20,22 +20,35 @@
     <link rel="stylesheet" href="assets/css/dragon.css">
     <link rel="stylesheet" href="assets/css/frontend.css">
     <link rel="stylesheet" href="assets/css/myDragons.css">
+    <link rel="stylesheet" href="assets/css/dragonMarketplace.css">
+
   </head>
 
   <body>
 
-    <div class="modal fade" id="removeOfferModal" tabindex="-1" role="dialog" aria-labelledby="removeOfferTitle" aria-hidden="true">
+    <div class="modal fade" id="sellOrRemoveModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="sellOrRemoveTitle" aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="modal-title" id="removeOfferTitle"></h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <h3 class="modal-title" id="sellOrRemoveTitle"></h3>
           </div>
-          <div class="row modal-body removeOfferBody"></div>
+          <div class="row modal-body sellOrRemoveBody"></div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            <button type="button" class="btn btn-secondary sellOrRemoveClose" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="myOffersModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myOffersTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="myOffersTitle">View or remove your active offers!</h3>
+          </div>
+          <div class="row modal-body myOffersBody"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -61,14 +74,15 @@
             <a class="nav-link" href="dragonBreed.html">Breeding</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="marketplace.html">Marketplace</a>
+            <a class="nav-link" href="DragonMarketplace.html">Marketplace</a>
           </li>
         </ul>
       </div>
     </nav>
 
     <div class="container-fluid">
-      <button type="button" class="btn btn-warning offersToRemove">View or remove your offers</button>
+
+      <button type="button" class="btn btn-warning myOffers">View or remove your offers</button>
       <div class="row" id="dragonObject"></div>
     </div>
 

@@ -1,5 +1,5 @@
 function newDragonHtml(id) {
-  let newDragonHtml =
+  let babyDragonHtml =
     `<div id="dragonId${id}">
       <div id="myDragon">
         <div id="rightWing">
@@ -131,14 +131,14 @@ function newDragonHtml(id) {
       $(`#babyModalBody > #dragonId${id}`).remove();
 
       $("#babyModal").modal();
-      $("#babyModalBody").prepend(newDragonHtml);
+      $("#babyModalBody").prepend(babyDragonHtml);
 
       getNewDragon(id);
     });
 }
 
 async function getNewDragon(id) {
-  let dragonData = await instance.methods.getDragon(id).call();
+  let dragonData = await dragonContractInstance.methods.getDragon(id).call();
   ControlFunctionTwo(dragonData, id);
 }
 

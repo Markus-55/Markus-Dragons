@@ -1,0 +1,89 @@
+.modal-body {
+  margin-left: 3px;
+}
+
+.sellRemovePage {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 39px;
+  border-radius: 7px;
+  width: 240px;
+  height: 42px;
+}
+
+.buyBtn {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 47px;
+  margin-bottom: -47px;
+  border-radius: 6px;
+  height: 41px;
+  width: 142px;
+}
+
+.offerInfo {
+  font-weight: bold;
+    font-size: 18px;
+    margin-top: 7px;
+    border-radius: 7px;
+    height: 42px;
+    width: 118px;
+}
+
+.myOffers {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 37px;
+  margin-bottom: -12px;
+  border-radius: 6px;
+  width: 273px;
+  height: 42px;
+}
+
+#removeDragonBox {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  padding-top: 7px;
+  margin-top: 54px;
+  height: 420px;
+  box-shadow: 0 6px 20px 0 rgb(0 0 0 / 33%);
+}
+
+#offerPrice {
+  margin-top: -29px;
+  margin-bottom: 12px;
+  margin-left: 82px;
+}
+
+.removeOffer {
+  border-radius: 7px;
+  font-weight: bold;
+  font-size: 18px;
+  height: 42px;
+  width: 152px;
+}
+
+#sellDragon {
+  margin-top: 8px;
+}
+
+#sellBtn {
+  border-radius: 7px 0 0 7px;
+}
+
+.dragonPrice {
+  height: 41px;
+  border-radius: 0 7px 7px 0;
+}
+
+#activeOffer {
+  background-color: #ff8d8d;
+  font-size: 19px;
+  height: 41px;
+  width: 549px;
+  border-radius: 7px;
+  line-height: 41px;
+  padding-left: 16px;
+}

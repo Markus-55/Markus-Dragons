@@ -1,6 +1,6 @@
 /* shownDragons.js shows the dragon to the frontend with it's details */
 
-function dragonHtml(id) {
+function dragonHtml(id, offerData) {
   let dragonStr =
   `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${id}">
     <div id="myDragonBox">
@@ -150,28 +150,49 @@ function dragonHtml(id) {
         <span id="momId"></span>
       </li>
     </ul>
-    <div class="input-group mb-3">
+    <div id="sellDragon" class="input-group mb-3">
       <div class="input-group-prepend">
-        <button id="sellDragon" class="btn btn-primary" type="button">Sell dragon</button>
+        <button id="sellBtn" class="btn btn-primary" type="button">Sell dragon</button>
       </div>
-      <input type="number" class="form-control dragonPrice${id}" placeholder="Input price" aria-label="Input price" aria-describedby="sellDragon">
+      <input type="number" class="form-control dragonPrice" placeholder="Input price" aria-label="Input price" aria-describedby="sellBtn">
     </div>
   </div>`;
 
   //console.log(dragonStr);
   $("#dragonObject").prepend(dragonStr);
 
-  $("#sellDragon").click(() => {
-    let price = $(`.dragonPrice${id}`).val();
+  if(offerData.active) {
+    $(`#dragonid${id} #sellDragon`).html(`
+      <div id="activeOffer">
+        <p>Already in marketplace!</p>
+      </div>`);
+  }
 
-    marketplaceInstance.methods.setOffer(price, id).send({}, (error, txHash) => {
-      if(error) {
-        console.log(error);
-      }
-      else {
-        console.log(txHash);
-      }
-    });
+  $("#sellBtn").click(() => {
+    let price = $(`#dragonId${id} .dragonPrice`).val();
+
+    if(price <= 0 || price == undefined) {
+      $("#sellOrRemoveModal").modal();
+      $("#sellOrRemoveTitle").html("Error: transaction failed!").css("color", "#ad2424");
+      $(".sellOrRemoveBody").html("Price must be greater then 0").css("color", "#ad2424");
+    }
+    else {
+      marketplaceInstance.methods.setOffer(price, id).send({}, (error, txHash) => {
+        if(error) {
+          console.log(error);
+          $("#sellOrRemoveModal").modal();
+          $("#sellOrRemoveTitle").html("Error: transaction failed!").css("color", "#ad2424");
+          $(".sellOrRemoveBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
+        }
+        else {
+          console.log(txHash);
+          $("#sellOrRemoveModal").modal();
+          $("#sellOrRemoveTitle").html("Offer successfully created!").css("color", "#007400");
+          $(".sellOrRemoveBody").html(`<p>Transaction hash: <br>${txHash}</p>`).css("color", "#007400");
+          $(".sellOrRemoveClose").click(() => location.reload());
+        }
+      });
+    }
   });
 }
 
