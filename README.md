@@ -1,6 +1,6 @@
 # Markus-Dragons
 
- My ERC-721 project where you can collect, create, breed and buy/sell your non-fungible dragon tokens!
+ My ERC-721 project game where you can collect, create, breed and buy/sell your non-fungible dragon tokens!
  
  This project is from the Bootcamp of Ivan On Tech Blockchain Academy
  
