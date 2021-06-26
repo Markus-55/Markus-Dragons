@@ -26,6 +26,20 @@
 
   <body>
 
+    <div class="modal fade" id="marketplaceOperator" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="marketplaceOperatorTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="marketplaceOperatorTitle"></h3>
+          </div>
+          <div class="row modal-body marketplaceOperatorBody"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="modal fade" id="sellOrRemoveModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="sellOrRemoveTitle" aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -64,14 +78,14 @@
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">My Dragons<span class="sr-only">(current)</span></a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="dragonCreation.html">Dragon Factory</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="dragonBreed.html">Breeding</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">My Dragons<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="DragonMarketplace.html">Marketplace</a>

@@ -95,8 +95,8 @@ contract Dragoncontract is IERC721, Ownable {
         return ownedDragons;
     }
 
-  function createDragonGen0(uint256 _genes) external {
-    require(gen0Total < gen0CreationLimit && msg.sender == owner || userCreationTotal < userCreationLimit, "The limit of generation 0 dragons is: 20");
+  function createDragonGen(uint256 _genes) external {
+    require(gen0Total < gen0CreationLimit && msg.sender == owner || tokenBalances[msg.sender] < userCreationLimit, "The limit of dragons you can create is: 20");
 
     if(gen0Total < gen0CreationLimit && msg.sender == owner) {
       gen0Total++;

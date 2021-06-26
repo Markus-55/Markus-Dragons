@@ -294,7 +294,7 @@ var abiDragoncontract = [
         "type": "uint256"
       }
     ],
-    "name": "createDragonGen0",
+    "name": "createDragonGen",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",

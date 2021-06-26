@@ -7,8 +7,8 @@ var dragonContractInstance;
 var marketplaceInstance;
 
 var user;
-var marketplaceAddress = "0xA5cf3af287F997CC049dAff649a52A92F491e0b7";
-var dragonContractAddress = "0x0d84a5C7239B4040fC85D8821E63565fb0Ba8C1C";
+var marketplaceAddress = "0x6E16cF8a3610F08E54F3e93Cf8B33F434d7BaE38";
+var dragonContractAddress = "0x7c74A691C34E5faFE104aaEA056C6473d3cD9c2F";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -27,9 +27,13 @@ async function marketplaceOperator() {
   let isOperator = await dragonContractInstance.methods.isApprovedForAll(user, marketplaceAddress).call();
 
   if(isOperator) {
-    console.log("Marketplace set as operator");
+    console.log("Marketplace set as operator!");
   }
   else {
+    $("#marketplaceOperator").modal();
+    $("#marketplaceOperatorTitle").html("Set marketplace as operator");
+    $(".marketplaceOperatorBody").html(`<p>By confirming the transaction, you accept that the marketplace can manage/sell your offers for you.<br>
+    If you decline the transaction you won't be able to sell your dragons</p>`);
     dragonContractInstance.methods.setApprovalForAll(marketplaceAddress, true).send({}, (error, txHash) => {
       if(error) {
         console.log(error);

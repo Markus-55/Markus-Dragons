@@ -1,8 +1,25 @@
-/* shownDragons.js shows the dragon to the frontend with it's details */
-
-function dragonHtml(id, offerData) {
-  let dragonStr =
+async function dragonOfferHtml(id, offerData, activeOffer) {
+  let dragonOfferStr =
   `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${id}">
+
+    <div class="modal fade" id="offerModal" tabindex="-1" role="dialog" aria-labelledby="offerModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="offerModalTitle">Offer details:</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="row modal-body offerModalBody"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-danger buyBtn">Buy dragon</button>
     <div id="myDragonBox">
       <div id="idDragon">Dragon ID: ${id}</div>
       <div id="myDragon">
@@ -150,57 +167,45 @@ function dragonHtml(id, offerData) {
         <span id="momId"></span>
       </li>
     </ul>
-    <div id="sellDragon" class="input-group mb-3">
-      <div class="input-group-prepend">
-        <button id="sellBtn" class="btn btn-success" type="button">Sell dragon</button>
-      </div>
-      <input type="number" class="form-control dragonPrice" placeholder="Input price" aria-label="Input price" aria-describedby="sellBtn">
-      <div class="ethBox">ETH</div>
-    </div>
+    <button type="button" class="btn btn-primary offerInfo" data-toggle="modal" data-target=".bd-example-modal-xl">Offer info</button>
   </div>`;
 
-  //console.log(dragonStr);
-  $("#dragonObject").prepend(dragonStr);
-
-  if(offerData.active) {
-    $(`#dragonid${id} #sellDragon`).html(`
-      <div id="activeOffer">
-        <p>Already in marketplace!</p>
-      </div>`);
+  //console.log(dragonOfferStr);
+  $(`#dragonId${0}`).remove();
+  if(!activeOffer) {
+    $(`#dragonId${id}`).remove();
+  }
+  else {
+    $(`#dragonId${id}`).remove();
+    $("#tokenOffers").prepend(dragonOfferStr);
   }
 
-  $("#sellBtn").click(() => {
-    let inputPrice = $(`#dragonId${id} .dragonPrice`).val();
-    let price = web3.utils.toWei(inputPrice, "ether");
+  $(`#dragonId${id} .buyBtn`).click(() => {
+    marketplaceInstance.methods.buyDragon(id).send({value: offerData.price}, (error, txHash) => {
+      $("#buyModal").modal();
+      if(error && error.code === -32603) {
+        $("#buyTitle").html("Error: transaction failed!").css("color", "#ad2424");
+        $(".buyBody").html("You cannot buy your own offer").css("color", "#ad2424");
+      }
+      else if(error) {
+        $("#buyTitle").html("Error: transaction failed!").css("color", "#ad2424");
+        $(".buyBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
+        console.log(error);
+      }
+      else {
+        $("#buyTitle").html("Offer successfully bought!").css("color", "#007400");
+        $(".buyBody").html(
+          `<p>The MD token has been added to your account!<br>
+          Token ID: ${offerData.tokenId}<br>
+          Cost: ${offerData.price / Math.pow(10, 18)} eth<br><br>
+          Transaction hash:<br>
+          ${txHash}</p>`
+        ).css("color", "#007400");
 
-    if(inputPrice <= 0) {
-      $("#sellOrRemoveModal").modal();
-      $("#sellOrRemoveTitle").html("Error: transaction failed!").css("color", "#ad2424");
-      $(".sellOrRemoveBody").html("Price must be greater then 0").css("color", "#ad2424");
-    }
-    else {
-      marketplaceInstance.methods.setOffer(price, id).send({}, (error, txHash) => {
-        if(error) {
-          console.log(error);
-          $("#sellOrRemoveModal").modal();
-          $("#sellOrRemoveTitle").html("Error: transaction failed!").css("color", "#ad2424");
-          $(".sellOrRemoveBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
-        }
-        else {
-          console.log(txHash);
-          $("#sellOrRemoveModal").modal();
-          $("#sellOrRemoveTitle").html("Offer successfully created!").css("color", "#007400");
-          $(".sellOrRemoveBody").html(
-            `<p>Offer has been added to marketplace!<br>
-            Offer Token ID: ${id}<br>
-            Offer price: ${inputPrice} eth<br><br>
-            Transaction hash:<br>
-            ${txHash}</p>`).css("color", "#007400");
-
-          $(".sellOrRemoveClose").click(() => location.reload());
-        }
-      });
-    }
+        $(".buyClose").click(() => location.reload());
+        console.log(txHash);
+      }
+    });
   });
 }
 
@@ -226,14 +231,21 @@ function dragonObj(dragonData) {
   return storedDragonsObj;
 }
 
-function dragonDetails(dragonData, id) {
-  $(`#dragonId${id} #generation`).append(`Generation: ${dragonData.generation}`);
+function activeDragonDetails(dragonData, id, offerData) {
   $(`#dragonId${id} #birthTime`).append(`Birth time: ${toReadableTime(dragonData.birthTime)}`);
-  $(`#dragonId${id} #dadId`).append(`Dad ID: ${dragonData.dadId}`);
-  $(`#dragonId${id} #momId`).append(`Mom ID: ${dragonData.momId}`);
+  $(`#dragonId${id} #generation`).append(`Generation: ${dragonData.generation}`);
+  $(`#dragonId${id} #dadId`).append(`dadId: ${dragonData.dadId}`);
+  $(`#dragonId${id} #momId`).append(`momId: ${dragonData.momId}`);
+
+  $(`#dragonId${id} .offerInfo`).click(() => {
+    $("#offerModal").modal();
+    $(".offerModalBody").html(`
+      Seller address: ${offerData.seller}<br>
+      Token price: ${offerData.price / Math.pow(10, 18)} eth`);
+  });
 }
 
-function renderOwnedDragons(dnaObject, id) {
+function renderActiveDragons(dnaObject, id) {
   let eyeShapeNum = parseInt(dnaObject.eyeShape);
   let hornShapeNum = parseInt(dnaObject.hornShape);
   let animationNum = parseInt(dnaObject.animation);

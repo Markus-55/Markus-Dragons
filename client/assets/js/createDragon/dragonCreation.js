@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var dragonContractInstance;
 var user;
-var dragonContractAddress = "0x0d84a5C7239B4040fC85D8821E63565fb0Ba8C1C";
+var dragonContractAddress = "0x7c74A691C34E5faFE104aaEA056C6473d3cD9c2F";
 
 $(document).ready(async () => {
   // asks user if they allow the website
@@ -24,7 +24,7 @@ $("#createDragonBtn").click(() => {
 
   let dnaStr = getDragonDna();
 
-  dragonContractInstance.methods.createDragonGen0(dnaStr).send({}, (error, txHash) => {
+  dragonContractInstance.methods.createDragonGen(dnaStr).send({}, (error, txHash) => {
     $("#txHashModal").modal();
     if(error && error.code === -32603) {
       $("#txHashModalTitle").html("Error: transaction failed!").css("color", "#ad2424");

@@ -202,7 +202,7 @@ async function dragonRemoveHtml(id, offerData) {
       </div>
     </div>
     <ul class="dragonInfo">
-      <li id="offerPrice">Price: ${offerData.price}</li>
+      <li id="offerPrice">Price: ${offerData.price / Math.pow(10, 18)} eth</li>
     </ul>
     <button type="button" class="btn btn-warning removeOffer">Remove offer</button>
   </div>`;
@@ -238,7 +238,11 @@ async function dragonRemoveHtml(id, offerData) {
 
         $("#sellOrRemoveModal").modal();
         $("#sellOrRemoveTitle").html("Offer successfully removed!").css("color", "#007400");
-        $(".sellOrRemoveBody").html(`<p>Transaction hash: <br>${txHash}</p>`).css("color", "#007400");
+        $(".sellOrRemoveBody").html(
+          `<p>Offer has been removed from marketplace!<br>
+          Token ID: ${id}<br><br>
+          Transaction hash:<br>
+          ${txHash}</p>`).css("color", "#007400");
 
         $(".sellOrRemoveClose").click(() => location.reload());
       }

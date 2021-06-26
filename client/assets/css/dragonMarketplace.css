@@ -54,7 +54,7 @@
 #offerPrice {
   margin-top: -29px;
   margin-bottom: 12px;
-  margin-left: 82px;
+  margin-left: 68px;
 }
 
 .removeOffer {
@@ -70,12 +70,24 @@
 }
 
 #sellBtn {
+  background-color: #32c554;
   border-radius: 7px 0 0 7px;
 }
 
 .dragonPrice {
   height: 41px;
+  margin-right: -1px;
+}
+
+.ethBox {
+  background-color: #b5b5b5;
   border-radius: 0 7px 7px 0;
+  width: 59px;
+  height: 41px;
+  display: flex;
+  justify-content: center;
+  line-height: 42px;
+  font-weight: bold;
 }
 
 #activeOffer {
