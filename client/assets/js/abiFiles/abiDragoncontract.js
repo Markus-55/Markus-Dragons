@@ -148,36 +148,6 @@ var abiDragoncontract = [
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "userCreationLimit",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "userCreationTotal",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       {
@@ -294,7 +264,7 @@ var abiDragoncontract = [
         "type": "uint256"
       }
     ],
-    "name": "createDragonGen",
+    "name": "createDragonGen0",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",

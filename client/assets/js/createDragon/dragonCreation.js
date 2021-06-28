@@ -5,7 +5,7 @@ var web3 = new Web3(Web3.givenProvider);
 
 var dragonContractInstance;
 var user;
-var dragonContractAddress = "0x7c74A691C34E5faFE104aaEA056C6473d3cD9c2F";
+var dragonContractAddress = "0xfaEbC4812e22C7623DB21b5aDf8b71a91369A250";
 
 $(document).ready(async () => {
   // asks user if they allow the website
@@ -23,12 +23,12 @@ $("#createDragonBtn").click(() => {
   $("#createdDragon").css("display", "none");
 
   let dnaStr = getDragonDna();
-
-  dragonContractInstance.methods.createDragonGen(dnaStr).send({}, (error, txHash) => {
+  
+  dragonContractInstance.methods.createDragonGen0(dnaStr).send({}, (error, txHash) => {
     $("#txHashModal").modal();
     if(error && error.code === -32603) {
       $("#txHashModalTitle").html("Error: transaction failed!").css("color", "#ad2424");
-      $("#txHashModalBody").html("You cannot create more then 20 dragons").css("color", "#ad2424");
+      $("#txHashModalBody").html("You cannot create more then 10 dragons").css("color", "#ad2424");
       //console.log(error);
     }
     else if(error) {

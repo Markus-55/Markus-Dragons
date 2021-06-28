@@ -1,5 +1,7 @@
 .modal-body {
   margin-left: 3px;
+  font-size: 20px;
+  padding: 24px;
 }
 
 .sellRemovePage {
@@ -7,8 +9,10 @@
   font-size: 18px;
   margin-top: 39px;
   border-radius: 7px;
-  width: 240px;
-  height: 42px;
+  width: 341px;
+  height: 51px;
+  line-height: 37px;
+  background-color: #186d7a;
 }
 
 .buyBtn {
@@ -17,17 +21,31 @@
   margin-top: 47px;
   margin-bottom: -47px;
   border-radius: 6px;
-  height: 41px;
+  height: 43px;
   width: 142px;
+  background-color: #32c554;
 }
 
 .offerInfo {
   font-weight: bold;
-    font-size: 18px;
-    margin-top: 7px;
-    border-radius: 7px;
-    height: 42px;
-    width: 118px;
+  font-size: 18px;
+  margin-top: 7px;
+  border-radius: 7px;
+  height: 42px;
+  width: 118px;
+  background-color: #009cb5;
+}
+
+.approval {
+  font-weight: bold;
+  font-size: 17px;
+  margin-top: 37px;
+  margin-left: 1px;
+  margin-bottom: -12px;
+  border-radius: 6px;
+  width: 248px;
+  height: 44px;
+  background-color: #226d79;
 }
 
 .myOffers {
@@ -38,6 +56,13 @@
   border-radius: 6px;
   width: 273px;
   height: 42px;
+  background-color: #f5c73e;
+}
+
+.myOffersBody {
+  font-size: 16px;
+  padding: 15px;
+  font-weight: bold;
 }
 
 #removeDragonBox {
@@ -46,7 +71,7 @@
   justify-content: center;
   border-radius: 10px;
   padding-top: 7px;
-  margin-top: 54px;
+  margin-top: 8px;
   height: 420px;
   box-shadow: 0 6px 20px 0 rgb(0 0 0 / 33%);
 }
@@ -54,15 +79,19 @@
 #offerPrice {
   margin-top: -29px;
   margin-bottom: 12px;
-  margin-left: 68px;
+  margin-left: 59px;
 }
 
 .removeOffer {
   border-radius: 7px;
   font-weight: bold;
   font-size: 18px;
-  height: 42px;
-  width: 152px;
+  line-height: 26px;
+  margin-top: 15px;
+  height: 39px;
+  width: 145px;
+  background-color: #f7e750;
+  border-color: #feeb37;
 }
 
 #sellDragon {

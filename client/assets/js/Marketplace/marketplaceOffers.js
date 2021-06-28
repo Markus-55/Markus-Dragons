@@ -1,10 +1,27 @@
-/* shownDragons.js shows the dragon to the frontend with it's details */
+async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
+  let dragonOfferStr =
+  `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${offerId}">
 
-function dragonHtml(id, offerData) {
-  let dragonStr =
-  `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${id}">
+    <div class="modal fade" id="offerModal" tabindex="-1" role="dialog" aria-labelledby="offerModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="offerModalTitle">Offer details:</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="row modal-body offerModalBody"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-success buyBtn">Buy dragon</button>
     <div id="myDragonBox">
-      <div id="idDragon">Dragon ID: ${id}</div>
+      <div id="idDragon">Dragon ID: ${offerId}</div>
       <div id="myDragon">
         <div id="rightWing">
           <div class="wings rightWingPart1"></div>
@@ -150,64 +167,49 @@ function dragonHtml(id, offerData) {
         <span id="momId"></span>
       </li>
     </ul>
-    <div id="sellDragon" class="input-group mb-3">
-      <div class="input-group-prepend">
-        <button id="sellBtn" class="btn btn-success" type="button">Sell dragon</button>
-      </div>
-      <input type="number" class="form-control dragonPrice" placeholder="Input price" aria-label="Input price" aria-describedby="sellBtn" max="1000">
-      <div class="ethBox">ETH</div>
-    </div>
+    <button type="button" class="btn btn-info offerInfo" data-toggle="modal" data-target=".bd-example-modal-xl">Offer info</button>
   </div>`;
 
-  //console.log(dragonStr);
-  $("#dragonObject").prepend(dragonStr);
+  //$("#tokenOffers").html(`<h3>There are no offers for now, click on the button above if you want to sell your dragons.</h3>`);
 
-  if(offerData.active) {
-    $(`#dragonid${id} #sellDragon`).html(`
-      <div id="activeOffer">
-        <p>Already in marketplace!</p>
-      </div>`);
+  //console.log(dragonOfferStr);
+  $(`#dragonId${0}`).remove();
+  if(!activeOffer) {
+    $(`#dragonId${offerId}`).remove();
+  }
+  else if(activeOffer) {
+    $(`#dragonId${offerId}`).remove();
+    $("#tokenOffers").prepend(dragonOfferStr);
   }
 
-  $("#sellBtn").click(async () => {
-    let isOperator = await dragonContractInstance.methods.isApprovedForAll(user, marketplaceAddress).call();
-
-    let inputPrice = parseFloat($(`#dragonId${id} .dragonPrice`).val()).toFixed(3);
-    let price = web3.utils.toWei(inputPrice, "ether");
-
-    if(!isOperator) {
-      operatorApproval();
-    }
-    else if(inputPrice <= 0) {
-      $("#sellOrRemoveModal").modal();
-      $("#sellOrRemoveTitle").html("Transaction failed!").css("color", "#ad2424");
-      $(".sellOrRemoveBody").html("Price cannot be less than or equal to zero").css("color", "#ad2424");
-    }
-    else if(inputPrice > 1000.999) {
-      $("#sellOrRemoveModal").modal();
-      $("#sellOrRemoveTitle").html("Transaction failed!").css("color", "#ad2424");
-      $(".sellOrRemoveBody").html("Price cannot be greater than 1000 ETH").css("color", "#ad2424");
+  $(`#dragonId${offerId} .buyBtn`).click(() => {
+    if(isSellerOf) {
+      $("#buyModal").modal();
+      $("#buyTitle").html("Transaction failed!").css("color", "#ad2424");
+      $(".buyBody").html(
+        `You cannot buy your own offer. If you want to remove it,
+        click on the button above the dragons and remove the active offers that you don't want to sell anymore.`).css("color", "#ad2424");
     }
     else {
-      marketplaceInstance.methods.setOffer(price, id).send({}, (error, txHash) => {
+      marketplaceInstance.methods.buyDragon(offerId).send({value: offerData.price}, (error, txHash) => {
+        $("#buyModal").modal();
         if(error) {
+          $("#buyTitle").html("Error: transaction failed!").css("color", "#ad2424");
+          $(".buyBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
           // console.log(error);
-          $("#sellOrRemoveModal").modal();
-          $("#sellOrRemoveTitle").html("Error: transaction failed!").css("color", "#ad2424");
-          $(".sellOrRemoveBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
         }
         else {
-          // console.log(txHash);
-          $("#sellOrRemoveModal").modal();
-          $("#sellOrRemoveTitle").html("Offer successfully created!").css("color", "#007400");
-          $(".sellOrRemoveBody").html(
-            `<p>Offer has been added to marketplace!<br>
-            Offer Token ID: ${id}<br>
-            Offer price: ${price / Math.pow(10, 18)} ETH<br><br>
+          $("#buyTitle").html("Offer successfully bought!").css("color", "#007400");
+          $(".buyBody").html(
+            `<p>The MD token has been added to your account!<br>
+            Token ID: ${offerData.tokenId}<br>
+            Cost: ${offerData.price / Math.pow(10, 18)} ETH<br><br>
             Transaction hash:<br>
-            ${txHash}</p>`).css("color", "#007400");
+            ${txHash}</p>`
+          ).css("color", "#007400");
 
-          $(".sellOrRemoveClose").click(() => location.reload());
+          $(".buyClose").click(() => location.reload());
+          // console.log(txHash);
         }
       });
     }
@@ -236,40 +238,47 @@ function dragonObj(dragonData) {
   return storedDragonsObj;
 }
 
-function dragonDetails(dragonData, id) {
-  $(`#dragonId${id} #generation`).append(`Generation: ${dragonData.generation}`);
-  $(`#dragonId${id} #birthTime`).append(`Birth time: ${toReadableTime(dragonData.birthTime)}`);
-  $(`#dragonId${id} #dadId`).append(`Dad ID: ${dragonData.dadId}`);
-  $(`#dragonId${id} #momId`).append(`Mom ID: ${dragonData.momId}`);
+function activeDragonDetails(dragonData, offerId, offerData) {
+  $(`#dragonId${offerId} #birthTime`).append(`Birth time: ${toReadableTime(dragonData.birthTime)}`);
+  $(`#dragonId${offerId} #generation`).append(`Generation: ${dragonData.generation}`);
+  $(`#dragonId${offerId} #dadId`).append(`dadId: ${dragonData.dadId}`);
+  $(`#dragonId${offerId} #momId`).append(`momId: ${dragonData.momId}`);
+
+  $(`#dragonId${offerId} .offerInfo`).click(() => {
+    $("#offerModal").modal();
+    $(".offerModalBody").html(`
+      Seller address: ${offerData.seller}<br>
+      Token price: ${offerData.price / Math.pow(10, 18)} ETH`);
+  });
 }
 
-function renderOwnedDragons(dnaObject, id) {
+function renderActiveDragons(dnaObject, offerId) {
   let eyeShapeNum = parseInt(dnaObject.eyeShape);
   let hornShapeNum = parseInt(dnaObject.hornShape);
   let animationNum = parseInt(dnaObject.animation);
 
-  headBodyColor(colors[dnaObject.headBodyColor], dnaObject.headBodyColor, id);
+  headBodyColor(colors[dnaObject.headBodyColor], dnaObject.headBodyColor, offerId);
 
-  wingsTailColor(colors[dnaObject.wingsTailColor], dnaObject.wingsTailColor, id);
+  wingsTailColor(colors[dnaObject.wingsTailColor], dnaObject.wingsTailColor, offerId);
 
-  legsArmsColor(colors[dnaObject.legsArmsColor], dnaObject.legsArmsColor, id);
+  legsArmsColor(colors[dnaObject.legsArmsColor], dnaObject.legsArmsColor, offerId);
 
-  eyesColor(colors[dnaObject.eyesColor], dnaObject.eyesColor, id);
+  eyesColor(colors[dnaObject.eyesColor], dnaObject.eyesColor, offerId);
 
-  eyeVariation(eyeShapeNum, animationNum, id);
+  eyeVariation(eyeShapeNum, animationNum, offerId);
 
-  hornVariation(hornShapeNum, animationNum, id);
+  hornVariation(hornShapeNum, animationNum, offerId);
 
-  topHornsColor(colors[dnaObject.topHornsColor], dnaObject.topHornsColor, id);
+  topHornsColor(colors[dnaObject.topHornsColor], dnaObject.topHornsColor, offerId);
 
-  sideHornsColor(colors[dnaObject.sideHornsColor], dnaObject.sideHornsColor, id);
+  sideHornsColor(colors[dnaObject.sideHornsColor], dnaObject.sideHornsColor, offerId);
 
   if(animationNum === 5) {
-    eyeAnimationVariations(eyeShapeNum, id);
+    eyeAnimationVariations(eyeShapeNum, offerId);
   }
   else {
-    animationVariations(animationNum, hornShapeNum, id);
+    animationVariations(animationNum, hornShapeNum, offerId);
   }
 
-  specialNum(dnaObject.lastNum, id);
+  specialNum(dnaObject.lastNum, offerId);
 }

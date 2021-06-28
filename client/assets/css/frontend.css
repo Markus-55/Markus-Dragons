@@ -16,6 +16,10 @@ nav {
   background-color: #343434;
 }
 
+#txHashModalBody {
+  font-size: 20px;
+}
+
 .navbar-brand {
   font-size: 1.6rem;
   font-family: "Hind Siliguri";
@@ -139,6 +143,7 @@ nav {
 }
 
 footer {
+  padding-left: 14px;
   font-size: 115%;
   color: black;
   margin-top: 229px;

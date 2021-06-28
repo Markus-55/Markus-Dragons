@@ -74,7 +74,6 @@ contract DragonMarketplace is Ownable, IDragonMarketplace {
 
       require(offer.price == msg.value, "The price needs to be equal to the offer of Token ID");
       require(offer.active, "There is no offer for this token ID");
-      require(offer.seller != msg.sender, "You cannot buy your own dragon");
 
       _offerRemove(_tokenId);
 

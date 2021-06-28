@@ -9,8 +9,7 @@ contract Dragoncontract is IERC721, Ownable {
 
   using SafeMath for uint256;
 
-  uint256 public constant gen0CreationLimit = 20;
-  uint256 public constant userCreationLimit = 20;
+  uint256 public constant gen0CreationLimit = 10;
 
   string private constant nameOfToken = "MarkusDragons";
   string private constant symbolOfToken = "MD";
@@ -45,7 +44,6 @@ contract Dragoncontract is IERC721, Ownable {
   mapping(address => mapping(address => bool)) private operatorApproval;
 
   uint256 public gen0Total;
-  uint256 public userCreationTotal;
 
   constructor() public {
     _createDragon(uint256(-1), 0, 0, 0, address(0));
@@ -95,18 +93,12 @@ contract Dragoncontract is IERC721, Ownable {
         return ownedDragons;
     }
 
-  function createDragonGen(uint256 _genes) external {
-    require(gen0Total < gen0CreationLimit && msg.sender == owner || tokenBalances[msg.sender] < userCreationLimit, "The limit of dragons you can create is: 20");
+  function createDragonGen0(uint256 _genes) external {
+    require(tokenBalances[msg.sender] < gen0CreationLimit, "The limit of generation 0 dragons per user is: 10");
 
-    if(gen0Total < gen0CreationLimit && msg.sender == owner) {
+    if(tokenBalances[msg.sender] < gen0CreationLimit) {
       gen0Total++;
-
       _createDragon(_genes, 0, 0, 0, msg.sender);
-    }
-    else {
-      userCreationTotal++;
-
-      _createDragon(_genes, 0, 0, userCreationTotal, msg.sender);
     }
   }
 

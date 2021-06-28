@@ -6,6 +6,10 @@ body, #dragonModal, #babyModal {
   border-radius: 17px;
 }
 
+.breedModalBody {
+  font-size: 20px;
+}
+
 #babyModalBody {
   padding-top: 0px;
   height: 344px;
@@ -13,7 +17,7 @@ body, #dragonModal, #babyModal {
 }
 
 .breedBtn {
-  background-color: #018f01;
+  background-color: #3dbf3d;
   margin-top: 105px;
   margin-bottom: -160px;
   font-weight: bold;
@@ -32,7 +36,7 @@ body, #dragonModal, #babyModal {
   width: 249px;
   height: 46px;
   line-height: 34px;
-  background-color: #ffda00;
+  background-color: #f5c73e;
 }
 
 #dadDragonBox, #momDragonBox {

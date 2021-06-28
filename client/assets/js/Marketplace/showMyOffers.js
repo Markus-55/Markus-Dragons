@@ -1,26 +1,8 @@
-async function dragonOfferHtml(id, offerData, activeOffer) {
-  let dragonOfferStr =
+async function dragonRemoveHtml(id, offerData) {
+  let offerStr =
   `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${id}">
-
-    <div class="modal fade" id="offerModal" tabindex="-1" role="dialog" aria-labelledby="offerModalTitle" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" id="offerModalTitle">Offer details:</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="row modal-body offerModalBody"></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <button type="button" class="btn btn-danger buyBtn">Buy dragon</button>
-    <div id="myDragonBox">
+   <button type="button" class="btn btn-warning removeOffer">Remove offer</button>
+    <div id="removeDragonBox">
       <div id="idDragon">Dragon ID: ${id}</div>
       <div id="myDragon">
         <div id="rightWing">
@@ -142,68 +124,51 @@ async function dragonOfferHtml(id, offerData, activeOffer) {
         </div>
       </div>
     </div>
-    <div id="myDragonDna">
-      <b>
-        DNA:
-        <!-- Colors -->
-        <span id="headBodyDna"></span>
-        <span id="wingsTailDna"></span>
-        <span id="legsArmsDna"></span>
-        <span id="eyesDna"></span>
-        <!-- Dragon attributes -->
-        <span id="eyeShapeDna"></span>
-        <span id="hornShapeDna"></span>
-        <span id="topHornsDna"></span>
-        <span id="sideHornsDna"></span>
-        <span id="animationDna"></span>
-        <span id="specialDna"></span>
-      </b>
-    </div>
     <ul class="dragonInfo">
-      <li id="birthTime"></li>
-      <li id="generation"></li>
-      <li>
-        <span id="dadId"></span>
-        <span id="momId"></span>
-      </li>
+      <li id="offerPrice">Price: ${offerData.price / Math.pow(10, 18)} ETH</li>
     </ul>
-    <button type="button" class="btn btn-primary offerInfo" data-toggle="modal" data-target=".bd-example-modal-xl">Offer info</button>
   </div>`;
 
-  //console.log(dragonOfferStr);
+  //console.log(offerStr);
   $(`#dragonId${0}`).remove();
-  if(!activeOffer) {
-    $(`#dragonId${id}`).remove();
+  $(".myOffers").click(() => {
+    if(offerData.active) {
+      $("#myOffersModal").modal();
+    }
+  });
+
+  if(!offerData.active) {
+    $(`.myOffersBody #dragonId${id}`).remove();
   }
   else {
-    $(`#dragonId${id}`).remove();
-    $("#tokenOffers").prepend(dragonOfferStr);
+    $(`.myOffersBody #dragonId${id}`).remove();
+    $(".myOffersBody").prepend(offerStr);
   }
 
-  $(`#dragonId${id} .buyBtn`).click(() => {
-    marketplaceInstance.methods.buyDragon(id).send({value: offerData.price}, (error, txHash) => {
-      $("#buyModal").modal();
-      if(error && error.code === -32603) {
-        $("#buyTitle").html("Error: transaction failed!").css("color", "#ad2424");
-        $(".buyBody").html("You cannot buy your own offer").css("color", "#ad2424");
-      }
-      else if(error) {
-        $("#buyTitle").html("Error: transaction failed!").css("color", "#ad2424");
-        $(".buyBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
-        console.log(error);
+  $(`#dragonId${id} > .removeOffer`).click(() => {
+
+    marketplaceInstance.methods.removeOffer(id).send({}, (error, txHash) => {
+      if(error) {
+        // console.log(error);
+        $("#myOffersModal").modal("hide");
+
+        $("#sellOrRemoveModal").modal();
+        $("#sellOrRemoveTitle").html("Error: transaction failed!").css("color", "#ad2424");
+        $(".sellOrRemoveBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
       }
       else {
-        $("#buyTitle").html("Offer successfully bought!").css("color", "#007400");
-        $(".buyBody").html(
-          `<p>The MD token has been added to your account!<br>
-          Token ID: ${offerData.tokenId}<br>
-          Cost: ${offerData.price / Math.pow(10, 18)} eth<br><br>
-          Transaction hash:<br>
-          ${txHash}</p>`
-        ).css("color", "#007400");
+        // console.log(txHash);
+        $("#myOffersModal").modal("hide");
 
-        $(".buyClose").click(() => location.reload());
-        console.log(txHash);
+        $("#sellOrRemoveModal").modal();
+        $("#sellOrRemoveTitle").html("Offer successfully removed!").css("color", "#007400");
+        $(".sellOrRemoveBody").html(
+          `<p>Offer has been removed from marketplace!<br>
+          Token ID: ${id}<br><br>
+          Transaction hash:<br>
+          ${txHash}</p>`).css("color", "#007400");
+
+        $(".sellOrRemoveClose").click(() => location.reload());
       }
     });
   });
@@ -229,20 +194,6 @@ function dragonObj(dragonData) {
 
   //console.log(storedDragonsObj)
   return storedDragonsObj;
-}
-
-function activeDragonDetails(dragonData, id, offerData) {
-  $(`#dragonId${id} #birthTime`).append(`Birth time: ${toReadableTime(dragonData.birthTime)}`);
-  $(`#dragonId${id} #generation`).append(`Generation: ${dragonData.generation}`);
-  $(`#dragonId${id} #dadId`).append(`dadId: ${dragonData.dadId}`);
-  $(`#dragonId${id} #momId`).append(`momId: ${dragonData.momId}`);
-
-  $(`#dragonId${id} .offerInfo`).click(() => {
-    $("#offerModal").modal();
-    $(".offerModalBody").html(`
-      Seller address: ${offerData.seller}<br>
-      Token price: ${offerData.price / Math.pow(10, 18)} eth`);
-  });
 }
 
 function renderActiveDragons(dnaObject, id) {
