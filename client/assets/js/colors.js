@@ -1,6 +1,5 @@
 /* Colors used for the dragons */
-
-var colors = {
+let colors = {
 00: "ae494f",
 01: "00073e",
 02: "c90d00",

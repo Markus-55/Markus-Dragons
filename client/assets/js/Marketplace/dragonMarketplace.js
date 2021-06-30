@@ -1,11 +1,11 @@
-var web3 = new Web3(Web3.givenProvider);
+let web3 = new Web3(Web3.givenProvider);
 
-var marketplaceInstance;
-var dragonContractInstance;
+let marketplaceInstance;
+let dragonContractInstance;
 
-var user;
-var marketplaceAddress = "0xAc73E1a9Bf878bC5143A901B5a3B21FF4a8c7e99";
-var dragonContractAddress = "0xfaEbC4812e22C7623DB21b5aDf8b71a91369A250";
+let user;
+let marketplaceAddress = "0x38037e291e05112361ecc86d52cBBb74EF07bd78";
+let dragonContractAddress = "0x1d75c6F38c1349A4730F8AC3A1950ba7628C8442";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();

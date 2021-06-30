@@ -170,8 +170,6 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
     <button type="button" class="btn btn-info offerInfo" data-toggle="modal" data-target=".bd-example-modal-xl">Offer info</button>
   </div>`;
 
-  //$("#tokenOffers").html(`<h3>There are no offers for now, click on the button above if you want to sell your dragons.</h3>`);
-
   //console.log(dragonOfferStr);
   $(`#dragonId${0}`).remove();
   if(!activeOffer) {
@@ -179,27 +177,26 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
   }
   else if(activeOffer) {
     $(`#dragonId${offerId}`).remove();
-    $("#tokenOffers").prepend(dragonOfferStr);
+    $(".tokenOffers").prepend(dragonOfferStr);
   }
 
   $(`#dragonId${offerId} .buyBtn`).click(() => {
     if(isSellerOf) {
-      $("#buyModal").modal();
-      $("#buyTitle").html("Transaction failed!").css("color", "#ad2424");
-      $(".buyBody").html(
+      $("#buyTitle").text("Transaction was not successful").css("color", "black");
+      $(".buyBody").text(
         `You cannot buy your own offer. If you want to remove it,
-        click on the button above the dragons and remove the active offers that you don't want to sell anymore.`).css("color", "#ad2424");
+        click on the button above the dragons and remove the active offers that you don't want to sell anymore.`).css("color", "black");
+      $("#buyModal").modal();
     }
     else {
       marketplaceInstance.methods.buyDragon(offerId).send({value: offerData.price}, (error, txHash) => {
-        $("#buyModal").modal();
         if(error) {
-          $("#buyTitle").html("Error: transaction failed!").css("color", "#ad2424");
-          $(".buyBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
+          $("#buyTitle").text("Transaction was not successful").css("color", "black");
+          $(".buyBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
           // console.log(error);
         }
         else {
-          $("#buyTitle").html("Offer successfully bought!").css("color", "#007400");
+          $("#buyTitle").text("Offer successfully bought!").css("color", "#007400");
           $(".buyBody").html(
             `<p>The MD token has been added to your account!<br>
             Token ID: ${offerData.tokenId}<br>
@@ -211,31 +208,10 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
           $(".buyClose").click(() => location.reload());
           // console.log(txHash);
         }
+        $("#buyModal").modal();
       });
     }
   });
-}
-
-function dragonObj(dragonData) {
-  let genes = dragonData.genes.split('');
-
-  let storedDragonsObj = {
-    // Dna dragon colors
-    headBodyColor: genes[0] + genes[1],
-    wingsTailColor: genes[2] + genes[3],
-    legsArmsColor: genes[4] + genes[5],
-    eyesColor: genes[6] + genes[7],
-    // Dna dragon attributes
-    eyeShape: genes[8],
-    hornShape: genes[9],
-    topHornsColor: genes[10] + genes[11],
-    sideHornsColor: genes[12] + genes[13],
-    animation: genes[14],
-    lastNum: genes[15]
-  }
-
-  //console.log(storedDragonsObj)
-  return storedDragonsObj;
 }
 
 function activeDragonDetails(dragonData, offerId, offerData) {

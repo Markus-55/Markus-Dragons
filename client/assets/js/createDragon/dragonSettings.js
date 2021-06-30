@@ -1,7 +1,7 @@
 /* dragonSettings.js creats objects for default and random dna,
    calls the functions in dragonFactory.js to render colors and attributes */
 
-var defaultDnaCode = {
+let defaultDnaCode = {
   // Default dna dragon colors
   headBodyColor: 40,
   wingsTailColor: 23,
@@ -18,16 +18,16 @@ var defaultDnaCode = {
 
 $(document).ready(function() {
   // sets the colors and attributes dna
-  $("#headBodyDna").html(defaultDnaCode.headBodyColor);
-  $("#wingsTailDna").html(defaultDnaCode.wingsTailColor);
-  $("#legsArmsDna").html(defaultDnaCode.legsArmsColor);
-  $("#eyesDna").html(defaultDnaCode.eyesColor);
-  $("#eyeShapeDna").html(defaultDnaCode.eyeShape);
-  $("#hornShapeDna").html(defaultDnaCode.hornShape);
-  $("#topHornsDna").html(defaultDnaCode.topHornsColor);
-  $("#sideHornsDna").html(defaultDnaCode.sideHornsColor);
-  $("#animationDna").html(defaultDnaCode.animation);
-  $("#specialDna").html(defaultDnaCode.lastNum);
+  $("#headBodyDna").text(defaultDnaCode.headBodyColor);
+  $("#wingsTailDna").text(defaultDnaCode.wingsTailColor);
+  $("#legsArmsDna").text(defaultDnaCode.legsArmsColor);
+  $("#eyesDna").text(defaultDnaCode.eyesColor);
+  $("#eyeShapeDna").text(defaultDnaCode.eyeShape);
+  $("#hornShapeDna").text(defaultDnaCode.hornShape);
+  $("#topHornsDna").text(defaultDnaCode.topHornsColor);
+  $("#sideHornsDna").text(defaultDnaCode.sideHornsColor);
+  $("#animationDna").text(defaultDnaCode.animation);
+  $("#specialDna").text(defaultDnaCode.lastNum);
 
   renderDragon(defaultDnaCode);
 });

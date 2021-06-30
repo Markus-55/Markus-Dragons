@@ -1,11 +1,11 @@
 /* dragonCreation.js is calling the smart contract with the given information
   to create the unique dragon token and store it */
 
-var web3 = new Web3(Web3.givenProvider);
+let web3 = new Web3(Web3.givenProvider);
 
-var dragonContractInstance;
-var user;
-var dragonContractAddress = "0xfaEbC4812e22C7623DB21b5aDf8b71a91369A250";
+let dragonContractInstance;
+let user;
+let dragonContractAddress = "0x1d75c6F38c1349A4730F8AC3A1950ba7628C8442";
 
 $(document).ready(async () => {
   // asks user if they allow the website
@@ -18,45 +18,46 @@ $(document).ready(async () => {
   birthEvent();
 });
 
+function birthEvent() {
+  dragonContractInstance.events.Birth().on("data", event => {
+    $("#createdDragon > .createdDragonTitle, .addedTokenText, .ownerDetail, .geneDetail, .idDetail").remove();
+    $("#createdDragon").css("display", "block");
+    $("#createdDragon").prepend(
+     `<span class="createdDragonTitle"><h5>Dragon successfully created!</h5></span>
+      <span class="addedTokenText">The MD token has been added to your account!</span>
+      <span class="ownerDetail">Owner: ${event.returnValues.owner}</span>
+      <span class="geneDetail">Genes: ${event.returnValues.genes}</span>
+      <span class="idDetail">Token Id: ${event.returnValues.dragonId}</span>`
+    );
+  }).on("error", (error, receipt) => {
+      console.log(error, receipt);
+    });
+}
+
 $("#createDragonBtn").click(() => {
 
   $("#createdDragon").css("display", "none");
 
   let dnaStr = getDragonDna();
-  
+
   dragonContractInstance.methods.createDragonGen0(dnaStr).send({}, (error, txHash) => {
-    $("#txHashModal").modal();
     if(error && error.code === -32603) {
-      $("#txHashModalTitle").html("Error: transaction failed!").css("color", "#ad2424");
-      $("#txHashModalBody").html("You cannot create more then 10 dragons").css("color", "#ad2424");
+      $("#txHashModalTitle").text("Creation of dragon was not successful").css("color", "black");
+      $(".txHashModalBody").text("You cannot create more then 10 dragons").css("color", "black");
       //console.log(error);
     }
     else if(error) {
-      $("#txHashModalTitle").html("Error: transaction failed!").css("color", "#ad2424");
-      $("#txHashModalBody").html("Failed to send transaction: " + error.message).css("color", "#ad2424");
+      $("#txHashModalTitle").text("Transaction was not successful").css("color", "black");
+      $(".txHashModalBody").text("Failed to send transaction: " + error.message).css("color", "black");
       //console.log(error);
     }
     else {
-      $("#txHashModalTitle").html("Transaction successfully sent!").css("color", "#007400");
-      $("#txHashModalBody").html(`<p>Transaction hash: <br>${txHash}</p>`).css("color", "#007400");
+      $("#txHashModalTitle").text("Transaction successfully sent!").css("color", "#007400");
+      $(".txHashModalBody").html(`<p>Transaction hash: <br>${txHash}</p>`).css("color", "#007400");
       //console.log(txHash);
     }
+    $("#txHashModal").modal();
   });
 });
 
 $('.close').click(() => $("#createdDragon").css("display", "none"));
-
-function birthEvent() {
-  dragonContractInstance.events.Birth().on("data", event => {
-    $("#createdDragon > p, h5").remove();
-    $("#createdDragon").css("display", "block");
-    $("#createdDragon").prepend(
-      `<h5 id="createdDragonTitle">Dragon successfully created!</h5>
-      <p id="addedTokenText">&nbsp; &nbsp;The MD token has been added to your account!</p>
-      <p>Owner: ${event.returnValues.owner} &nbsp; &nbsp; &nbsp; &nbsp;
-      Genes: ${event.returnValues.genes} &nbsp; &nbsp; &nbsp; &nbsp;
-      Token Id: ${event.returnValues.dragonId}</p>`);
-  }).on("error", (error, receipt) => {
-      console.log(error, receipt);
-    });
-}

@@ -3,22 +3,22 @@ async function removeOffers() {
   let ownedDragonIds = await dragonContractInstance.methods.allOwnedDragons().call();
 
   for(let i = 0; i < ownedDragonIds.length; i++) {
-    let id = ownedDragonIds[i];
-    let offerData = await marketplaceInstance.methods.getOffer(id).call();
+    let offerId = ownedDragonIds[i];
+    let offerData = await marketplaceInstance.methods.getOffer(offerId).call();
 
-    getIdToRemove(id, offerData).catch(error => console.log(error));
+    getIdToRemove(offerId, offerData).catch(error => console.log(error));
   }
 }
 
-async function getIdToRemove(id, offerData) {
-  let dragonData = await dragonContractInstance.methods.getDragon(id).call();
-  controlFunctionRemoveOffers(dragonData, id, offerData);
+async function getIdToRemove(offerId, offerData) {
+  let dragonData = await dragonContractInstance.methods.getDragon(offerId).call();
+  controlFunctionRemoveOffers(dragonData, offerId, offerData);
 }
 
-function controlFunctionRemoveOffers(dragonData, id, offerData) {
-  dragonRemoveHtml(id, offerData);
+function controlFunctionRemoveOffers(dragonData, offerId, offerData) {
+  dragonRemoveHtml(offerId, offerData);
 
   let dnaObject = dragonObj(dragonData);
 
-  renderActiveDragons(dnaObject, id);
+  renderActiveDragons(dnaObject, offerId);
 }

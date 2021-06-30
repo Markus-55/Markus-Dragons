@@ -1,14 +1,14 @@
 /* myDragons.js uses the functions from Dragoncontract.sol that gets all the dragons that the user owns
    and displays them with all their attributes, colors & animations on the page: myDragons.html */
 
-var web3 = new Web3(Web3.givenProvider);
+let web3 = new Web3(Web3.givenProvider);
 
-var dragonContractInstance;
-var marketplaceInstance;
+let dragonContractInstance;
+let marketplaceInstance;
 
-var user;
-var marketplaceAddress = "0xAc73E1a9Bf878bC5143A901B5a3B21FF4a8c7e99";
-var dragonContractAddress = "0xfaEbC4812e22C7623DB21b5aDf8b71a91369A250";
+let user;
+let marketplaceAddress = "0x38037e291e05112361ecc86d52cBBb74EF07bd78";
+let dragonContractAddress = "0x1d75c6F38c1349A4730F8AC3A1950ba7628C8442";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -53,34 +53,33 @@ async function operatorApproval() {
   let isOperator = await dragonContractInstance.methods.isApprovedForAll(user, marketplaceAddress).call();
 
   if(!isOperator) {
-    $("#OperatorAproval").modal();
-    $("#OperatorAprovalTitle").html("Operator approval");
+    $("#OperatorAprovalTitle").text("Operator approval");
     $(".OperatorAprovalBody").html(`<p>In order to sell your dragons,
       you need to accept the marketplace as an operator so that it can manage/sell your offers.
       Click on the confirm button if you accept or you can decline if you don't want to sell your dragons</p>`);
+    $("#OperatorAproval").modal();
 
     $(".confirmBtn").click(() => marketplaceOperator());
     $(".declineBtn").click(() => location.reload());
   }
   else {
+    $("#marketplaceOperatorTitle").text("Operator approval").css("color", "#007400");
+    $(".marketplaceOperatorBody").text("Marketplace is an approved operator!").css("color", "#007400");
     $("#marketplaceOperator").modal();
-    $("#marketplaceOperatorTitle").html("Operator approval").css("color", "#007400");
-    $(".marketplaceOperatorBody").html("Marketplace is an approved operator!").css("color", "#007400");
   }
 }
 
 function marketplaceOperator() {
   dragonContractInstance.methods.setApprovalForAll(marketplaceAddress, true).send({}, (error, txHash) => {
     if(error) {
-      $("#marketplaceOperator").modal();
-      $("#marketplaceOperatorTitle").html("Error: transaction failed!").css("color", "#ad2424");
-      $(".marketplaceOperatorBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
+      $("#marketplaceOperatorTitle").text("Transaction was not successful").css("color", "black");
+      $(".marketplaceOperatorBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
     }
     else {
-      $("#marketplaceOperator").modal();
-      $("#marketplaceOperatorTitle").html("Operator approval").css("color", "#007400");
+      $("#marketplaceOperatorTitle").text("Operator approval").css("color", "#007400");
       $(".marketplaceOperatorBody").html(`Marketplace set as operator!<br><br>
         Transaction hash:<br>${txHash}`).css("color", "#007400");
     }
+    $("#marketplaceOperator").modal();
   });
 }

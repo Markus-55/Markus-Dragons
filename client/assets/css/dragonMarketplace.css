@@ -13,6 +13,7 @@
   height: 51px;
   line-height: 37px;
   background-color: #186d7a;
+  border-color: #186d7a;
 }
 
 .buyBtn {
@@ -24,6 +25,7 @@
   height: 43px;
   width: 142px;
   background-color: #32c554;
+  border-color: #32c554;
 }
 
 .offerInfo {
@@ -46,6 +48,7 @@
   width: 248px;
   height: 44px;
   background-color: #226d79;
+  border-color: #226d79;
 }
 
 .myOffers {
@@ -100,6 +103,7 @@
 
 #sellBtn {
   background-color: #32c554;
+  border-color: #32c554;
   border-radius: 7px 0 0 7px;
 }
 

@@ -31,6 +31,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <a href="dragonBreed.html" class="btn btn-warning dragonResetBtn2">Reset selected dragons</a>
           <div class="row modal-body dragonModalBody"></div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -40,14 +41,14 @@
     </div>
 
     <div class="modal fade" id="breedModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="breedModalTitle" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title" id="breedModalTitle"></h4>
           </div>
           <div class="modal-body breedModalBody"></div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary breedClose" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -59,16 +60,16 @@
           <div class="modal-header">
             <h4 class="modal-title" id="babyModalTitle">Here's your baby dragon!</h4>
           </div>
-          <div class="modal-body" id="babyModalBody"></div>
+          <div class="modal-body babyModalBody"></div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary babyClose" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
 
     <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
-      <a class="navbar-brand" href="#">Markus-Dragons</a>
+      <a class="navbar-brand" href="index.html">Markus-Dragons</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -105,12 +106,6 @@
           <a href="dragonBreed.html" class="btn btn-warning dragonResetBtn">Reset selected dragons</a>
           <div id="momDragonBox"></div>
           <button type="button" class="btn btn-info momDragonBtn" data-toggle="modal" data-target="#dragonModal">Select Mom dragon</button>
-        </div>
-
-        <div class="alert alert-dismissible show" role="alert" id="dragonBirth">
-          <button type="button" class="close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
 
       </div>

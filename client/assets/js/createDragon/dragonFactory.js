@@ -12,47 +12,47 @@ function genColors() {
 
 function headBodyColor(color, code) {
   $("#head, #body").css("background", "#" + color);
-  $("#headBodyCode").html("code: " + code);
-  $("#headBodyDna").html(code);
+  $("#headBodyCode").text("code: " + code);
+  $("#headBodyDna").text(code);
 }
 
 function wingsTailColor(color, code) {
   $(".wings, .tailEnd").css("border-left-color", "#" + color);
   $(".tail").css("background", "#" + color);
-  $("#wingsTailCode").html("code: " + code);
-  $("#wingsTailDna").html(code);
+  $("#wingsTailCode").text("code: " + code);
+  $("#wingsTailDna").text(code);
 }
 
 function legsArmsColor(color, code) {
   $(".legs, .feet, .arms").css("background", "#" + color);
-  $("#legsArmsCode").html("code: " + code);
-  $("#legsArmsDna").html(code);
+  $("#legsArmsCode").text("code: " + code);
+  $("#legsArmsDna").text(code);
 }
 
 function eyesColor(color, code) {
   $(".pupils").css("background", "#" + color);
-  $("#eyesCode").html("code: " + code);
-  $("#eyesDna").html(code);
+  $("#eyesCode").text("code: " + code);
+  $("#eyesDna").text(code);
 }
 
 function topHornsColor(color, code) {
   $(".topHorns").css("background", "#" + color);
-  $("#topHornsCode").html("code: " + code);
-  $("#topHornsDna").html(code);
+  $("#topHornsCode").text("code: " + code);
+  $("#topHornsDna").text(code);
 }
 
 function sideHornsColor(color, code) {
   $(".sideHorns").css("background", "#" + color);
-  $("#sideHornsCode").html("code: " + code);
-  $("#sideHornsDna").html(code);
+  $("#sideHornsCode").text("code: " + code);
+  $("#sideHornsDna").text(code);
 }
 
 function eyeVariation(eyeShapeNum, animationNum) {
-  $("#eyeShapeDna").html(eyeShapeNum);
+  $("#eyeShapeDna").text(eyeShapeNum);
   switch (eyeShapeNum) {
     case 1:
       originalEyes();
-      $("#eyesName").html("Original");
+      $("#eyesName").text("Original");
       // When animation is dilating eyes call function
       // to properly set the eye shape
       if(animationNum == 5) {
@@ -61,7 +61,7 @@ function eyeVariation(eyeShapeNum, animationNum) {
       break
     case 2:
       originalEyes();
-      $("#eyesName").html("Happy");
+      $("#eyesName").text("Happy");
       eyesTypeHappy();
       if(animationNum == 5) {
         eyeAnimationVariations(2);
@@ -69,7 +69,7 @@ function eyeVariation(eyeShapeNum, animationNum) {
       break
     case 3:
       originalEyes();
-      $("#eyesName").html("Round");
+      $("#eyesName").text("Round");
       eyesTypeRound();
       if(animationNum == 5) {
         eyeAnimationVariations(3);
@@ -77,7 +77,7 @@ function eyeVariation(eyeShapeNum, animationNum) {
       break
     case 4:
       originalEyes();
-      $("#eyesName").html("Relaxed");
+      $("#eyesName").text("Relaxed");
       eyesTypeRelaxed();
       if(animationNum == 5) {
         eyeAnimationVariations(4);
@@ -85,7 +85,7 @@ function eyeVariation(eyeShapeNum, animationNum) {
       break
     case 5:
       originalEyes();
-      $("#eyesName").html("Pointy");
+      $("#eyesName").text("Pointy");
       eyesTypePointy();
       if(animationNum == 5) {
         eyeAnimationVariations(5);
@@ -93,7 +93,7 @@ function eyeVariation(eyeShapeNum, animationNum) {
       break
     case 6:
       originalEyes();
-      $("#eyesName").html("Zen");
+      $("#eyesName").text("Zen");
       eyesTypeZen();
       if(animationNum == 5) {
         eyeAnimationVariations(6);
@@ -101,7 +101,7 @@ function eyeVariation(eyeShapeNum, animationNum) {
       break
     case 7:
       originalEyes();
-      $("#eyesName").html("Moon-shape");
+      $("#eyesName").text("Moon-shape");
       eyesTypeMoon();
       if(animationNum == 5) {
         eyeAnimationVariations(7);
@@ -111,10 +111,10 @@ function eyeVariation(eyeShapeNum, animationNum) {
 }
 
 function hornVariation(hornShapeNum, animationNum) {
-  $("#hornShapeDna").html(hornShapeNum);
+  $("#hornShapeDna").text(hornShapeNum);
   switch (hornShapeNum) {
     case 1:
-      $("#hornsName").html("Original");
+      $("#hornsName").text("Original");
       originalHorns();
       // same as in eyeVariation but with horn shape instead,
       // when animation is tilting head
@@ -124,7 +124,7 @@ function hornVariation(hornShapeNum, animationNum) {
       break
     case 2:
       originalHorns();
-      $("#hornsName").html("Centered");
+      $("#hornsName").text("Centered");
       hornsTypeCentered();
       if(animationNum == 2) {
         animationVariations(2, 2);
@@ -132,7 +132,7 @@ function hornVariation(hornShapeNum, animationNum) {
       break
     case 3:
       originalHorns();
-      $("#hornsName").html("Small");
+      $("#hornsName").text("Small");
       hornsTypeSmall();
       if(animationNum == 2) {
         animationVariations(2, 3);
@@ -140,7 +140,7 @@ function hornVariation(hornShapeNum, animationNum) {
       break
     case 4:
       originalHorns();
-      $("#hornsName").html("Rounded");
+      $("#hornsName").text("Rounded");
       hornsTypeRounded();
       if(animationNum == 2) {
         animationVariations(2, 4);
@@ -148,7 +148,7 @@ function hornVariation(hornShapeNum, animationNum) {
       break
     case 5:
       originalHorns();
-      $("#hornsName").html("Blades");
+      $("#hornsName").text("Blades");
       hornsTypeBlades();
       if(animationNum == 2) {
         animationVariations(2, 5);
@@ -159,16 +159,16 @@ function hornVariation(hornShapeNum, animationNum) {
 
 function animationVariations(animationNum, hornShapeNum) {
 
-  $("#animationDna").html(animationNum);
+  $("#animationDna").text(animationNum);
 
   switch (animationNum) {
     case 1:
       resetAnimation();
-      $("#animationName").html("No animation");
+      $("#animationName").text("No animation");
       break
     case 2:
       resetAnimation();
-      $("#animationName").html("Tilting head");
+      $("#animationName").text("Tilting head");
       // When user switches between differente horn shapes with the slider,
       // sets the appropriate animation for selected horn shape
       if(hornShapeNum == 5) {
@@ -189,12 +189,12 @@ function animationVariations(animationNum, hornShapeNum) {
       break
     case 3:
       resetAnimation();
-      $("#animationName").html("Moving tail end");
+      $("#animationName").text("Moving tail end");
       animationTypeTailEnd();
       break
     case 4:
       resetAnimation();
-      $("#animationName").html("Moving wings");
+      $("#animationName").text("Moving wings");
       animationTypeWings();
       break
   }
@@ -203,10 +203,10 @@ function animationVariations(animationNum, hornShapeNum) {
 // Function does the same as case 2 in animationVariations,
 // but for the eye shapes
 function eyeAnimationVariations(eyeShapeNum) {
-  $("#animationDna").html(5);
+  $("#animationDna").text(5);
 
   resetAnimation();
-  $("#animationName").html("Dilating eyes");
+  $("#animationName").text("Dilating eyes");
   if(eyeShapeNum == 2) {
     animationHappyEyes();
   }

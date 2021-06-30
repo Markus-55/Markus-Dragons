@@ -160,7 +160,7 @@ function dragonHtml(id, offerData) {
   </div>`;
 
   //console.log(dragonStr);
-  $("#dragonObject").prepend(dragonStr);
+  $(".dragonObject").prepend(dragonStr);
 
   if(offerData.active) {
     $(`#dragonid${id} #sellDragon`).html(`
@@ -179,27 +179,25 @@ function dragonHtml(id, offerData) {
       operatorApproval();
     }
     else if(inputPrice <= 0) {
+      $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");
+      $(".sellOrRemoveBody").text("Price cannot be less than or equal to zero").css("color", "black");
       $("#sellOrRemoveModal").modal();
-      $("#sellOrRemoveTitle").html("Transaction failed!").css("color", "#ad2424");
-      $(".sellOrRemoveBody").html("Price cannot be less than or equal to zero").css("color", "#ad2424");
     }
     else if(inputPrice > 1000.999) {
+      $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");
+      $(".sellOrRemoveBody").text("Price cannot be greater than 1000 ETH").css("color", "black");
       $("#sellOrRemoveModal").modal();
-      $("#sellOrRemoveTitle").html("Transaction failed!").css("color", "#ad2424");
-      $(".sellOrRemoveBody").html("Price cannot be greater than 1000 ETH").css("color", "#ad2424");
     }
     else {
       marketplaceInstance.methods.setOffer(price, id).send({}, (error, txHash) => {
         if(error) {
           // console.log(error);
-          $("#sellOrRemoveModal").modal();
-          $("#sellOrRemoveTitle").html("Error: transaction failed!").css("color", "#ad2424");
-          $(".sellOrRemoveBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
+          $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");
+          $(".sellOrRemoveBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
         }
         else {
           // console.log(txHash);
-          $("#sellOrRemoveModal").modal();
-          $("#sellOrRemoveTitle").html("Offer successfully created!").css("color", "#007400");
+          $("#sellOrRemoveTitle").text("Offer successfully created!").css("color", "#007400");
           $(".sellOrRemoveBody").html(
             `<p>Offer has been added to marketplace!<br>
             Offer Token ID: ${id}<br>
@@ -209,31 +207,10 @@ function dragonHtml(id, offerData) {
 
           $(".sellOrRemoveClose").click(() => location.reload());
         }
+        $("#sellOrRemoveModal").modal();
       });
     }
   });
-}
-
-function dragonObj(dragonData) {
-  let genes = dragonData.genes.split('');
-
-  let storedDragonsObj = {
-    // Dna dragon colors
-    headBodyColor: genes[0] + genes[1],
-    wingsTailColor: genes[2] + genes[3],
-    legsArmsColor: genes[4] + genes[5],
-    eyesColor: genes[6] + genes[7],
-    // Dna dragon attributes
-    eyeShape: genes[8],
-    hornShape: genes[9],
-    topHornsColor: genes[10] + genes[11],
-    sideHornsColor: genes[12] + genes[13],
-    animation: genes[14],
-    lastNum: genes[15]
-  }
-
-  //console.log(storedDragonsObj)
-  return storedDragonsObj;
 }
 
 function dragonDetails(dragonData, id) {
@@ -241,35 +218,4 @@ function dragonDetails(dragonData, id) {
   $(`#dragonId${id} #birthTime`).append(`Birth time: ${toReadableTime(dragonData.birthTime)}`);
   $(`#dragonId${id} #dadId`).append(`Dad ID: ${dragonData.dadId}`);
   $(`#dragonId${id} #momId`).append(`Mom ID: ${dragonData.momId}`);
-}
-
-function renderOwnedDragons(dnaObject, id) {
-  let eyeShapeNum = parseInt(dnaObject.eyeShape);
-  let hornShapeNum = parseInt(dnaObject.hornShape);
-  let animationNum = parseInt(dnaObject.animation);
-
-  headBodyColor(colors[dnaObject.headBodyColor], dnaObject.headBodyColor, id);
-
-  wingsTailColor(colors[dnaObject.wingsTailColor], dnaObject.wingsTailColor, id);
-
-  legsArmsColor(colors[dnaObject.legsArmsColor], dnaObject.legsArmsColor, id);
-
-  eyesColor(colors[dnaObject.eyesColor], dnaObject.eyesColor, id);
-
-  eyeVariation(eyeShapeNum, animationNum, id);
-
-  hornVariation(hornShapeNum, animationNum, id);
-
-  topHornsColor(colors[dnaObject.topHornsColor], dnaObject.topHornsColor, id);
-
-  sideHornsColor(colors[dnaObject.sideHornsColor], dnaObject.sideHornsColor, id);
-
-  if(animationNum === 5) {
-    eyeAnimationVariations(eyeShapeNum, id);
-  }
-  else {
-    animationVariations(animationNum, hornShapeNum, id);
-  }
-
-  specialNum(dnaObject.lastNum, id);
 }

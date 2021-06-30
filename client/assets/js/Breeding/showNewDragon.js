@@ -1,7 +1,7 @@
 function newDragonHtml(id) {
   let babyDragonHtml =
     `<div id="dragonId${id}">
-      <div id="myDragon">
+      <div id="myBabyDragon">
         <div id="rightWing">
           <div class="wings rightWingPart1"></div>
           <div class="wings rightWingPart2"></div>
@@ -122,30 +122,22 @@ function newDragonHtml(id) {
       </div>
     </div>`;
 
-    $(".breedBtn").click(() => {
-      $(`#babyModalBody > #dragonId${id}`).remove();
-      $("#babyModalBody").css("display", "block");
-    });
-
-    $(".babyDragonBtn").click(() => {
-      $(`#babyModalBody > #dragonId${id}`).remove();
-
-      $("#babyModal").modal();
-      $("#babyModalBody").prepend(babyDragonHtml);
-
-      getNewDragon(id);
-    });
+    $(".babyModalBody").prepend(babyDragonHtml);
 }
 
 async function getNewDragon(id) {
   let dragonData = await dragonContractInstance.methods.getDragon(id).call();
-  ControlFunctionTwo(dragonData, id);
+  ControlFunctionBaby(dragonData, id);
 }
 
-function ControlFunctionTwo(dragonData, id) {
+function ControlFunctionBaby(dragonData, id) {
   newDragonHtml(id);
 
   let dnaObject = dragonObj(dragonData);
 
   renderOwnedDragons(dnaObject, id);
+
+  $('.breedClose').click(() => $("#babyModal").modal());
+
+  $('.babyClose').click(() => location.reload());
 }

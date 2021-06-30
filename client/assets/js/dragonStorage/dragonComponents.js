@@ -5,40 +5,93 @@ function toReadableTime(convertNumb) {
   return new Date(convertNumb * 1000).toLocaleString("en-GB");
 }
 
+function dragonObj(dragonData) {
+  let genes = dragonData.genes.split('');
+
+  let storedDragonsObj = {
+    // Dna dragon colors
+    headBodyColor: genes[0] + genes[1],
+    wingsTailColor: genes[2] + genes[3],
+    legsArmsColor: genes[4] + genes[5],
+    eyesColor: genes[6] + genes[7],
+    // Dna dragon attributes
+    eyeShape: genes[8],
+    hornShape: genes[9],
+    topHornsColor: genes[10] + genes[11],
+    sideHornsColor: genes[12] + genes[13],
+    animation: genes[14],
+    lastNum: genes[15]
+  }
+
+  //console.log(storedDragonsObj)
+  return storedDragonsObj;
+}
+
+function renderOwnedDragons(dnaObject, id) {
+  let eyeShapeNum = parseInt(dnaObject.eyeShape);
+  let hornShapeNum = parseInt(dnaObject.hornShape);
+  let animationNum = parseInt(dnaObject.animation);
+
+  headBodyColor(colors[dnaObject.headBodyColor], dnaObject.headBodyColor, id);
+
+  wingsTailColor(colors[dnaObject.wingsTailColor], dnaObject.wingsTailColor, id);
+
+  legsArmsColor(colors[dnaObject.legsArmsColor], dnaObject.legsArmsColor, id);
+
+  eyesColor(colors[dnaObject.eyesColor], dnaObject.eyesColor, id);
+
+  eyeVariation(eyeShapeNum, animationNum, id);
+
+  hornVariation(hornShapeNum, animationNum, id);
+
+  topHornsColor(colors[dnaObject.topHornsColor], dnaObject.topHornsColor, id);
+
+  sideHornsColor(colors[dnaObject.sideHornsColor], dnaObject.sideHornsColor, id);
+
+  if(animationNum === 5) {
+    eyeAnimationVariations(eyeShapeNum, id);
+  }
+  else {
+    animationVariations(animationNum, hornShapeNum, id);
+  }
+
+  specialNum(dnaObject.lastNum, id);
+}
+
 function headBodyColor(color, code, id) {
   $(`#dragonId${id} #head, #dragonId${id} #body`).css("background", "#" + color);
-  $(`#dragonId${id} #headBodyDna`).html(code);
+  $(`#dragonId${id} #headBodyDna`).text(code);
 }
 
 function wingsTailColor(color, code, id) {
   $(`#dragonId${id} .wings, #dragonId${id} .tailEnd`).css("border-left-color", "#" + color);
   $(`#dragonId${id} .tail`).css("background", "#" + color);
-  $(`#dragonId${id} #wingsTailDna`).html(code);
+  $(`#dragonId${id} #wingsTailDna`).text(code);
 }
 
 function legsArmsColor(color, code, id) {
   $(`#dragonId${id} .legs, #dragonId${id} .feet, #dragonId${id} .arms`).css("background", "#" + color);
-  $(`#dragonId${id} #legsArmsDna`).html(code);
+  $(`#dragonId${id} #legsArmsDna`).text(code);
 }
 
 function eyesColor(color, code, id) {
   $(`#dragonId${id} .pupils`).css("background", "#" + color);
-  $(`#dragonId${id} #eyesDna`).html(code);
+  $(`#dragonId${id} #eyesDna`).text(code);
 }
 
 function topHornsColor(color, code, id) {
   $(`#dragonId${id} .topHorns`).css("background", "#" + color);
-  $(`#dragonId${id} #topHornsDna`).html(code);
+  $(`#dragonId${id} #topHornsDna`).text(code);
 }
 
 function sideHornsColor(color, code, id) {
   $(`#dragonId${id} .sideHorns`).css("background", "#" + color);
-  $(`#dragonId${id} #sideHornsDna`).html(code);
+  $(`#dragonId${id} #sideHornsDna`).text(code);
 }
 
 function eyeVariation(eyeShapeNum, animationNum, id) {
 
-  $(`#dragonId${id} #eyeShapeDna`).html(eyeShapeNum);
+  $(`#dragonId${id} #eyeShapeDna`).text(eyeShapeNum);
   switch (eyeShapeNum) {
     case 1:
       // When animation is dilating eyes call function
@@ -88,7 +141,7 @@ function eyeVariation(eyeShapeNum, animationNum, id) {
 
 function hornVariation(hornShapeNum, animationNum, id) {
 
-  $(`#dragonId${id} #hornShapeDna`).html(hornShapeNum);
+  $(`#dragonId${id} #hornShapeDna`).text(hornShapeNum);
   switch (hornShapeNum) {
     case 1:
       // same as in eyeVariation but with horn shape instead,
@@ -126,7 +179,7 @@ function hornVariation(hornShapeNum, animationNum, id) {
 
 function animationVariations(animationNum, hornShapeNum, id) {
 
-  $(`#dragonId${id} #animationDna`).html(animationNum);
+  $(`#dragonId${id} #animationDna`).text(animationNum);
   switch (animationNum) {
     case 1:
       break
@@ -162,7 +215,7 @@ function animationVariations(animationNum, hornShapeNum, id) {
 // but for the eye shapes
 function eyeAnimationVariations(eyeShapeNum, id) {
 
-  $(`#dragonId${id} #animationDna`).html(5);
+  $(`#dragonId${id} #animationDna`).text(5);
 
   if(eyeShapeNum == 2) {
     animationHappyEyes(id);
@@ -176,7 +229,7 @@ function eyeAnimationVariations(eyeShapeNum, id) {
 }
 
 function specialNum(lastNum, id) {
-  $(`#dragonId${id} #specialDna`).html(lastNum);
+  $(`#dragonId${id} #specialDna`).text(lastNum);
 }
 
 function animationHappyEyes(id) {

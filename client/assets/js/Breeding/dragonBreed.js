@@ -1,11 +1,11 @@
 /* dragonBreed.js is calling the smart contract with the given information
   to breed the dragons and displaying all the errors and notifications */
 
-var web3 = new Web3(Web3.givenProvider);
+let web3 = new Web3(Web3.givenProvider);
 
-var dragonContractInstance;
-var user;
-var dragonContractAddress = "0xfaEbC4812e22C7623DB21b5aDf8b71a91369A250";
+let dragonContractInstance;
+let user;
+let dragonContractAddress = "0x1d75c6F38c1349A4730F8AC3A1950ba7628C8442";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -14,7 +14,7 @@ $(document).ready(async () => {
 
   console.log(dragonContractInstance);
 
-  ownedDragons();
+  ownedDragons().catch(error => console.log(error));
   birthEvent();
 });
 
@@ -36,56 +36,44 @@ function ControlFunction(dragonData, id) {
 
   let dnaObject = dragonObj(dragonData);
 
+  breedDragonDetails(dragonData, id);
+
   renderOwnedDragons(dnaObject, id);
 }
 
-$(".breedBtn").click(() => {
-
-  $("#dragonBirth").css("display", "none");
-
-  if(dadId == undefined || momId == undefined) {
-    $("#breedModal").modal();
-    $("#breedModalTitle").html("Error!").css("color", "#ad2424");
-    $(".breedModalBody").html("Please select both dad & mom dragons to breed").css("color", "#ad2424");
-  }
-  else if(dadId != momId) {
-    dragonContractInstance.methods.breed(dadId, momId).send({}, (error, txHash) => {
-      $("#breedModal").modal();
-      if(error) {
-        $("#breedModalTitle").html("Error: transaction failed!").css("color", "#ad2424");
-        $(".breedModalBody").html("Failed to send transaction: " + error.message).css("color", "#ad2424");
-      }
-      else {
-        $("#breedModalTitle").html("Transaction successfully sent!").css("color", "#007400");
-        $(".breedModalBody").html(`<p>Transaction hash: <br>${txHash}</p>`).css("color", "#007400");
-      }
-    });
-  }
-  else {
-    $("#breedModal").modal();
-    $("#breedModalTitle").html("Error!").css("color", "#ad2424");
-    $(".breedModalBody").html("<p>Please choose another dragon,<br>the dragon has already been selected</p>").css("color", "#ad2424");
-  }
-});
-
-$('.close').click(() => $("#dragonBirth").css("display", "none"));
-
 function birthEvent() {
   dragonContractInstance.events.Birth().on("data", event => {
-    $("#dragonBirth > p, h5").remove();
-    $("#dragonBirth").css("display", "block");
-    $("#dragonBirth").prepend(
-      `<h5 id="createdDragonTitle">Dragons successfully bred!</h5>
-      <p id="addedTokenText">&nbsp; &nbsp;The MD token has been added to your account!
-      &nbsp; &nbsp; &nbsp; &nbsp; <button type="button" class="btn btn-info babyDragonBtn">Show baby dragon</button></p>
-      <p>Owner: ${event.returnValues.owner} &nbsp; &nbsp; &nbsp; &nbsp;
-      Genes: ${event.returnValues.genes} &nbsp; &nbsp; &nbsp; &nbsp;
-      Token Id: ${event.returnValues.dragonId}</p>`);
+    $(".babyModalBody > p, h5").remove();
+    $(".babyModalBody").css("display", "block");
+    $(".babyModalBody").prepend(
+      `<span class="createdDragonTitle"><h5>Dragon successfully created!</h5></span>
+       <span class="addedTokenText">The MD token has been added to your account!</span>
+       <span class="ownerDetail">Owner: ${event.returnValues.owner}</span>
+       <span class="idDetail">Token Id: ${event.returnValues.dragonId}</span>
+       <span class="geneDetail">Genes: ${event.returnValues.genes}</span>`
+      );
 
-      $('.babyDragonBtn').click(() => $(`.babyDragonBtn`).remove());
-
-      newDragonHtml(event.returnValues.dragonId);
+      getNewDragon(event.returnValues.dragonId);
   }).on("error", (error, receipt) => {
       console.log(error, receipt);
   });
 }
+
+$(".breedBtn").click(() => {
+  if(dadId == undefined || momId == undefined) {
+    $("#breedModal").modal("hide");
+  }
+  else if(dadId != momId) {
+    dragonContractInstance.methods.breed(dadId, momId).send({}, (error, txHash) => {
+      if(error) {
+        $("#breedModalTitle").text("Transaction was not successful").css("color", "black");
+        $(".breedModalBody").text("Failed to send transaction: " + error.message).css("color", "black");
+      }
+      else {
+        $("#breedModalTitle").text("Transaction successfully sent!").css("color", "#007400");
+        $(".breedModalBody").html(`<p>Transaction hash: <br>${txHash}</p>`).css("color", "#007400");
+      }
+      $("#breedModal").modal();
+    });
+  }
+});

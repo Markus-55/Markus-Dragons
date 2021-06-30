@@ -16,7 +16,7 @@ nav {
   background-color: #343434;
 }
 
-#txHashModalBody {
+.txHashModalBody {
   font-size: 20px;
 }
 
@@ -43,12 +43,17 @@ nav {
   border-top: 0;
 }
 
-#createdDragonTitle {
-  font-weight: bold;
+.createdDragonTitle {
+  margin-right: 582px;
 }
 
-#createdDragonTitle, #addedTokenText {
-  display: inline;
+.addedTokenText {
+  font-size: 18px;
+}
+
+.ownerDetail, .geneDetail {
+  margin-right: 27px;
+  font-size: 17px;
 }
 
 #createdDragon {
@@ -91,6 +96,7 @@ nav {
 }
 
 #createDragonBtn {
+  background-color: #32c554;
   border-radius: 10px;
   margin-top: -352px;
   margin-left: -64px;
@@ -100,6 +106,7 @@ nav {
 }
 
 #randomDragonBtn {
+  background-color: #f5c73e;
   border-radius: 10px;
   margin-top: -87px;
   margin-left: 167px;
@@ -111,6 +118,8 @@ nav {
 }
 
 #defaultDragonBtn {
+  background-color: #1198f8;
+  border-color: #2fa5fa;
   border-radius: 10px;
   margin-top: 429px;
   margin-left: -51px;
@@ -146,5 +155,5 @@ footer {
   padding-left: 14px;
   font-size: 115%;
   color: black;
-  margin-top: 229px;
+  margin-top: 182px;
 }

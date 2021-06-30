@@ -1,9 +1,9 @@
-async function dragonRemoveHtml(id, offerData) {
+async function dragonRemoveHtml(offerId, offerData) {
   let offerStr =
-  `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${id}">
+  `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${offerId}">
    <button type="button" class="btn btn-warning removeOffer">Remove offer</button>
     <div id="removeDragonBox">
-      <div id="idDragon">Dragon ID: ${id}</div>
+      <div id="idDragon">Dragon ID: ${offerId}</div>
       <div id="myDragon">
         <div id="rightWing">
           <div class="wings rightWingPart1"></div>
@@ -138,91 +138,66 @@ async function dragonRemoveHtml(id, offerData) {
   });
 
   if(!offerData.active) {
-    $(`.myOffersBody #dragonId${id}`).remove();
+    $(`.myOffersBody #dragonId${offerId}`).remove();
   }
   else {
-    $(`.myOffersBody #dragonId${id}`).remove();
+    $(`.myOffersBody #dragonId${offerId}`).remove();
     $(".myOffersBody").prepend(offerStr);
   }
 
-  $(`#dragonId${id} > .removeOffer`).click(() => {
+  $(`#dragonId${offerId} > .removeOffer`).click(() => {
 
-    marketplaceInstance.methods.removeOffer(id).send({}, (error, txHash) => {
+    marketplaceInstance.methods.removeOffer(offerId).send({}, (error, txHash) => {
       if(error) {
-        // console.log(error);
         $("#myOffersModal").modal("hide");
-
-        $("#sellOrRemoveModal").modal();
-        $("#sellOrRemoveTitle").html("Error: transaction failed!").css("color", "#ad2424");
-        $(".sellOrRemoveBody").html(`Failed to send transaction: ${error.message}`).css("color", "#ad2424");
+        $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");
+        $(".sellOrRemoveBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
+        // console.log(error);
       }
       else {
-        // console.log(txHash);
         $("#myOffersModal").modal("hide");
-
-        $("#sellOrRemoveModal").modal();
-        $("#sellOrRemoveTitle").html("Offer successfully removed!").css("color", "#007400");
+        $("#sellOrRemoveTitle").text("Offer successfully removed!").css("color", "#007400");
         $(".sellOrRemoveBody").html(
           `<p>Offer has been removed from marketplace!<br>
-          Token ID: ${id}<br><br>
+          Token ID: ${offerId}<br><br>
           Transaction hash:<br>
           ${txHash}</p>`).css("color", "#007400");
 
         $(".sellOrRemoveClose").click(() => location.reload());
+        // console.log(txHash);
       }
+      $("#sellOrRemoveModal").modal();
     });
   });
 }
 
-function dragonObj(dragonData) {
-  let genes = dragonData.genes.split('');
-
-  let storedDragonsObj = {
-    // Dna dragon colors
-    headBodyColor: genes[0] + genes[1],
-    wingsTailColor: genes[2] + genes[3],
-    legsArmsColor: genes[4] + genes[5],
-    eyesColor: genes[6] + genes[7],
-    // Dna dragon attributes
-    eyeShape: genes[8],
-    hornShape: genes[9],
-    topHornsColor: genes[10] + genes[11],
-    sideHornsColor: genes[12] + genes[13],
-    animation: genes[14],
-    lastNum: genes[15]
-  }
-
-  //console.log(storedDragonsObj)
-  return storedDragonsObj;
-}
-
-function renderActiveDragons(dnaObject, id) {
+function renderActiveDragons(dnaObject, offerId) {
   let eyeShapeNum = parseInt(dnaObject.eyeShape);
   let hornShapeNum = parseInt(dnaObject.hornShape);
   let animationNum = parseInt(dnaObject.animation);
 
-  headBodyColor(colors[dnaObject.headBodyColor], dnaObject.headBodyColor, id);
+  headBodyColor(colors[dnaObject.headBodyColor], dnaObject.headBodyColor, offerId);
 
-  wingsTailColor(colors[dnaObject.wingsTailColor], dnaObject.wingsTailColor, id);
+  wingsTailColor(colors[dnaObject.wingsTailColor], dnaObject.wingsTailColor, offerId);
 
-  legsArmsColor(colors[dnaObject.legsArmsColor], dnaObject.legsArmsColor, id);
+  legsArmsColor(colors[dnaObject.legsArmsColor], dnaObject.legsArmsColor, offerId);
 
-  eyesColor(colors[dnaObject.eyesColor], dnaObject.eyesColor, id);
+  eyesColor(colors[dnaObject.eyesColor], dnaObject.eyesColor, offerId);
 
-  eyeVariation(eyeShapeNum, animationNum, id);
+  eyeVariation(eyeShapeNum, animationNum, offerId);
 
-  hornVariation(hornShapeNum, animationNum, id);
+  hornVariation(hornShapeNum, animationNum, offerId);
 
-  topHornsColor(colors[dnaObject.topHornsColor], dnaObject.topHornsColor, id);
+  topHornsColor(colors[dnaObject.topHornsColor], dnaObject.topHornsColor, offerId);
 
-  sideHornsColor(colors[dnaObject.sideHornsColor], dnaObject.sideHornsColor, id);
+  sideHornsColor(colors[dnaObject.sideHornsColor], dnaObject.sideHornsColor, offerId);
 
   if(animationNum === 5) {
-    eyeAnimationVariations(eyeShapeNum, id);
+    eyeAnimationVariations(eyeShapeNum, offerId);
   }
   else {
-    animationVariations(animationNum, hornShapeNum, id);
+    animationVariations(animationNum, hornShapeNum, offerId);
   }
 
-  specialNum(dnaObject.lastNum, id);
+  specialNum(dnaObject.lastNum, offerId);
 }
