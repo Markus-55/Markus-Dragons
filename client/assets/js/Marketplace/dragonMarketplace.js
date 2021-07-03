@@ -4,8 +4,8 @@ let marketplaceInstance;
 let dragonContractInstance;
 
 let user;
-let marketplaceAddress = "0x38037e291e05112361ecc86d52cBBb74EF07bd78";
-let dragonContractAddress = "0x1d75c6F38c1349A4730F8AC3A1950ba7628C8442";
+let marketplaceAddress = "0xFAE4A57FcE02d0Fd4d35E55D40AedD5E2507eBc1";
+let dragonContractAddress = "0x8117F56235cDBdb8faE5Ab168594fB7479BEA63d";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();

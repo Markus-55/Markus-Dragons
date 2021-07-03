@@ -1,7 +1,9 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier: UNLICENSED
+
+pragma solidity ^0.8.6;
 
 import "./Dragoncontract.sol";
-import "./Ownable.sol";
+import "@openzeppelin/contracts/utils/escrow/Escrow.sol";
 
 /*
  * Market place to trade dragons (should **in theory** be used for any ERC721 token)
@@ -27,7 +29,7 @@ interface IDragonMarketplace {
     /**
     * Get all tokenId's that are currently for sale. Returns an empty arror if none exist.
      */
-    function getAllTokenOnSale() external view  returns(uint256[] memory listOfOffers);
+    function getAllTokenOnSale() external view returns(uint256[] memory listOfOffers);
 
     /**
     * Creates a new offer for _tokenId for the price _price.

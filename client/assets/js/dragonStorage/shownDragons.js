@@ -172,7 +172,7 @@ function dragonHtml(id, offerData) {
   $("#sellBtn").click(async () => {
     let isOperator = await dragonContractInstance.methods.isApprovedForAll(user, marketplaceAddress).call();
 
-    let inputPrice = parseFloat($(`#dragonId${id} .dragonPrice`).val()).toFixed(3);
+    let inputPrice = parseFloat($(`#dragonId${id} .dragonPrice`).val()).toFixed(8);
     let price = web3.utils.toWei(inputPrice, "ether");
 
     if(!isOperator) {
@@ -183,7 +183,7 @@ function dragonHtml(id, offerData) {
       $(".sellOrRemoveBody").text("Price cannot be less than or equal to zero").css("color", "black");
       $("#sellOrRemoveModal").modal();
     }
-    else if(inputPrice > 1000.999) {
+    else if(inputPrice > 1000) {
       $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");
       $(".sellOrRemoveBody").text("Price cannot be greater than 1000 ETH").css("color", "black");
       $("#sellOrRemoveModal").modal();

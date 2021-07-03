@@ -1,0 +1,24 @@
+{
+  "name": "markus-dragons",
+  "version": "1.0.0",
+  "description": "My ERC-721 project Markus-Dragons an NFT game where you can collect, create, breed and buy/sell your non-fungible dragon tokens!",
+  "main": "truffle-config.js",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.2.0",
+    "@truffle/hdwallet-provider": "^1.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Markus-55/Markus-Dragons.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Markus-55/Markus-Dragons/issues"
+  },
+  "homepage": "https://github.com/Markus-55/Markus-Dragons#readme"
+}

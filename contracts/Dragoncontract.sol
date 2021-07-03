@@ -1,13 +1,12 @@
-pragma solidity ^0.5.12;
+// SPDX-License-Identifier: UNLICENSED
+
+pragma solidity ^0.8.6;
 
 import "./IERC721.sol";
 import "./IERC721Receiver.sol";
-import "./Safemath.sol";
-import "./Ownable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Dragoncontract is IERC721, Ownable {
-
-  using SafeMath for uint256;
 
   uint256 public constant gen0CreationLimit = 10;
 
@@ -45,11 +44,11 @@ contract Dragoncontract is IERC721, Ownable {
 
   uint256 public gen0Total;
 
-  constructor() public {
-    _createDragon(uint256(-1), 0, 0, 0, address(0));
+  constructor() {
+    _createDragon(type(uint256).max, 0, 0, 0, address(0));
   }
 
-  function breed(uint256 _dadId, uint256 _momId) external returns (uint256) {
+  function breed(uint256 _dadId, uint256 _momId) external {
     require(_owns(msg.sender, _dadId), "You do not own the dad dragon");
     require(_owns(msg.sender, _momId), "You do not own the mom dragon");
 
@@ -109,10 +108,10 @@ contract Dragoncontract is IERC721, Ownable {
     uint256 _generation,
     address _owner
   ) private returns (uint256) {
-      Dragon memory _dragon = Dragon(_genes, uint64(now), uint32(_dadId), uint32(_momId), uint16(_generation));
+      Dragon memory _dragon = Dragon(_genes, uint64(block.timestamp), uint32(_dadId), uint32(_momId), uint16(_generation));
 
-      uint256 newDragonId = dragons.length;
-      dragons.push(_dragon) - 1;
+      dragons.push(_dragon);
+      uint256 newDragonId = dragons.length - 1;
 
       emit Birth(_owner, newDragonId, _genes, _momId, _dadId);
 
@@ -121,28 +120,28 @@ contract Dragoncontract is IERC721, Ownable {
       return newDragonId;
   }
 
-  function name() external view returns (string memory tokenName) {
+  function name() override external pure returns (string memory tokenName) {
     return nameOfToken;
   }
 
-  function symbol() external view returns (string memory tokenSymbol) {
+  function symbol() override external pure returns (string memory tokenSymbol) {
     return symbolOfToken;
   }
 
-  function balanceOf(address _owner) external view returns (uint256 balance) {
+  function balanceOf(address _owner) override external view returns (uint256 balance) {
     return tokenBalances[_owner];
   }
 
-  function totalSupply() external view returns (uint256 total) {
+  function totalSupply() override external view returns (uint256 total) {
     return dragons.length;
   }
 
-  function ownerOf(uint256 _tokenId) external view returns (address owner) {
+  function ownerOf(uint256 _tokenId) override external view returns (address owner) {
     require(_tokenId < dragons.length, "Token does not exist");
     return dragonOwners[_tokenId];
   }
 
-  function transfer(address _to, uint256 _tokenId) external {
+  function transfer(address _to, uint256 _tokenId) override external {
     require(_to != address(0), "Cannot transfer to 0 address");
     require(_to != address(this), "Cannot transfer to contract address");
     require(_owns(msg.sender, _tokenId), "Token must be owned by sender");
@@ -151,19 +150,19 @@ contract Dragoncontract is IERC721, Ownable {
   }
 
   function _transfer(address _from, address _to, uint256 _tokenId) private {
-    tokenBalances[_to] = tokenBalances[_to].add(1);
+    tokenBalances[_to]++;
 
     dragonOwners[_tokenId] = _to;
 
     if (_from != address(0)) {
-      tokenBalances[_from] = tokenBalances[_from].sub(1);
+      tokenBalances[_from]--;
       delete tokenApprovedAddresses[_tokenId];
     }
 
     emit Transfer(_from, _to, _tokenId);
   }
 
-  function approve(address _approved, uint256 _tokenId) external {
+  function approve(address _approved, uint256 _tokenId) override external {
     require(_owns(msg.sender, _tokenId) || operatorApproval[dragonOwners[_tokenId]][msg.sender], "You are not the owner or the operator of this token ID");
 
     tokenApprovedAddresses[_tokenId] = _approved;
@@ -171,7 +170,7 @@ contract Dragoncontract is IERC721, Ownable {
     emit Approval(msg.sender, _approved, _tokenId);
   }
 
-  function setApprovalForAll(address _operator, bool _approved) external {
+  function setApprovalForAll(address _operator, bool _approved) override external {
     require(_operator != msg.sender, "You cannot set yourself as operator");
 
     operatorApproval[msg.sender][_operator] = _approved;
@@ -179,23 +178,23 @@ contract Dragoncontract is IERC721, Ownable {
     emit ApprovalForAll(msg.sender, _operator, _approved);
   }
 
-  function getApproved(uint256 _tokenId) external view returns (address) {
+  function getApproved(uint256 _tokenId) override external view returns (address) {
     require(_tokenId < dragons.length, "Token does not exist");
 
     return tokenApprovedAddresses[_tokenId];
   }
 
-  function isApprovedForAll(address _owner, address _operator) public view returns (bool) {
+  function isApprovedForAll(address _owner, address _operator) override public view returns (bool) {
     return operatorApproval[_owner][_operator];
   }
 
-  function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory _data) public {
+  function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory _data) override public {
     require(_transferFromRequire(msg.sender, _from, _to, _tokenId));
 
     _safeTransfer(_from, _to, _tokenId, _data);
   }
 
-  function safeTransferFrom(address _from, address _to, uint256 _tokenId) external {
+  function safeTransferFrom(address _from, address _to, uint256 _tokenId) override external {
     safeTransferFrom(_from, _to, _tokenId, "");
   }
 
@@ -205,7 +204,7 @@ contract Dragoncontract is IERC721, Ownable {
     require(_checkERC721Support(_from, _to, _tokenId, _data), "Contract does not support ERC721 tokens");
   }
 
-  function transferFrom(address _from, address _to, uint256 _tokenId) external {
+  function transferFrom(address _from, address _to, uint256 _tokenId) override external {
     require(_transferFromRequire(msg.sender, _from, _to, _tokenId));
 
     _transfer(_from, _to, _tokenId);
@@ -244,22 +243,24 @@ contract Dragoncontract is IERC721, Ownable {
   function _mixDna(uint256 _dadDna, uint256 _momDna) private view returns (uint256) {
     uint256[8] memory geneArray;
 
-    uint8 random = uint8(now % 256);
-    uint256 randomIndex = uint8(now % 8);
-    uint8 randomEyes = uint8((now % 7) + 1);
-    uint8 HornOrAnimation = uint8((now % 5) + 1);
-    uint8 randomColor = uint8((now % 82) + 10);
+    uint8 random = uint8(block.timestamp % 256);
+    uint8 randomIndex = uint8(block.timestamp % 8);
+    uint8 randomEyes = uint8((block.timestamp % 7) + 1);
+    uint8 HornOrAnimation = uint8((block.timestamp % 5) + 1);
+    uint8 randomColor = uint8((block.timestamp % 82) + 10);
 
     uint256 i;
     uint8 index = 7;
 
-    for(i = 1; i <= 128; i=i*2) {
-      geneArray[index] = random & i != 0 ? _momDna % 100 : _dadDna % 100;
+    for(i = 1; i <= 128; i*=2) {
+      unchecked {
+        geneArray[index] = random & i != 0 ? _momDna % 100 : _dadDna % 100;
 
-      _momDna /= 100;
-      _dadDna /= 100;
+        _momDna /= 100;
+        _dadDna /= 100;
 
-      index--;
+        index--;
+      }
     }
 
     if(randomIndex == 4) {

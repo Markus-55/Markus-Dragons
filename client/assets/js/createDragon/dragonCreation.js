@@ -5,7 +5,7 @@ let web3 = new Web3(Web3.givenProvider);
 
 let dragonContractInstance;
 let user;
-let dragonContractAddress = "0x1d75c6F38c1349A4730F8AC3A1950ba7628C8442";
+let dragonContractAddress = "0x8117F56235cDBdb8faE5Ab168594fB7479BEA63d";
 
 $(document).ready(async () => {
   // asks user if they allow the website
