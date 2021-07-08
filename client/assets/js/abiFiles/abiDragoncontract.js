@@ -1,7 +1,6 @@
-var abiDragoncontract = [
+let abiDragoncontract = [
   {
     "inputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
@@ -98,6 +97,25 @@ var abiDragoncontract = [
       {
         "indexed": true,
         "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "from",
         "type": "address"
       },
@@ -118,7 +136,6 @@ var abiDragoncontract = [
     "type": "event"
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "gen0CreationLimit",
     "outputs": [
@@ -128,12 +145,11 @@ var abiDragoncontract = [
         "type": "uint256"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "gen0Total",
     "outputs": [
@@ -143,12 +159,45 @@ var abiDragoncontract = [
         "type": "uint256"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -162,19 +211,11 @@ var abiDragoncontract = [
       }
     ],
     "name": "breed",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "bytes4",
@@ -190,12 +231,11 @@ var abiDragoncontract = [
         "type": "bool"
       }
     ],
-    "payable": false,
     "stateMutability": "pure",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "uint256",
@@ -236,12 +276,11 @@ var abiDragoncontract = [
         "type": "address"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "allOwnedDragons",
     "outputs": [
@@ -251,12 +290,11 @@ var abiDragoncontract = [
         "type": "uint256[]"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "uint256",
@@ -266,12 +304,11 @@ var abiDragoncontract = [
     ],
     "name": "createDragonGen0",
     "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "payable",
+    "type": "function",
+    "payable": true
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "name",
     "outputs": [
@@ -281,12 +318,11 @@ var abiDragoncontract = [
         "type": "string"
       }
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "pure",
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "symbol",
     "outputs": [
@@ -296,12 +332,11 @@ var abiDragoncontract = [
         "type": "string"
       }
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "pure",
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "address",
@@ -317,12 +352,11 @@ var abiDragoncontract = [
         "type": "uint256"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": true,
     "inputs": [],
     "name": "totalSupply",
     "outputs": [
@@ -332,12 +366,11 @@ var abiDragoncontract = [
         "type": "uint256"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "uint256",
@@ -353,12 +386,11 @@ var abiDragoncontract = [
         "type": "address"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -373,12 +405,10 @@ var abiDragoncontract = [
     ],
     "name": "transfer",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -393,12 +423,10 @@ var abiDragoncontract = [
     ],
     "name": "approve",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -413,12 +441,10 @@ var abiDragoncontract = [
     ],
     "name": "setApprovalForAll",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "uint256",
@@ -434,12 +460,11 @@ var abiDragoncontract = [
         "type": "address"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "address",
@@ -460,12 +485,11 @@ var abiDragoncontract = [
         "type": "bool"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -485,12 +509,10 @@ var abiDragoncontract = [
     ],
     "name": "safeTransferFrom",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -515,12 +537,10 @@ var abiDragoncontract = [
     ],
     "name": "safeTransferFrom",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": false,
     "inputs": [
       {
         "internalType": "address",
@@ -540,12 +560,10 @@ var abiDragoncontract = [
     ],
     "name": "transferFrom",
     "outputs": [],
-    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
     "inputs": [
       {
         "internalType": "address",
@@ -566,8 +584,8 @@ var abiDragoncontract = [
         "type": "bool"
       }
     ],
-    "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   }
 ];

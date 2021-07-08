@@ -9,6 +9,7 @@ import "./PaymentGateway.sol";
 
 contract DragonMarketplace is Ownable, IDragonMarketplace {
   Dragoncontract private _dragonContract;
+  PaymentGateway private _paymentGateway;
 
   struct Offer {
     address payable seller;
@@ -18,8 +19,9 @@ contract DragonMarketplace is Ownable, IDragonMarketplace {
     bool active;
   }
 
-  constructor(address dragonContract) {
+  constructor(address dragonContract, address paymentGateway) {
     setDragonContract(dragonContract);
+    setPaymentGateway(paymentGateway);
   }
 
   Offer[] offers;
@@ -28,6 +30,10 @@ contract DragonMarketplace is Ownable, IDragonMarketplace {
 
   function setDragonContract(address _dragonContractAddress) override public onlyOwner {
     _dragonContract = Dragoncontract(_dragonContractAddress);
+  }
+
+  function setPaymentGateway(address _paymentGatewayAddress) public onlyOwner {
+    _paymentGateway = PaymentGateway(_paymentGatewayAddress);
   }
 
   function getOffer(uint256 _tokenId) override external view returns (address seller, uint256 price, uint256 index, uint256 tokenId, bool active) {
@@ -62,35 +68,30 @@ contract DragonMarketplace is Ownable, IDragonMarketplace {
     emit MarketTransaction("Offer Created", msg.sender, _tokenId);
   }
 
-    function removeOffer(uint256 _tokenId) override external {
-      Offer memory offer = tokenIdToOffer[_tokenId];
+  function removeOffer(uint256 _tokenId) override external {
+    Offer memory offer = tokenIdToOffer[_tokenId];
 
-      require(offer.seller == msg.sender, "Only the seller of the Token Id can remove an offer");
+    require(offer.seller == msg.sender, "Only the seller of the Token Id can remove an offer");
 
-      _offerRemove(_tokenId);
+    _offerRemove(_tokenId);
 
-      emit MarketTransaction("Offer removed", msg.sender, _tokenId);
-    }
+    emit MarketTransaction("Offer removed", msg.sender, _tokenId);
+  }
 
-    function buyDragon(uint256 _tokenId) override external payable {
-      Offer memory offer = tokenIdToOffer[_tokenId];
+  function buyDragon(uint256 _tokenId, uint256 _price) override external payable {
+    Offer memory offer = tokenIdToOffer[_tokenId];
 
-      require(offer.price == msg.value, "The price needs to be equal to the offer of Token ID");
-      require(offer.active, "There is no offer for this token ID");
+    require(offer.price == _price, "The price needs to be equal to the offer of Token ID");
+    require(offer.active, "There is no offer for this token ID");
 
-      _offerRemove(_tokenId);
+    _offerRemove(_tokenId);
+    _dragonContract.transferFrom(offer.seller, msg.sender, _tokenId);
 
-      if(offer.price > 0) {
-        offer.seller.transfer(offer.price);
-      }
+    emit MarketTransaction("Token ID purchased", msg.sender, _tokenId);
+  }
 
-      _dragonContract.safeTransferFrom(offer.seller, msg.sender, _tokenId);
-
-      emit MarketTransaction("Token ID purchased", msg.sender, _tokenId);
-    }
-
-    function _offerRemove(uint256 _tokenId) private {
-      offers[tokenIdToOffer[_tokenId].index].active = false;
-      delete tokenIdToOffer[_tokenId];
-    }
+  function _offerRemove(uint256 _tokenId) private {
+    offers[tokenIdToOffer[_tokenId].index].active = false;
+    delete tokenIdToOffer[_tokenId];
+  }
 }

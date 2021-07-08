@@ -1,16 +1,19 @@
 let web3 = new Web3(Web3.givenProvider);
 
-let marketplaceInstance;
 let dragonContractInstance;
-
+let marketplaceInstance;
+let paymentGatewayInstance;
 let user;
-let marketplaceAddress = "0xFAE4A57FcE02d0Fd4d35E55D40AedD5E2507eBc1";
-let dragonContractAddress = "0x8117F56235cDBdb8faE5Ab168594fB7479BEA63d";
+
+let dragonContractAddress = "0x992c2db83d65BF508621ceaFB7c692F9F1767264";
+let marketplaceAddress = "0xF7c6B97AD3A9F875ce941e9520ba4D47A5BF2f7e";
+let paymentGatewayAddress = "0x6f54845bbaaEC194e1ebcf60058B828f5B575452";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
-  marketplaceInstance = new web3.eth.Contract(abiMarketplace, marketplaceAddress, {from: accounts[0]});
   dragonContractInstance = new web3.eth.Contract(abiDragoncontract, dragonContractAddress, {from: accounts[0]});
+  marketplaceInstance = new web3.eth.Contract(abiMarketplace, marketplaceAddress, {from: accounts[0]});
+  paymentGatewayInstance = new web3.eth.Contract(abiPaymentGateway, paymentGatewayAddress, {from: accounts[0]});
   user = accounts[0];
 
   // console.log(marketplaceInstance);

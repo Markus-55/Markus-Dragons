@@ -4,25 +4,31 @@ pragma solidity ^0.8.6;
 
 import "@openzeppelin/contracts/utils/escrow/Escrow.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./DragonMarketplace.sol";
 
 contract PaymentGateway is Ownable {
-  Escrow private escrow;
-  address payable wallet;
+  Escrow private _escrowContract;
+  DragonMarketplace private _dragonMarketplace;
 
-  constructor(address payable _wallet) {
-    escrow = new Escrow();
-    wallet = _wallet;
+  constructor(address dragonMarketplaceAddress) {
+    _escrowContract = new Escrow();
+    setMarketplaceContract(dragonMarketplaceAddress);
   }
 
-  function sendPayment(address payable _payee, uint256 _price) external payable {
-    escrow.deposit{value: _price}(_payee);
+  function setMarketplaceContract(address _dragonMarketplaceAddress) public onlyOwner {
+    _dragonMarketplace = DragonMarketplace(_dragonMarketplaceAddress);
   }
 
-  function withdraw(address payable _payee) external onlyOwner {
-    escrow.withdraw(_payee);
+  function sendPayment(address payable _payee, uint256 _tokenId) external payable {
+    _dragonMarketplace.buyDragon(_tokenId, msg.value);
+    _escrowContract.deposit{value: msg.value}(_payee);
+  }
+
+  function withdraw(address payable _payee) external {
+    _escrowContract.withdraw(_payee);
   }
 
   function balance(address _payee) external view returns (uint256 balanceOf) {
-    return escrow.depositsOf(_payee);
+    return _escrowContract.depositsOf(_payee);
   }
 }

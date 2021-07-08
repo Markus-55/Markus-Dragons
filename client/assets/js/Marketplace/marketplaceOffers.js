@@ -189,11 +189,11 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
       $("#buyModal").modal();
     }
     else {
-      marketplaceInstance.methods.buyDragon(offerId).send({value: offerData.price}, (error, txHash) => {
+      paymentGatewayInstance.methods.sendPayment(offerData.seller, offerData.tokenId).send({value: offerData.price}, (error, txHash) => {
         if(error) {
           $("#buyTitle").text("Transaction was not successful").css("color", "black");
-          $(".buyBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
-          // console.log(error);
+              $(".buyBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
+              console.log(error);
         }
         else {
           $("#buyTitle").text("Offer successfully bought!").css("color", "#007400");
@@ -206,7 +206,7 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
           ).css("color", "#007400");
 
           $(".buyClose").click(() => location.reload());
-          // console.log(txHash);
+          console.log(txHash);
         }
         $("#buyModal").modal();
       });

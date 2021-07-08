@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Dragoncontract is IERC721, Ownable {
 
-  uint256 public constant gen0CreationLimit = 10;
+  uint256 public constant gen0CreationLimit = 5;
 
   string private constant nameOfToken = "MarkusDragons";
   string private constant symbolOfToken = "MD";
@@ -92,12 +92,14 @@ contract Dragoncontract is IERC721, Ownable {
         return ownedDragons;
     }
 
-  function createDragonGen0(uint256 _genes) external {
-    require(tokenBalances[msg.sender] < gen0CreationLimit, "The limit of generation 0 dragons per user is: 10");
+  function createDragonGen0(uint256 _genes) external payable {
+    require(tokenBalances[msg.sender] < gen0CreationLimit, "The limit of generation 0 dragons per user is: 5");
+    require(0.1 ether == msg.value, "Every dragon costs 0.1 ETH");
 
     if(tokenBalances[msg.sender] < gen0CreationLimit) {
       gen0Total++;
       _createDragon(_genes, 0, 0, 0, msg.sender);
+      payable(_owner).transfer(msg.value);
     }
   }
 
