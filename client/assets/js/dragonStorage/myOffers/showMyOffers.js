@@ -1,9 +1,9 @@
-async function dragonRemoveHtml(offerId, offerData) {
+async function myOfferHtml(ownedId, offerData) {
   let offerStr =
-  `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${offerId}">
+  `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${ownedId}">
    <button type="button" class="btn btn-warning removeOffer">Remove offer</button>
     <div id="removeDragonBox">
-      <div id="idDragon">Dragon ID: ${offerId}</div>
+      <div id="idDragon">Dragon ID: ${ownedId}</div>
       <div id="myDragon">
         <div id="rightWing">
           <div class="wings rightWingPart1"></div>
@@ -131,23 +131,25 @@ async function dragonRemoveHtml(offerId, offerData) {
 
   //console.log(offerStr);
   $(`#dragonId${0}`).remove();
+  $("#myOffersTitle").text("You have no active offers");
   $(".myOffers").click(() => {
     if(offerData.active) {
-      $("#myOffersModal").modal();
+      $("#myOffersTitle").text("My Offers:");
     }
+    $("#myOffersModal").modal();
   });
 
   if(!offerData.active) {
-    $(`.myOffersBody #dragonId${offerId}`).remove();
+    $(`.myOffersBody #dragonId${ownedId}`).remove();
   }
   else {
-    $(`.myOffersBody #dragonId${offerId}`).remove();
+    $(`.myOffersBody #dragonId${ownedId}`).remove();
     $(".myOffersBody").prepend(offerStr);
   }
 
-  $(`#dragonId${offerId} > .removeOffer`).click(() => {
+  $(`#dragonId${ownedId} > .removeOffer`).click(() => {
 
-    marketplaceInstance.methods.removeOffer(offerId).send({}, (error, txHash) => {
+    marketplaceInstance.methods.removeOffer(ownedId).send({}, (error, txHash) => {
       if(error) {
         $("#myOffersModal").modal("hide");
         $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");
@@ -159,7 +161,7 @@ async function dragonRemoveHtml(offerId, offerData) {
         $("#sellOrRemoveTitle").text("Offer successfully removed!").css("color", "#007400");
         $(".sellOrRemoveBody").html(
           `<p>Offer has been removed from marketplace!<br>
-          Token ID: ${offerId}<br><br>
+          Token ID: ${ownedId}<br><br>
           Transaction hash:<br>
           ${txHash}</p>`).css("color", "#007400");
 
@@ -169,35 +171,4 @@ async function dragonRemoveHtml(offerId, offerData) {
       $("#sellOrRemoveModal").modal();
     });
   });
-}
-
-function renderActiveDragons(dnaObject, offerId) {
-  let eyeShapeNum = parseInt(dnaObject.eyeShape);
-  let hornShapeNum = parseInt(dnaObject.hornShape);
-  let animationNum = parseInt(dnaObject.animation);
-
-  headBodyColor(colors[dnaObject.headBodyColor], dnaObject.headBodyColor, offerId);
-
-  wingsTailColor(colors[dnaObject.wingsTailColor], dnaObject.wingsTailColor, offerId);
-
-  legsArmsColor(colors[dnaObject.legsArmsColor], dnaObject.legsArmsColor, offerId);
-
-  eyesColor(colors[dnaObject.eyesColor], dnaObject.eyesColor, offerId);
-
-  eyeVariation(eyeShapeNum, animationNum, offerId);
-
-  hornVariation(hornShapeNum, animationNum, offerId);
-
-  topHornsColor(colors[dnaObject.topHornsColor], dnaObject.topHornsColor, offerId);
-
-  sideHornsColor(colors[dnaObject.sideHornsColor], dnaObject.sideHornsColor, offerId);
-
-  if(animationNum === 5) {
-    eyeAnimationVariations(eyeShapeNum, offerId);
-  }
-  else {
-    animationVariations(animationNum, hornShapeNum, offerId);
-  }
-
-  specialNum(dnaObject.lastNum, offerId);
 }

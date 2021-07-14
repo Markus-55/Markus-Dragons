@@ -7,8 +7,8 @@ let dragonContractInstance;
 let marketplaceInstance;
 
 let user;
-let dragonContractAddress = "0x992c2db83d65BF508621ceaFB7c692F9F1767264";
-let marketplaceAddress = "0xF7c6B97AD3A9F875ce941e9520ba4D47A5BF2f7e";
+let dragonContractAddress = "0xb242D6B59Df933d3Af167B89C311DefEe6131211";
+let marketplaceAddress = "0xf966025866c32510299221b56d4Bf36c9a9bD18F";
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
@@ -18,27 +18,27 @@ $(document).ready(async () => {
 
   // console.log(marketplaceInstance);
   ownedDragons().catch(error => console.log(error));
-  removeOffers();
+  myOffers();
 });
 
 async function ownedDragons() {
   let ownedDragonIds = await dragonContractInstance.methods.allOwnedDragons().call();
   for(let i = 0; i < ownedDragonIds.length; i++) {
     let id = ownedDragonIds[i];
-    let offerData = await marketplaceInstance.methods.getOffer(id).call();
+    let activeOffer = await marketplaceInstance.methods.getActiveStatus(id).call();
 
-    getMyDragons(id, offerData).catch(error => console.log(error));
+    getMyDragons(id, activeOffer).catch(error => console.log(error));
   }
 }
 
-async function getMyDragons(id, offerData) {
+async function getMyDragons(id, activeOffer) {
   let dragonData = await dragonContractInstance.methods.getDragon(id).call();
 
-  controlFunction(dragonData, id, offerData);
+  controlFunction(dragonData, id, activeOffer);
 }
 
-function controlFunction(dragonData, id, offerData) {
-  dragonHtml(id, offerData);
+function controlFunction(dragonData, id, activeOffer) {
+  dragonHtml(id, activeOffer);
 
   let dnaObject = dragonObj(dragonData);
 
@@ -63,9 +63,11 @@ async function operatorApproval() {
     $(".declineBtn").click(() => location.reload());
   }
   else {
-    $("#marketplaceOperatorTitle").text("Operator approval").css("color", "#007400");
-    $(".marketplaceOperatorBody").text("Marketplace is an approved operator!").css("color", "#007400");
-    $("#marketplaceOperator").modal();
+    $("#setOperatorTitle").text("Operator approval").css("color", "black");
+    $(".setOperatorBody").text("Marketplace contract is an approved operator").css("color", "black");
+    $(".removeOperatorBtn").click(() => removeMarketplaceOperator());
+    $(".closeBtn").click(() => location.reload());
+    $("#setOperatorModal").modal();
   }
 }
 
@@ -76,9 +78,40 @@ function marketplaceOperator() {
       $(".marketplaceOperatorBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
     }
     else {
-      $("#marketplaceOperatorTitle").text("Operator approval").css("color", "#007400");
-      $(".marketplaceOperatorBody").html(`Marketplace set as operator!<br><br>
-        Transaction hash:<br>${txHash}`).css("color", "#007400");
+      dragonContractInstance.events.ApprovalForAll().on("data", event => {
+        $("#marketplaceOperatorTitle").text("Marketplace contract set as operator").css("color", "#007400");
+        $(".marketplaceOperatorBody").html(
+         `<p>Owner: ${event.returnValues.owner}<br>
+          Operator: ${event.returnValues.operator}<br>
+          Approved: ${event.returnValues.approved}<br><br>
+          Transaction hash:<br>${txHash}</p>`
+        ).css("color", "black");
+      }).on("error", (error, receipt) => {
+          console.log(error, receipt);
+        });
+    }
+    $("#marketplaceOperator").modal();
+  });
+}
+
+function removeMarketplaceOperator() {
+  dragonContractInstance.methods.setApprovalForAll(marketplaceAddress, false).send({}, (error, txHash) => {
+    if(error) {
+      $("#marketplaceOperatorTitle").text("Transaction was not successful").css("color", "black");
+      $(".marketplaceOperatorBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
+    }
+    else {
+      $("#marketplaceOperatorTitle").text("Approval for marketplace contract removed").css("color", "#007400");
+      dragonContractInstance.events.ApprovalForAll().on("data", event => {
+        $(".marketplaceOperatorBody").html(
+         `<p>Owner: ${event.returnValues.owner}<br>
+          Removed operator: ${event.returnValues.operator}<br>
+          Approved: ${event.returnValues.approved}<br><br>
+          Transaction hash:<br>${txHash}</p>`
+        ).css("color", "black");
+      }).on("error", (error, receipt) => {
+          console.log(error, receipt);
+        });
     }
     $("#marketplaceOperator").modal();
   });

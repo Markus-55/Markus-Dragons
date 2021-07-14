@@ -5,11 +5,6 @@ let abiMarketplace = [
         "internalType": "address",
         "name": "dragonContract",
         "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "paymentGateway",
-        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -102,19 +97,6 @@ let abiMarketplace = [
       }
     ],
     "name": "setDragonContract",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_paymentGatewayAddress",
-        "type": "address"
-      }
-    ],
-    "name": "setPaymentGateway",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -232,9 +214,9 @@ let abiMarketplace = [
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
-        "name": "_price",
-        "type": "uint256"
+        "internalType": "address payable",
+        "name": "_seller",
+        "type": "address"
       }
     ],
     "name": "buyDragon",
@@ -242,5 +224,57 @@ let abiMarketplace = [
     "stateMutability": "payable",
     "type": "function",
     "payable": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "_payee",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "sendPayment",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function",
+    "payable": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "_payee",
+        "type": "address"
+      }
+    ],
+    "name": "withdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_payee",
+        "type": "address"
+      }
+    ],
+    "name": "balance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "balanceOf",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   }
 ];

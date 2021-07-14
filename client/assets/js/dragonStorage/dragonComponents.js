@@ -5,6 +5,13 @@ function toReadableTime(convertNumb) {
   return new Date(convertNumb * 1000).toLocaleString("en-GB");
 }
 
+function dragonDetails(dragonData, id, offerData) {
+  $(`#dragonId${id} #generation`).text(`Generation: ${dragonData.generation}`);
+  $(`#dragonId${id} #birthTime`).text(`Birth time: ${toReadableTime(dragonData.birthTime)}`);
+  $(`#dragonId${id} #dadId`).text(`Dad ID: ${dragonData.dadId}`);
+  $(`#dragonId${id} #momId`).text(`Mom ID: ${dragonData.momId}`);
+}
+
 function dragonObj(dragonData) {
   let genes = dragonData.genes.split('');
 

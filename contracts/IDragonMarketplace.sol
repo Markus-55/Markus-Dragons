@@ -54,5 +54,5 @@ interface IDragonMarketplace {
     * Requirement: The msg.value needs to equal the price of _tokenId
     * Requirement: There must be an active offer for _tokenId
      */
-    function buyDragon(uint256 _tokenId, uint256 _price) external payable;
+    function buyDragon(uint256 _tokenId, address payable _seller) external payable;
 }

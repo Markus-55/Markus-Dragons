@@ -3,15 +3,15 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
   `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${offerId}">
 
     <div class="modal fade" id="offerModal" tabindex="-1" role="dialog" aria-labelledby="offerModalTitle" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="modal-title" id="offerModalTitle">Offer details:</h3>
+            <h3 class="modal-title" id="offerModalTitle">Additional information:</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="row modal-body offerModalBody"></div>
+          <div class="row modal-body offerModalBody">Seller address: ${offerData.seller}</div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
@@ -21,8 +21,11 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
 
     <button type="button" class="btn btn-success buyBtn">Buy dragon</button>
     <div id="myDragonBox">
-      <div id="idDragon">Dragon ID: ${offerId}</div>
-      <div id="myDragon">
+      <div id="idDragon">
+      <div>Price: ${offerData.price / Math.pow(10, 18)} ETH</div>
+      Dragon ID: ${offerId}
+      </div>
+      <div id="offerDragon">
         <div id="rightWing">
           <div class="wings rightWingPart1"></div>
           <div class="wings rightWingPart2"></div>
@@ -142,7 +145,7 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
         </div>
       </div>
     </div>
-    <div id="myDragonDna">
+    <div id="dragonDna">
       <b>
         DNA:
         <!-- Colors -->
@@ -162,99 +165,47 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
     <ul class="dragonInfo">
       <li id="birthTime"></li>
       <li id="generation"></li>
-      <li>
-        <span id="dadId"></span>
-        <span id="momId"></span>
-      </li>
     </ul>
-    <button type="button" class="btn btn-info offerInfo" data-toggle="modal" data-target=".bd-example-modal-xl">Offer info</button>
+    <button type="button" class="btn btn-info offerInfo" data-toggle="modal" data-target="#offerModal">Additional information</button>
   </div>`;
 
   //console.log(dragonOfferStr);
   $(`#dragonId${0}`).remove();
-  if(!activeOffer) {
-    $(`#dragonId${offerId}`).remove();
-  }
-  else if(activeOffer) {
+
+  if(activeOffer) {
     $(`#dragonId${offerId}`).remove();
     $(".tokenOffers").prepend(dragonOfferStr);
   }
+  if(!activeOffer) {
+    $(`#dragonId${offerId}`).remove();
+  }
 
+  if(isSellerOf) {
+    $(`#dragonId${offerId} .buyBtn`).css("display", "none");
+    $(`#dragonId${offerId} #myDragonBox`).css("margin-top", "97px");
+  }
   $(`#dragonId${offerId} .buyBtn`).click(() => {
-    if(isSellerOf) {
-      $("#buyTitle").text("Transaction was not successful").css("color", "black");
-      $(".buyBody").text(
-        `You cannot buy your own offer. If you want to remove it,
-        click on the button above the dragons and remove the active offers that you don't want to sell anymore.`).css("color", "black");
+    marketplaceInstance.methods.buyDragon(offerData.tokenId, offerData.seller).send({value: offerData.price}, (error, txHash) => {
+      if(error) {
+        $("#buyTitle").text("Transaction was not successful").css("color", "black");
+        $(".buyBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
+        console.log(error);
+      }
+      else {
+        $("#buyTitle").text("Offer successfully bought!").css("color", "#007400");
+        $(".buyBody").html(
+          `<p>The MD token has been added to your account!<br>
+          Token ID: ${offerData.tokenId}<br>
+          Cost: ${offerData.price / Math.pow(10, 18)} ETH<br>
+          <a class="checkMyDragon" href="myDragons.html">Click to check out your new dragon!</a><br><br>
+          Transaction hash:<br>
+          ${txHash}</p>`
+        ).css("color", "#007400");
+
+        $(".buyClose").click(() => location.reload());
+        console.log(txHash);
+      }
       $("#buyModal").modal();
-    }
-    else {
-      paymentGatewayInstance.methods.sendPayment(offerData.seller, offerData.tokenId).send({value: offerData.price}, (error, txHash) => {
-        if(error) {
-          $("#buyTitle").text("Transaction was not successful").css("color", "black");
-              $(".buyBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
-              console.log(error);
-        }
-        else {
-          $("#buyTitle").text("Offer successfully bought!").css("color", "#007400");
-          $(".buyBody").html(
-            `<p>The MD token has been added to your account!<br>
-            Token ID: ${offerData.tokenId}<br>
-            Cost: ${offerData.price / Math.pow(10, 18)} ETH<br><br>
-            Transaction hash:<br>
-            ${txHash}</p>`
-          ).css("color", "#007400");
-
-          $(".buyClose").click(() => location.reload());
-          console.log(txHash);
-        }
-        $("#buyModal").modal();
-      });
-    }
+    });
   });
-}
-
-function activeDragonDetails(dragonData, offerId, offerData) {
-  $(`#dragonId${offerId} #birthTime`).append(`Birth time: ${toReadableTime(dragonData.birthTime)}`);
-  $(`#dragonId${offerId} #generation`).append(`Generation: ${dragonData.generation}`);
-  $(`#dragonId${offerId} #dadId`).append(`dadId: ${dragonData.dadId}`);
-  $(`#dragonId${offerId} #momId`).append(`momId: ${dragonData.momId}`);
-
-  $(`#dragonId${offerId} .offerInfo`).click(() => {
-    $("#offerModal").modal();
-    $(".offerModalBody").html(`
-      Seller address: ${offerData.seller}<br>
-      Token price: ${offerData.price / Math.pow(10, 18)} ETH`);
-  });
-}
-
-function renderActiveDragons(dnaObject, offerId) {
-  let eyeShapeNum = parseInt(dnaObject.eyeShape);
-  let hornShapeNum = parseInt(dnaObject.hornShape);
-  let animationNum = parseInt(dnaObject.animation);
-
-  headBodyColor(colors[dnaObject.headBodyColor], dnaObject.headBodyColor, offerId);
-
-  wingsTailColor(colors[dnaObject.wingsTailColor], dnaObject.wingsTailColor, offerId);
-
-  legsArmsColor(colors[dnaObject.legsArmsColor], dnaObject.legsArmsColor, offerId);
-
-  eyesColor(colors[dnaObject.eyesColor], dnaObject.eyesColor, offerId);
-
-  eyeVariation(eyeShapeNum, animationNum, offerId);
-
-  hornVariation(hornShapeNum, animationNum, offerId);
-
-  topHornsColor(colors[dnaObject.topHornsColor], dnaObject.topHornsColor, offerId);
-
-  sideHornsColor(colors[dnaObject.sideHornsColor], dnaObject.sideHornsColor, offerId);
-
-  if(animationNum === 5) {
-    eyeAnimationVariations(eyeShapeNum, offerId);
-  }
-  else {
-    animationVariations(animationNum, hornShapeNum, offerId);
-  }
-
-  specialNum(dnaObject.lastNum, offerId);
 }

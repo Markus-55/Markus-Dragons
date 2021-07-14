@@ -4,6 +4,14 @@
   padding: 24px;
 }
 
+#myDragonBox {
+  margin-top: 7px;
+}
+
+.checkMyDragon {
+  color: #007400;
+}
+
 .sellRemovePage {
   font-weight: bold;
   font-size: 18px;
@@ -20,7 +28,6 @@
   font-weight: bold;
   font-size: 18px;
   margin-top: 47px;
-  margin-bottom: -47px;
   border-radius: 6px;
   height: 43px;
   width: 142px;
@@ -28,13 +35,25 @@
   border-color: #32c554;
 }
 
+.priceDragon {
+  font-weight: bold;
+}
+
+#offerDragon {
+  position: absolute;
+  margin-top: 93px;
+}
+
+#dragonDna {
+  margin-top: -74px;
+  margin-left: 9px;
+}
+
 .offerInfo {
   font-weight: bold;
   font-size: 18px;
   margin-top: 7px;
   border-radius: 7px;
-  height: 42px;
-  width: 118px;
   background-color: #009cb5;
 }
 
@@ -49,6 +68,12 @@
   height: 44px;
   background-color: #226d79;
   border-color: #226d79;
+}
+
+.removeOperatorBtn {
+  background-color: #f5c73e;
+  font-weight: bold;
+  border-radius: 6px;
 }
 
 .myOffers {
@@ -91,8 +116,6 @@
   font-size: 18px;
   line-height: 26px;
   margin-top: 15px;
-  height: 39px;
-  width: 145px;
   background-color: #f7e750;
   border-color: #feeb37;
 }

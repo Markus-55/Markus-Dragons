@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>Academy dragons</title>
+    <title>Markus-Dragons</title>
 
     <script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -16,11 +16,11 @@
     <script src="assets/js/abiFiles/abiDragoncontract.js"></script>
     <script src="assets/js/abiFiles/abiMarketplace.js"></script>
 
+    <link rel="stylesheet" href="assets/css/dragonMarketplace.css">
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/dragon.css">
     <link rel="stylesheet" href="assets/css/frontend.css">
     <link rel="stylesheet" href="assets/css/myDragons.css">
-    <link rel="stylesheet" href="assets/css/dragonMarketplace.css">
 
   </head>
 
@@ -55,6 +55,21 @@
       </div>
     </div>
 
+    <div class="modal fade" id="setOperatorModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="setOperatorTitle" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="setOperatorTitle"></h3>
+          </div>
+          <div class="row modal-body setOperatorBody"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning removeOperatorBtn" data-dismiss="modal">Remove operator approval</button>
+            <button type="button" class="btn btn-secondary closeBtn" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="modal fade" id="sellOrRemoveModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="sellOrRemoveTitle" aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -73,7 +88,7 @@
       <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="modal-title" id="myOffersTitle">My Offers:</h3>
+            <h3 class="modal-title" id="myOffersTitle"></h3>
           </div>
           <div class="row modal-body myOffersBody"></div>
           <div class="modal-footer">
@@ -124,7 +139,7 @@
 <script src="assets/js/dragonStorage/myDragons.js"></script>
 <script src="assets/js/dragonStorage/dragonComponents.js"></script>
 <script src="assets/js/dragonStorage/shownDragons.js"></script>
-<script src="assets/js/Marketplace/offerRemove.js"></script>
-<script src="assets/js/Marketplace/showMyOffers.js"></script>
+<script src="assets/js/dragonStorage/myOffers/myOffers.js"></script>
+<script src="assets/js/dragonStorage/myOffers/showMyOffers.js"></script>
 
 </html>

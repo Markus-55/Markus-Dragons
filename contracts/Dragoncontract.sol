@@ -165,7 +165,7 @@ contract Dragoncontract is IERC721, Ownable {
   }
 
   function approve(address _approved, uint256 _tokenId) override external {
-    require(_owns(msg.sender, _tokenId) || operatorApproval[dragonOwners[_tokenId]][msg.sender], "You are not the owner or the operator of this token ID");
+    require(_owns(msg.sender, _tokenId) || operatorApproval[dragonOwners[_tokenId]][msg.sender], "You are not the owner or the operator of this token");
 
     tokenApprovedAddresses[_tokenId] = _approved;
 

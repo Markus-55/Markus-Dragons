@@ -1,6 +1,6 @@
 /* shownDragons.js shows the dragon to the frontend with it's details */
 
-function dragonHtml(id, offerData) {
+function dragonHtml(id, activeOffer) {
   let dragonStr =
   `<div class="col-xl-3 col-lg-4 col-sm-6" id="dragonId${id}">
     <div id="myDragonBox">
@@ -162,7 +162,7 @@ function dragonHtml(id, offerData) {
   //console.log(dragonStr);
   $(".dragonObject").prepend(dragonStr);
 
-  if(offerData.active) {
+  if(activeOffer) {
     $(`#dragonid${id} #sellDragon`).html(`
       <div id="activeOffer">
         <p>Already in marketplace!</p>
@@ -179,12 +179,12 @@ function dragonHtml(id, offerData) {
       operatorApproval();
     }
     else if(inputPrice <= 0) {
-      $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");
+      $("#sellOrRemoveTitle").text("Invalid input price").css("color", "black");
       $(".sellOrRemoveBody").text("Price cannot be less than or equal to zero").css("color", "black");
       $("#sellOrRemoveModal").modal();
     }
     else if(inputPrice > 1000) {
-      $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");
+      $("#sellOrRemoveTitle").text("Invalid input price").css("color", "black");
       $(".sellOrRemoveBody").text("Price cannot be greater than 1000 ETH").css("color", "black");
       $("#sellOrRemoveModal").modal();
     }
@@ -211,11 +211,4 @@ function dragonHtml(id, offerData) {
       });
     }
   });
-}
-
-function dragonDetails(dragonData, id) {
-  $(`#dragonId${id} #generation`).append(`Generation: ${dragonData.generation}`);
-  $(`#dragonId${id} #birthTime`).append(`Birth time: ${toReadableTime(dragonData.birthTime)}`);
-  $(`#dragonId${id} #dadId`).append(`Dad ID: ${dragonData.dadId}`);
-  $(`#dragonId${id} #momId`).append(`Mom ID: ${dragonData.momId}`);
 }
