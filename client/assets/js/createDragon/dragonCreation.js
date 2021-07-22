@@ -5,7 +5,6 @@ let web3 = new Web3(Web3.givenProvider);
 
 let dragonContractInstance;
 let user;
-let dragonContractAddress = "0xb242D6B59Df933d3Af167B89C311DefEe6131211";
 
 $(document).ready(async () => {
   // asks user if they allow the website
@@ -40,7 +39,7 @@ $("#createDragonBtn").click(() => {
 
   let dnaStr = getDragonDna();
 
-  let price = 0.1;
+  let price = 0.05;
   let dragonPrice = web3.utils.toWei(price.toString(), "ether");
 
   dragonContractInstance.methods.createDragonGen0(dnaStr).send({value: dragonPrice}, (error, txHash) => {

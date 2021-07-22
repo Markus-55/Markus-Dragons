@@ -189,26 +189,67 @@ function dragonHtml(id, activeOffer) {
       $("#sellOrRemoveModal").modal();
     }
     else {
-      marketplaceInstance.methods.setOffer(price, id).send({}, (error, txHash) => {
-        if(error) {
-          // console.log(error);
-          $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");
-          $(".sellOrRemoveBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
-        }
-        else {
-          // console.log(txHash);
-          $("#sellOrRemoveTitle").text("Offer successfully created!").css("color", "#007400");
-          $(".sellOrRemoveBody").html(
-            `<p>Offer has been added to marketplace!<br>
-            Offer Token ID: ${id}<br>
-            Offer price: ${price / Math.pow(10, 18)} ETH<br><br>
-            Transaction hash:<br>
-            ${txHash}</p>`).css("color", "#007400");
-
-          $(".sellOrRemoveClose").click(() => location.reload());
-        }
-        $("#sellOrRemoveModal").modal();
-      });
+      createOffer(price, id);
     }
   });
 }
+
+function createOffer(price, id) {
+  marketplaceInstance.methods.setOffer(price, id).send({}, (error, txHash) => {
+    if(error) {
+      $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");
+      $(".sellOrRemoveBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
+      // console.log(error);
+    }
+    else {
+      $("#sellOrRemoveTitle").text("Offer successfully created!").css("color", "#007400");
+      $(".sellOrRemoveBody").html(
+        `<p>Offer has been added to marketplace!<br>
+        Offer Token ID: ${id}<br>
+        Offer price: ${price / Math.pow(10, 18)} ETH<br><br>
+        Transaction hash:<br>
+        ${txHash}</p>`).css("color", "#007400");
+
+      $(".sellOrRemoveClose").click(() => location.reload());
+      // console.log(txHash);
+    }
+    $("#sellOrRemoveModal").modal();
+  });
+}
+
+$(".withdrawBtn").click(async () => {
+  let userBalance = await marketplaceInstance.methods.balance(userAddress).call();
+
+  $("#toWithdrawTitle").text("Funds to withdraw").css("color", "black");
+  $(".toWithdrawBody").html(
+    `<p>You have ${userBalance / Math.pow(10, 18)} ETH in your balance<br>
+    Do you want to withdraw?</p>`).css("color", "black");
+
+  if(userBalance > 0) {
+    $(".confirmWithdraw").click(() => {
+      marketplaceInstance.methods.withdraw(userAddress).send({}, (error, txHash) => {
+        if(error) {
+          $("#withdrawTitle").text("Transaction was not successful").css("color", "black");
+          $(".withdrawBody").html(`Failed to send transaction: ${error.message}`).css("color", "black");
+          console.log(error);
+        }
+        else {
+          $("#withdrawTitle").text("Successfully withdrawn funds!").css("color", "#007400");
+          $(".withdrawBody").html(
+            `<p>You have successfully withdrawn your funds<br><br>
+            Transaction hash:<br>
+            ${txHash}</p>`).css("color", "#007400");
+          console.log(txHash);
+        }
+        $("#withdrawModal").modal();
+      });
+    });
+    $("#toWithdrawModal").modal();
+  }
+  else {
+    $("#withdrawTitle").text("You have no funds to withdraw").css("color", "black");
+    $(".withdrawBody").text("").css("color", "black");
+
+    $("#withdrawModal").modal();
+  }
+});

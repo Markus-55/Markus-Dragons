@@ -57,34 +57,39 @@
   background-color: #009cb5;
 }
 
-.approval {
+.myDragonBtn {
   font-weight: bold;
-  font-size: 17px;
   margin-top: 37px;
-  margin-left: 1px;
   margin-bottom: -12px;
   border-radius: 6px;
+}
+
+.myOffersBtn {
+  font-size: 18px;
+  width: 273px;
+  height: 44px;
+  background-color: #f5c73e;
+}
+
+.approvalBtn {
+  font-size: 17px;
   width: 248px;
   height: 44px;
   background-color: #226d79;
   border-color: #226d79;
 }
 
-.removeOperatorBtn {
-  background-color: #f5c73e;
-  font-weight: bold;
-  border-radius: 6px;
+.withdrawBtn {
+  font-size: 18px;
+  width: 204px;
+  height: 45px;
+  background-color: #32c554;
+  border-color: #32c554;
 }
 
-.myOffers {
+.removeOperatorBtn {
   font-weight: bold;
-  font-size: 18px;
-  margin-top: 37px;
-  margin-bottom: -12px;
   border-radius: 6px;
-  width: 273px;
-  height: 42px;
-  background-color: #f5c73e;
 }
 
 .myOffersBody {

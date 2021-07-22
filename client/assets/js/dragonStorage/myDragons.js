@@ -7,14 +7,14 @@ let dragonContractInstance;
 let marketplaceInstance;
 
 let user;
-let dragonContractAddress = "0xb242D6B59Df933d3Af167B89C311DefEe6131211";
-let marketplaceAddress = "0xf966025866c32510299221b56d4Bf36c9a9bD18F";
+let userAddress;
 
 $(document).ready(async () => {
   let accounts = await window.ethereum.enable();
   dragonContractInstance = new web3.eth.Contract(abiDragoncontract, dragonContractAddress, {from: accounts[0]});
   marketplaceInstance = new web3.eth.Contract(abiMarketplace, marketplaceAddress, {from: accounts[0]});
   user = accounts[0];
+  userAddress = web3.currentProvider.selectedAddress;
 
   // console.log(marketplaceInstance);
   ownedDragons().catch(error => console.log(error));
@@ -23,6 +23,8 @@ $(document).ready(async () => {
 
 async function ownedDragons() {
   let ownedDragonIds = await dragonContractInstance.methods.allOwnedDragons().call();
+  let allOffers = await marketplaceInstance.methods.getAllTokenOnSale().call();
+
   for(let i = 0; i < ownedDragonIds.length; i++) {
     let id = ownedDragonIds[i];
     let activeOffer = await marketplaceInstance.methods.getActiveStatus(id).call();
@@ -47,7 +49,7 @@ function controlFunction(dragonData, id, activeOffer) {
   renderOwnedDragons(dnaObject, id);
 }
 
-$(".approval").click(async () => operatorApproval());
+$(".approvalBtn").click(async () => operatorApproval());
 
 async function operatorApproval() {
   let isOperator = await dragonContractInstance.methods.isApprovedForAll(user, marketplaceAddress).call();
@@ -60,13 +62,12 @@ async function operatorApproval() {
     $("#OperatorAproval").modal();
 
     $(".confirmBtn").click(() => marketplaceOperator());
-    $(".declineBtn").click(() => location.reload());
   }
   else {
     $("#setOperatorTitle").text("Operator approval").css("color", "black");
     $(".setOperatorBody").text("Marketplace contract is an approved operator").css("color", "black");
     $(".removeOperatorBtn").click(() => removeMarketplaceOperator());
-    $(".closeBtn").click(() => location.reload());
+
     $("#setOperatorModal").modal();
   }
 }

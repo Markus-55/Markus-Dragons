@@ -132,7 +132,7 @@ async function myOfferHtml(ownedId, offerData) {
   //console.log(offerStr);
   $(`#dragonId${0}`).remove();
   $("#myOffersTitle").text("You have no active offers");
-  $(".myOffers").click(() => {
+  $(".myOffersBtn").click(() => {
     if(offerData.active) {
       $("#myOffersTitle").text("My Offers:");
     }

@@ -96,7 +96,7 @@ contract DragonMarketplace is Ownable, IDragonMarketplace {
     _escrowContract.withdraw(_payee);
   }
 
-  function balance(address _payee) external view returns (uint256 balanceOf) {
+  function balance(address _payee) external view returns (uint256 userBalance) {
     return _escrowContract.depositsOf(_payee);
   }
 
