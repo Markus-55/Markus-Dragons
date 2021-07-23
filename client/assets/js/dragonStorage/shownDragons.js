@@ -154,7 +154,7 @@ function dragonHtml(id, activeOffer) {
       <div class="input-group-prepend">
         <button id="sellBtn" class="btn btn-success" type="button">Sell dragon</button>
       </div>
-      <input type="number" class="form-control dragonPrice" placeholder="Input price" aria-label="Input price" aria-describedby="sellBtn" max="1000">
+      <input type="number" class="form-control dragonPrice" placeholder="Input price" aria-label="Input price" aria-describedby="ETH" min="0" max="1000">
       <div class="ethBox">ETH</div>
     </div>
   </div>`;
@@ -194,8 +194,8 @@ function dragonHtml(id, activeOffer) {
   });
 }
 
-function createOffer(price, id) {
-  marketplaceInstance.methods.setOffer(price, id).send({}, (error, txHash) => {
+async function createOffer(price, id) {
+  await marketplaceInstance.methods.setOffer(price, id).send({}, (error, txHash) => {
     if(error) {
       $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");
       $(".sellOrRemoveBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
@@ -204,11 +204,11 @@ function createOffer(price, id) {
     else {
       $("#sellOrRemoveTitle").text("Offer successfully created!").css("color", "#007400");
       $(".sellOrRemoveBody").html(
-        `<p>Offer has been added to marketplace!<br>
-        Offer Token ID: ${id}<br>
-        Offer price: ${price / Math.pow(10, 18)} ETH<br><br>
-        Transaction hash:<br>
-        ${txHash}</p>`).css("color", "#007400");
+       `<p>Offer has been added to marketplace!<br>
+         Offer Token ID: ${id}<br>
+         Offer price: ${web3.utils.fromWei(price)} ETH<br><br>
+         Transaction hash:<br>
+         ${txHash}</p>`).css("color", "#007400");
 
       $(".sellOrRemoveClose").click(() => location.reload());
       // console.log(txHash);
@@ -226,8 +226,8 @@ $(".withdrawBtn").click(async () => {
     Do you want to withdraw?</p>`).css("color", "black");
 
   if(userBalance > 0) {
-    $(".confirmWithdraw").click(() => {
-      marketplaceInstance.methods.withdraw(userAddress).send({}, (error, txHash) => {
+    $(".confirmWithdraw").click(async() => {
+      await marketplaceInstance.methods.withdraw(userAddress).send({}, (error, txHash) => {
         if(error) {
           $("#withdrawTitle").text("Transaction was not successful").css("color", "black");
           $(".withdrawBody").html(`Failed to send transaction: ${error.message}`).css("color", "black");

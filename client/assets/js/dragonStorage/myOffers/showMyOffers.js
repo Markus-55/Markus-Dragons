@@ -147,9 +147,10 @@ async function myOfferHtml(ownedId, offerData) {
     $(".myOffersBody").prepend(offerStr);
   }
 
-  $(`#dragonId${ownedId} > .removeOffer`).click(() => {
+  $(`#dragonId${ownedId} > .removeOffer`).click(async() => {
 
-    marketplaceInstance.methods.removeOffer(ownedId).send({}, (error, txHash) => {
+    $("#myOffersModal").modal("hide");
+    await marketplaceInstance.methods.removeOffer(ownedId).send({}, (error, txHash) => {
       if(error) {
         $("#myOffersModal").modal("hide");
         $("#sellOrRemoveTitle").text("Transaction was not successful").css("color", "black");

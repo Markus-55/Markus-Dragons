@@ -18,12 +18,11 @@ $(document).ready(async () => {
 
   // console.log(marketplaceInstance);
   ownedDragons().catch(error => console.log(error));
-  myOffers();
+  myOffers().catch(error => console.log(error));
 });
 
 async function ownedDragons() {
   let ownedDragonIds = await dragonContractInstance.methods.allOwnedDragons().call();
-  let allOffers = await marketplaceInstance.methods.getAllTokenOnSale().call();
 
   for(let i = 0; i < ownedDragonIds.length; i++) {
     let id = ownedDragonIds[i];
@@ -55,10 +54,6 @@ async function operatorApproval() {
   let isOperator = await dragonContractInstance.methods.isApprovedForAll(user, marketplaceAddress).call();
 
   if(!isOperator) {
-    $("#OperatorAprovalTitle").text("Operator approval");
-    $(".OperatorAprovalBody").html(`<p>In order to sell your dragons,
-      you need to accept the marketplace as an operator so that it can manage/sell your offers.
-      Click on the confirm button if you accept or you can decline if you don't want to sell your dragons</p>`);
     $("#OperatorAproval").modal();
 
     $(".confirmBtn").click(() => marketplaceOperator());
@@ -72,8 +67,8 @@ async function operatorApproval() {
   }
 }
 
-function marketplaceOperator() {
-  dragonContractInstance.methods.setApprovalForAll(marketplaceAddress, true).send({}, (error, txHash) => {
+async function marketplaceOperator() {
+  await dragonContractInstance.methods.setApprovalForAll(marketplaceAddress, true).send({}, (error, txHash) => {
     if(error) {
       $("#marketplaceOperatorTitle").text("Transaction was not successful").css("color", "black");
       $(".marketplaceOperatorBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
@@ -95,8 +90,8 @@ function marketplaceOperator() {
   });
 }
 
-function removeMarketplaceOperator() {
-  dragonContractInstance.methods.setApprovalForAll(marketplaceAddress, false).send({}, (error, txHash) => {
+async function removeMarketplaceOperator() {
+  await dragonContractInstance.methods.setApprovalForAll(marketplaceAddress, false).send({}, (error, txHash) => {
     if(error) {
       $("#marketplaceOperatorTitle").text("Transaction was not successful").css("color", "black");
       $(".marketplaceOperatorBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");

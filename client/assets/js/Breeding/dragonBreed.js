@@ -58,12 +58,12 @@ function birthEvent() {
   });
 }
 
-$(".breedBtn").click(() => {
+$(".breedBtn").click(async () => {
   if(dadId == undefined || momId == undefined) {
     $("#breedModal").modal("hide");
   }
   else if(dadId != momId) {
-    dragonContractInstance.methods.breed(dadId, momId).send({}, (error, txHash) => {
+    await dragonContractInstance.methods.breed(dadId, momId).send({}, (error, txHash) => {
       if(error) {
         $("#breedModalTitle").text("Transaction was not successful").css("color", "black");
         $(".breedModalBody").text("Failed to send transaction: " + error.message).css("color", "black");

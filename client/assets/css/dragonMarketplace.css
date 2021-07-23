@@ -5,6 +5,17 @@
 }
 
 #myDragonBox {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  padding-top: 7px;
+  margin-top: 54px;
+  height: 488px;
+  box-shadow: 0 6px 20px 0 rgb(0 0 0 / 33%);
+}
+
+#myDragonBox {
   margin-top: 7px;
 }
 
@@ -35,10 +46,6 @@
   border-color: #32c554;
 }
 
-.priceDragon {
-  font-weight: bold;
-}
-
 #offerDragon {
   position: absolute;
   margin-top: 93px;
@@ -55,108 +62,4 @@
   margin-top: 7px;
   border-radius: 7px;
   background-color: #009cb5;
-}
-
-.myDragonBtn {
-  font-weight: bold;
-  margin-top: 37px;
-  margin-bottom: -12px;
-  border-radius: 6px;
-}
-
-.myOffersBtn {
-  font-size: 18px;
-  width: 273px;
-  height: 44px;
-  background-color: #f5c73e;
-}
-
-.approvalBtn {
-  font-size: 17px;
-  width: 248px;
-  height: 44px;
-  background-color: #226d79;
-  border-color: #226d79;
-}
-
-.withdrawBtn {
-  font-size: 18px;
-  width: 204px;
-  height: 45px;
-  background-color: #32c554;
-  border-color: #32c554;
-}
-
-.removeOperatorBtn {
-  font-weight: bold;
-  border-radius: 6px;
-}
-
-.myOffersBody {
-  font-size: 16px;
-  padding: 15px;
-  font-weight: bold;
-}
-
-#removeDragonBox {
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  border-radius: 10px;
-  padding-top: 7px;
-  margin-top: 8px;
-  height: 420px;
-  box-shadow: 0 6px 20px 0 rgb(0 0 0 / 33%);
-}
-
-#offerPrice {
-  margin-top: -29px;
-  margin-bottom: 12px;
-  margin-left: 57px;
-}
-
-.removeOffer {
-  border-radius: 7px;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 26px;
-  margin-top: 15px;
-  background-color: #f7e750;
-  border-color: #feeb37;
-}
-
-#sellDragon {
-  margin-top: 8px;
-}
-
-#sellBtn {
-  background-color: #32c554;
-  border-color: #32c554;
-  border-radius: 7px 0 0 7px;
-}
-
-.dragonPrice {
-  height: 41px;
-  margin-right: -1px;
-}
-
-.ethBox {
-  background-color: #b5b5b5;
-  border-radius: 0 7px 7px 0;
-  width: 59px;
-  height: 41px;
-  display: flex;
-  justify-content: center;
-  line-height: 42px;
-  font-weight: bold;
-}
-
-#activeOffer {
-  background-color: #ff8d8d;
-  font-size: 19px;
-  height: 41px;
-  width: 549px;
-  border-radius: 7px;
-  line-height: 41px;
-  padding-left: 16px;
 }

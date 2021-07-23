@@ -16,7 +16,6 @@
     <script src="assets/js/abiFiles/abiDragoncontract.js"></script>
     <script src="assets/js/abiFiles/abiMarketplace.js"></script>
 
-    <link rel="stylesheet" href="assets/css/dragonMarketplace.css">
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/dragon.css">
     <link rel="stylesheet" href="assets/css/frontend.css">
@@ -30,9 +29,13 @@
       <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="modal-title" id="OperatorAprovalTitle"></h3>
+            <h3 class="modal-title" id="OperatorAprovalTitle">Operator approval</h3>
           </div>
-          <div class="row modal-body OperatorAprovalBody"></div>
+          <div class="modal-body">
+            <p>In order to sell your dragons,
+            you need to accept the marketplace as an operator so that it can manage/sell your offers.
+            Click on the confirm button if you accept or you can decline if you don't want to sell your dragons</p>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary declineBtn" data-dismiss="modal">Decline</button>
             <button type="button" class="btn btn-success confirmBtn" data-dismiss="modal">Confirm</button>
@@ -47,7 +50,7 @@
           <div class="modal-header">
             <h3 class="modal-title" id="marketplaceOperatorTitle"></h3>
           </div>
-          <div class="row modal-body marketplaceOperatorBody"></div>
+          <div class="modal-body marketplaceOperatorBody"></div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
@@ -76,7 +79,7 @@
           <div class="modal-header">
             <h3 class="modal-title" id="sellOrRemoveTitle"></h3>
           </div>
-          <div class="row modal-body sellOrRemoveBody"></div>
+          <div class="modal-body sellOrRemoveBody"></div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary sellOrRemoveClose" data-dismiss="modal">Close</button>
           </div>

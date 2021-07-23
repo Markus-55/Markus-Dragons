@@ -33,7 +33,7 @@ function birthEvent() {
     });
 }
 
-$("#createDragonBtn").click(() => {
+$("#createDragonBtn").click(async() => {
 
   $("#createdDragon").css("display", "none");
 
@@ -42,7 +42,7 @@ $("#createDragonBtn").click(() => {
   let price = 0.05;
   let dragonPrice = web3.utils.toWei(price.toString(), "ether");
 
-  dragonContractInstance.methods.createDragonGen0(dnaStr).send({value: dragonPrice}, (error, txHash) => {
+  await dragonContractInstance.methods.createDragonGen0(dnaStr).send({value: dragonPrice}, (error, txHash) => {
     if(error && error.code === -32603) {
       $("#txHashModalTitle").text("Creation of dragon was not successful").css("color", "black");
       $(".txHashModalBody").text("You cannot create more then 5 dragons").css("color", "black");

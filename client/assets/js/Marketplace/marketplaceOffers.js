@@ -22,7 +22,7 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
     <button type="button" class="btn btn-success buyBtn">Buy dragon</button>
     <div id="myDragonBox">
       <div id="idDragon">
-      <div>Price: ${offerData.price / Math.pow(10, 18)} ETH</div>
+      <div>Price: ${web3.utils.fromWei(offerData.price)} ETH</div>
       Dragon ID: ${offerId}
       </div>
       <div id="offerDragon">
@@ -184,8 +184,8 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
     $(`#dragonId${offerId} .buyBtn`).css("display", "none");
     $(`#dragonId${offerId} #myDragonBox`).css("margin-top", "97px");
   }
-  $(`#dragonId${offerId} .buyBtn`).click(() => {
-    marketplaceInstance.methods.buyDragon(offerData.tokenId, offerData.seller).send({value: offerData.price}, (error, txHash) => {
+  $(`#dragonId${offerId} .buyBtn`).click(async() => {
+    await marketplaceInstance.methods.buyDragon(offerData.tokenId, offerData.seller).send({value: offerData.price}, (error, txHash) => {
       if(error) {
         $("#buyTitle").text("Transaction was not successful").css("color", "black");
         $(".buyBody").text(`Failed to send transaction: ${error.message}`).css("color", "black");
@@ -196,7 +196,7 @@ async function dragonOfferHtml(offerId, offerData, activeOffer, isSellerOf) {
         $(".buyBody").html(
           `<p>The MD token has been added to your account!<br>
           Token ID: ${offerData.tokenId}<br>
-          Cost: ${offerData.price / Math.pow(10, 18)} ETH<br>
+          Cost: ${web3.utils.fromWei(offerData.price)} ETH<br>
           <a class="checkMyDragon" href="myDragons.html">Click to check out your new dragon!</a><br><br>
           Transaction hash:<br>
           ${txHash}</p>`
