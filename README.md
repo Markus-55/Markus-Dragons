@@ -7,9 +7,9 @@
 
  ### Built With
 
-* [jQuery](https://jquery.com/) (latest)
+* [jQuery](https://jquery.com/) v3.6.0
 * [Bootstrap](https://getbootstrap.com/) v4.3.1
-* [web3](https://web3js.readthedocs.io/en/v1.3.4/) (latest)
+* [web3](https://web3js.readthedocs.io/en/v1.3.4/) v1.4.0
 
 # Getting Started
 
