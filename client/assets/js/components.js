@@ -1,5 +1,5 @@
-let dragonContractAddress = "0xaDcE6A637661BEdC809312431bB23531cEe828f6";
-let marketplaceAddress = "0x504909a6B6a7cd5dcA48Bb5767ab169942281C18";
+let dragonContractAddress = "0x3D30706300A1df1acd719c13Db2e45AA70397a65";
+let marketplaceAddress = "0x0989127Fc1317b05d4075d84db8611BF2425F066";
 
 function toReadableTime(convertNumb) {
   return new Date(convertNumb * 1000).toLocaleString("en-GB");

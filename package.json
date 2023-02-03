@@ -1,24 +1,34 @@
 {
-  "name": "markus-dragons",
+  "name": "Markus-Dragons",
   "version": "1.0.0",
-  "description": "My ERC-721 project Markus-Dragons an NFT game where you can collect, create, breed and buy/sell your non-fungible dragon tokens!",
-  "main": "truffle-config.js",
-  "dependencies": {
-    "@openzeppelin/contracts": "^4.2.0",
-    "@truffle/hdwallet-provider": "^1.4.1"
-  },
-  "devDependencies": {},
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx hardhat test test/test.js --network hardhat",
+    "compile": "npx hardhat compile",
+    "help": "npx hardhat --help",
+    "ganache": "ganache-cli -l 90000000 -p 8545 -m \"hello markus alchemy courses hello earth friend hope mountain training round test\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Markus-55/Markus-Dragons.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Markus-55/Markus-Dragons/issues"
-  },
-  "homepage": "https://github.com/Markus-55/Markus-Dragons#readme"
+  "repository": "https://github.com/Markus-55/Markus-Dragons.git",
+  "author": "Markus Bielaszka <69858432+Markus-55@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/providers": "^5.7.2",
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.7",
+    "@nomicfoundation/hardhat-toolbox": "^2.0.1",
+    "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "@nomiclabs/hardhat-etherscan": "^3.1.5",
+    "@openzeppelin/contracts": "^4.8.1",
+    "@typechain/ethers-v5": "^10.2.0",
+    "@typechain/hardhat": "^6.1.5",
+    "chai": "^4.3.7",
+    "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
+    "ganache": "^7.7.3",
+    "hardhat": "^2.12.6",
+    "hardhat-gas-reporter": "^1.0.9",
+    "solidity-coverage": "^0.8.2",
+    "typechain": "^8.1.1"
+  }
 }

@@ -6,12 +6,13 @@ import "./IERC721.sol";
 import "./IERC721Receiver.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Dragoncontract is IERC721, Ownable {
+contract Dragoncontract is IERC721 {
 
   uint256 public constant gen0CreationLimit = 5;
 
   string private constant nameOfToken = "MarkusDragons";
   string private constant symbolOfToken = "MD";
+  address private contractOwner;
 
   bytes4 private constant ERC721VerificationNum = bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
 
@@ -46,6 +47,7 @@ contract Dragoncontract is IERC721, Ownable {
 
   constructor() {
     _createDragon(type(uint256).max, 0, 0, 0, address(0));
+    contractOwner = msg.sender;
   }
 
   function breed(uint256 _dadId, uint256 _momId) external {
@@ -92,14 +94,10 @@ contract Dragoncontract is IERC721, Ownable {
         return ownedDragons;
     }
 
-  function createDragonGen0(uint256 _genes) external payable {
-    require(tokenBalances[msg.sender] < gen0CreationLimit, "The limit of generation 0 dragons per user is: 5");
-    require(0.05 ether == msg.value, "Every dragon costs 0.05 ETH");
-
+  function createDragonGen0(uint256 _genes) external {
     if(tokenBalances[msg.sender] < gen0CreationLimit) {
       gen0Total++;
       _createDragon(_genes, 0, 0, 0, msg.sender);
-      payable(_owner).transfer(msg.value);
     }
   }
 
