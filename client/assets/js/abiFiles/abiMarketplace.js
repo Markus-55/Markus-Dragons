@@ -55,50 +55,72 @@ let abiMarketplace = [
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
+    "inputs": [
       {
         "internalType": "address",
-        "name": "",
+        "name": "_payee",
         "type": "address"
+      }
+    ],
+    "name": "balance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "userBalance",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address payable",
+        "name": "_seller",
+        "type": "address"
+      }
+    ],
+    "name": "buyDragon",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getActiveStatus",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "active",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [],
-    "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
+    "name": "getAllTokenOnSale",
+    "outputs": [
       {
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
+        "internalType": "uint256[]",
+        "name": "listOfOffers",
+        "type": "uint256[]"
       }
     ],
-    "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_dragonContractAddress",
-        "type": "address"
-      }
-    ],
-    "name": "setDragonContract",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -138,8 +160,20 @@ let abiMarketplace = [
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [
@@ -149,31 +183,48 @@ let abiMarketplace = [
         "type": "uint256"
       }
     ],
-    "name": "getActiveStatus",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "active",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "name": "removeOffer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [],
-    "name": "getAllTokenOnSale",
-    "outputs": [
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
-        "internalType": "uint256[]",
-        "name": "listOfOffers",
-        "type": "uint256[]"
+        "internalType": "address payable",
+        "name": "_payee",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
       }
     ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "name": "sendPayment",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_dragonContractAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setDragonContract",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [
@@ -196,53 +247,15 @@ let abiMarketplace = [
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "_tokenId",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
       }
     ],
-    "name": "removeOffer",
+    "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_tokenId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address payable",
-        "name": "_seller",
-        "type": "address"
-      }
-    ],
-    "name": "buyDragon",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function",
-    "payable": true
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address payable",
-        "name": "_payee",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "sendPayment",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function",
-    "payable": true
   },
   {
     "inputs": [
@@ -256,25 +269,5 @@ let abiMarketplace = [
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_payee",
-        "type": "address"
-      }
-    ],
-    "name": "balance",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "balanceOf",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
   }
 ];
