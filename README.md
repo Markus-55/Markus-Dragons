@@ -58,4 +58,4 @@ In the marketplace you can buy active offers. When you have bought a dragon, the
 
 # Contact
 
-Markus Bielaszka - markus.bielaszka@gmail.com
+Markus Bielaszka - markus@virturium.io
